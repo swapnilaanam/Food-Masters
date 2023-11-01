@@ -1,21 +1,89 @@
 "use client";
 
 import Lottie from 'lottie-react';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-
-import authAnimation from '@/assets/animation/authAnimation.json';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+
+import { AuthContext } from '@/providers/AuthProvider';
+import authAnimation from '@/assets/animation/authAnimation.json';
+import Swal from 'sweetalert2';
+import axios from 'axios';
 
 
 const SignUp = () => {
+    const { signUpUser, updateUser, signOutUser } = useContext(AuthContext);
+
     const {
         register,
         handleSubmit,
         formState: { errors },
+        reset
     } = useForm();
 
-    const onSubmit = (data) => console.log(data)
+    const router = useRouter();
+
+    const onSubmit = (data) => {
+        if (data.password === data.passwordconfirm) {
+            const formData = new FormData();
+            formData.append('image', data.profilepic[0]);
+
+            const img_hosting_url = `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_img_hosting_token}`;
+
+            fetch(img_hosting_url, {
+                method: 'POST',
+                body: formData
+            })
+                .then(res => res.json())
+                .then(imgResponse => {
+                    if (imgResponse.success) {
+                        const imgURL = imgResponse.data.display_url;
+
+                        signUpUser(data.email, data.password)
+                            .then(result => {
+                                updateUser(data.name, imgURL)
+                                    .then(() => {
+                                        signOutUser()
+                                            .then(() => {
+                                                const newUser = {
+                                                    name: data.name,
+                                                    email: data.email,
+                                                    profilePic: imgURL,
+                                                    country: 'Bangladesh'
+                                                };
+
+                                                axios.post('http://localhost:5000/users', newUser)
+                                                    .then(res => {
+                                                        if (res.status === 201) {
+                                                            Swal.fire('You are signed up for food masters successfully!');
+                                                            reset();
+                                                            router.push('/signin');
+                                                        }
+                                                    })
+                                                    .catch(error => console.log(error));
+                                            })
+                                            .catch(error => console.log(error));
+                                    })
+                                    .catch(error => console.log(error));
+                            })
+                            .catch(error => {
+                                Swal.fire({
+                                    icon: 'error',
+                                    text: `${error?.message}`,
+                                });
+                            });
+                    }
+                })
+                .catch(error => console.log(error));
+        }
+        else {
+            Swal.fire({
+                icon: 'error',
+                text: 'Password And Confirm Password Does Not Match',
+            })
+        }
+    };
 
     return (
         <section className="bg-orange-100 py-24 min-h-screen flex justify-center items-center">

@@ -1,21 +1,74 @@
 "use client";
 
 import Lottie from 'lottie-react';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 
 import authAnimation from '@/assets/animation/authAnimation.json';
 import { FaGoogle } from "react-icons/fa";
+import { AuthContext } from '@/providers/AuthProvider';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import Swal from 'sweetalert2';
 
 const SignIn = () => {
+  const { signInUser, signInGoogle } = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm();
 
-  const onSubmit = (data) => console.log(data)
+  const router = useRouter();
+
+  const onSubmit = (data) => {
+    signInUser(data.email, data.password)
+      .then(result => {
+        Swal.fire("Signed In Successfully!");
+        reset();
+        router.push('/');
+      })
+      .catch(error => {
+        Swal.fire({
+          icon: 'error',
+          text: `${error?.message}`,
+        });
+      });
+  };
+
+  const handleGoogleSignIn = () => {
+    signInGoogle()
+      .then(result => {
+        const loggedUser = result.user;
+
+        const newUser = {
+          name: loggedUser.displayName,
+          email: loggedUser.email,
+          profilePic: loggedUser.photoURL,
+          country: "Bangladesh"
+        };
+
+        axios.post('http://localhost:5000/users', newUser)
+          .then(res => {
+            if (res.status === 201) {
+              console.log("Data saved successfully!");
+            }
+          })
+          .catch(error => console.log(error));
+
+        Swal.fire('You Are Signed In Successfully!');
+        router.push('/');
+      })
+      .catch(error => {
+        Swal.fire({
+          icon: 'error',
+          text: `${error?.message}`,
+        });
+      });
+  }
 
   return (
     <section className="bg-orange-100 py-24 min-h-screen flex justify-center items-center">
@@ -76,7 +129,7 @@ const SignIn = () => {
               <div className='w-full border border-gray-700 border-dashed border-spacing-10'></div>
             </div>
             <div className="flex justify-center items-center">
-              <button className="text-center bg-orange-300 px-12 py-3 rounded-sm text-base font-medium flex justify-center items-center gap-2">
+              <button onClick={handleGoogleSignIn} className="text-center bg-orange-300 px-12 py-3 rounded-sm text-base font-medium flex justify-center items-center gap-2">
                 <FaGoogle />
                 <span>Google</span>
               </button>
