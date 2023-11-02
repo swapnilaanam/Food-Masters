@@ -71,12 +71,12 @@ const SignIn = () => {
   }
 
   return (
-    <section className="bg-orange-100 py-24 min-h-screen flex justify-center items-center">
+    <section className="bg-orange-100 py-24 min-h-screen flex justify-center items-center px-4 lg:px-0">
       <div className="max-w-7xl mx-auto lg:grid lg:grid-cols-12 bg-white">
         <div
-          className="relative flex h-32 items-end bg-green-100 lg:col-span-5 lg:h-full xl:col-span-6"
+          className="flex items-end bg-green-100 lg:col-span-5 lg:h-full xl:col-span-6"
         >
-          <Lottie animationData={authAnimation} />
+          <Lottie animationData={authAnimation} className="w-full"/>
         </div>
 
         <div
@@ -143,7 +143,7 @@ const SignIn = () => {
           </div>
         </div>
       </div>
-      <div className="bg-white text-xl font-medium absolute bottom-0 right-0 flex justify-center items-center rounded-sm">
+      <div className="bg-white text-xl font-medium fixed bottom-0 right-0 flex justify-center items-center rounded-sm">
         <Link href="/" className="py-3 px-5 text-black"><span className="text-green-600">Food</span> <span className="text-orange-500"> Masters</span> For Business</Link>
         <Link href="/" className="py-3 px-5 bg-green-500 text-white">Go To Home</Link>
       </div>

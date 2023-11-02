@@ -1,8 +1,8 @@
-import { Inter } from 'next/font/google'
-import './globals.css'
-import AuthProvider from '@/providers/AuthProvider'
+import { Kanit } from 'next/font/google';
+import './globals.css';
+import AuthProvider from '@/providers/AuthProvider';
 
-const inter = Inter({ subsets: ['latin'] })
+const kanit = Kanit({subsets: ['latin'], weight: ["400", "500", "600", "700"], variable: '--font-kanit'});
 
 export const metadata = {
   title: 'Food Masters || Home',
@@ -12,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${kanit.className}`}>
         <AuthProvider>
           {children}
         </AuthProvider>
