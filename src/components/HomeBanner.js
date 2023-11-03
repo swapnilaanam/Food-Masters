@@ -3,7 +3,7 @@ import homeBanner from '@/assets/image/homebanner3.jpg';
 
 const HomeBanner = () => {
   return (
-    <div className="w-full h-[85vh] relative">
+    <section className="w-full h-[85vh] relative">
       <Image src={homeBanner} alt="Home Page Banner" className="w-full h-full object-cover object-top" />
       <div className="absolute top-0 w-full h-full flex flex-col justify-end items-center pb-32">
         <h2 className="text-5xl font-semibold text-green-600 mb-7">Food Masters</h2>
@@ -18,7 +18,7 @@ const HomeBanner = () => {
           <input type="submit" className="bg-green-600 text-white text-lg font-medium px-10 h-14 rounded-r-full cursor-pointer" />
         </form>
       </div>
-    </div>
+    </section>
   )
 }
 

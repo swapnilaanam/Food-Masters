@@ -27,7 +27,7 @@ const SignUp = () => {
     const onSubmit = (data) => {
         if (data.password === data.passwordconfirm) {
             const formData = new FormData();
-            formData.append('image', data.profilepic[0]);
+            formData.append('image', data.restaurantthumbnail[0]);
 
             const img_hosting_url = `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_img_hosting_token}`;
 
@@ -40,25 +40,28 @@ const SignUp = () => {
                     if (imgResponse.success) {
                         const imgURL = imgResponse.data.display_url;
 
-                        signUpUser(data.email, data.password)
+                        signUpUser(data.restaurantemail, data.password)
                             .then(result => {
-                                updateUser(data.name, imgURL)
+                                updateUser(data.restaurantname, imgURL)
                                     .then(() => {
                                         signOutUser()
                                             .then(() => {
-                                                const newUser = {
-                                                    name: data.name,
-                                                    email: data.email,
-                                                    profilePic: imgURL,
+                                                const newRestaurant = {
+                                                    restaurantName: data.restaurantname,
+                                                    restaurantEmail: data.restaurantemail,
+                                                    restaurantThumbnail: imgURL,
+                                                    restaurantPhoneNumber: '+88' + data.restaurantphone,
+                                                    address: data.address,
+                                                    city: data.city,
                                                     country: 'Bangladesh'
                                                 };
 
-                                                axios.post('http://localhost:5000/users', newUser)
+                                                axios.post('http://localhost:5000/restaurants', newRestaurant)
                                                     .then(res => {
                                                         if (res.status === 201) {
-                                                            Swal.fire('You are signed up for food masters successfully!');
+                                                            Swal.fire('You are signed up for food masters business successfully!');
                                                             reset();
-                                                            router.push('/signin');
+                                                            router.push('/business/signin');
                                                         }
                                                     })
                                                     .catch(error => console.log(error));
@@ -86,10 +89,10 @@ const SignUp = () => {
     };
 
     return (
-        <main className="bg-orange-100 py-24 min-h-screen flex justify-center items-center px-4 lg:px-0">
+        <main className="bg-green-100 py-24 min-h-screen flex justify-center items-center px-4 lg:px-0">
             <section className="max-w-7xl mx-auto lg:grid lg:grid-cols-12 bg-white">
                 <div
-                    className="flex items-end bg-green-100 lg:col-span-5 lg:h-full xl:col-span-6"
+                    className="flex items-end bg-orange-200 lg:col-span-5 lg:h-full xl:col-span-6"
                 >
                     <Lottie animationData={authAnimation} />
                 </div>
@@ -100,56 +103,106 @@ const SignUp = () => {
                     <div className="max-w-xl lg:max-w-3xl">
                         <h1 className="text-center text-3xl text-green-600 font-semibold pb-5">
                             Food Masters
+                            <span className="text-orange-500 ms-2"> For Business</span>
                         </h1>
                         <form onSubmit={handleSubmit(onSubmit)} className="mt-8 grid grid-cols-12 gap-6">
                             <div className="col-span-12 lg:col-span-6">
                                 <label
-                                    htmlFor="name"
+                                    htmlFor="restaurantname"
                                     className="block text-base font-medium text-gray-700"
                                 >
-                                    Name
+                                    Restaurant Name
                                 </label>
 
                                 <input
                                     type="text"
-                                    id="name"
-                                    {...register("name", { required: true })}
+                                    id="restaurantname"
+                                    {...register("restaurantname", { required: true })}
                                     className="mt-1 w-full h-8 rounded-sm border-2 border-gray-300 bg-white text-sm text-gray-700 shadow-sm ps-2"
-                                    placeholder="Type Your Name..."
+                                    placeholder="Type Your Restaurant Name..."
                                 />
-                                {errors.name && <span className="text-red-600 mt-2">** Name is required</span>}
+                                {errors.restaurantname && <span className="text-red-600 mt-2">** Restaurant Name is required</span>}
                             </div>
 
                             <div className="col-span-12 lg:col-span-6">
                                 <label
-                                    htmlFor="profilepic"
+                                    htmlFor="restaurantthumbnail"
                                     className="block text-base font-medium text-gray-700"
                                 >
-                                    Profile Picture
+                                    Restaurant Thumbnail
                                 </label>
 
                                 <input
                                     type="file"
-                                    id="profilePic"
-                                    {...register("profilepic", { required: true })}
+                                    id="restaurantthumbnail"
+                                    {...register("restaurantthumbnail", { required: true })}
                                     className="mt-1 w-full h-8 rounded-sm border-2 border-gray-300 bg-white text-sm text-gray-700 shadow-sm"
                                 />
-                                {errors.profilepic && <span className="text-red-600 mt-2">** Profile Picture is required</span>}
+                                {errors.restaurantthumbnail && <span className="text-red-600 mt-2">** Restaurant Thumbnail is required</span>}
                             </div>
 
                             <div className="col-span-12">
-                                <label htmlFor="email" className="block text-base font-medium text-gray-700">
-                                    Email
+                                <label htmlFor="restaurantemail" className="block text-base font-medium text-gray-700">
+                                    Restaurant Email
                                 </label>
 
                                 <input
                                     type="email"
-                                    id="email"
-                                    {...register("email", { required: true })}
+                                    id="restaurantemail"
+                                    {...register("restaurantemail", { required: true })}
                                     className="mt-1 w-full h-8 rounded-sm border-2 border-gray-300 bg-white text-sm text-gray-700 shadow-sm ps-2"
-                                    placeholder="Type Your Email..."
+                                    placeholder="Type Your Restaurant Email..."
                                 />
-                                {errors.email && <span className="text-red-600 mt-2">** Email is required</span>}
+                                {errors.restaurantemail && <span className="text-red-600 mt-2">** Restaurant Email is required</span>}
+                            </div>
+
+                            <div className="col-span-12 lg:col-span-6">
+                                <label htmlFor="address" className="block text-base font-medium text-gray-700">
+                                    Address:
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="address"
+                                    {...register("address", { required: true })}
+                                    className="mt-1 w-full h-8 rounded-sm border-2 border-gray-300 bg-white text-sm text-gray-700 shadow-sm ps-2"
+                                    placeholder="Type Your Restaurant Address..."
+                                />
+                                {errors.address && <span className="text-red-600 mt-2">** Address is required</span>}
+                            </div>
+
+                            <div className="col-span-12 lg:col-span-6">
+                                <label htmlFor="city" className="block text-base font-medium text-gray-700">
+                                    City:
+                                </label>
+
+                                <select
+                                    defaultValue="Dhaka"
+                                    id="city"
+                                    {...register("city", { required: true })}
+                                    className="mt-1 w-full h-8 rounded-sm border-2 border-gray-300 bg-white text-sm text-gray-700 shadow-sm"
+                                >
+                                    <option value="Sylhet">Sylhet</option>
+                                    <option value="Dhaka">Dhaka</option>
+                                    <option value="Khulna">Khulna</option>
+                                </select>
+                            </div>
+
+                            <div className="col-span-12">
+                                <label htmlFor="restaurantphone" className="block text-base font-medium text-gray-700">
+                                    Restaurant Phone Number
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="restaurantphone"
+                                    {...register("restaurantphone", { required: true, maxLength: 11, pattern: /^01[3-9]\d{8}$/ })}
+                                    className="mt-1 w-full h-8 rounded-sm border-2 border-gray-300 bg-white text-sm text-gray-700 shadow-sm ps-2"
+                                    placeholder="A Valid Bangladesh mobile number starting with 01 (11 digits)..."
+                                />
+                                {errors.restaurantphone?.type === 'required' && <span className="text-red-600 mt-2">** Restaurant Phone Number is required</span>}
+                                {errors.restaurantphone?.type === 'maxLength' && <span className="text-red-600 mt-2">** Phone Number is greater than 11 digits</span>}
+                                {errors.restaurantphone?.type === 'pattern' && <span className="text-red-600 mt-2">** Phone Number is not valid</span>}
                             </div>
 
                             <div className="col-span-12 lg:col-span-6">
@@ -162,7 +215,7 @@ const SignUp = () => {
                                     id="password"
                                     {...register("password", { required: true })}
                                     className="mt-1 w-full h-8 rounded-sm border-2 border-gray-300 bg-white text-sm text-gray-700 shadow-sm ps-2"
-                                    placeholder="Type Your Password..."
+                                    placeholder="Type Password..."
                                 />
                                 {errors.password && <span className="text-red-600 mt-2">** Password is required</span>}
                             </div>
@@ -180,7 +233,7 @@ const SignUp = () => {
                                     id="passwordconfirm"
                                     {...register("passwordconfirm", { required: true })}
                                     className="mt-1 w-full h-8 rounded-sm border-2 border-gray-300 bg-white text-sm text-gray-700 shadow-sm ps-2"
-                                    placeholder="Type Your Password Again..."
+                                    placeholder="Type The Same Password Again..."
                                 />
                                 {errors.passwordconfirm && <span className="text-red-600 mt-2">** Confirm Password is required</span>}
                             </div>
@@ -200,23 +253,19 @@ const SignUp = () => {
                                 <button
                                     className="inline-block shrink-0 rounded-md border border-green-600 bg-green-600 px-20 py-2.5 mt-2 text-base font-medium text-white transition hover:bg-green-700 focus:outline-none focus:ring active:text-green-600"
                                 >
-                                    Sign Up
+                                    Sign Up As A Restaurant
                                 </button>
                             </div>
                         </form>
                         <div className="w-full mt-8">
                             <p className="mt-4 text-base text-gray-500 sm:mt-0">
                                 Already have an account?
-                                <Link href="/signin" className="text-green-600 font-medium"> Sign In</Link>.
+                                <Link href="/business/signin" className="text-green-600 font-medium"> Sign In</Link>.
                             </p>
                         </div>
                     </div>
                 </main>
             </section>
-            <div className="bg-white text-xl font-medium fixed bottom-0 right-0 flex justify-center items-center rounded-sm">
-                <Link href="/business/dashboard" className="py-3 px-5 text-black"><span className="text-green-600">Food Masters</span> For Business</Link>
-                <Link href="/" className="py-3 px-5 bg-green-500 text-white">Go To Home</Link>
-            </div>
         </main>
     )
 }

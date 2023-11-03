@@ -1,12 +1,14 @@
-import Navbar from "@/components/Navbar"
+import Navbar from "@/components/Shared/Navbar"
 
-const WithNavbarLayout = ({children}) => {
+const WithNavbarLayout = ({ children }) => {
   return (
-    <main>
+    <>
+      <header>
         <Navbar />
-        <div>{children}</div>
-    </main>
-    
+      </header>
+      {children}
+    </>
+
   )
 }
 

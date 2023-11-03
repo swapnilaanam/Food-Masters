@@ -4,9 +4,9 @@ import HomeBanner from "@/components/HomeBanner";
 
 export default function Home() {
   return (
-    <section>
+    <main>
       <HomeBanner />
       <Features />
-    </section>
+    </main>
   )
 }

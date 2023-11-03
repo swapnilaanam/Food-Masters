@@ -71,8 +71,8 @@ const SignIn = () => {
   }
 
   return (
-    <section className="bg-orange-100 py-24 min-h-screen flex justify-center items-center px-4 lg:px-0">
-      <div className="max-w-7xl mx-auto lg:grid lg:grid-cols-12 bg-white">
+    <main className="bg-orange-100 py-24 min-h-screen flex justify-center items-center px-4 lg:px-0">
+      <section className="max-w-7xl mx-auto lg:grid lg:grid-cols-12 bg-white">
         <div
           className="flex items-end bg-green-100 lg:col-span-5 lg:h-full xl:col-span-6"
         >
@@ -96,7 +96,8 @@ const SignIn = () => {
                   type="email"
                   id="email"
                   {...register("email", { required: true })}
-                  className="mt-1 w-full h-8 rounded-sm border-2 border-gray-300 bg-white text-sm text-gray-700 shadow-sm"
+                  className="mt-1 w-full h-8 rounded-sm border-2 border-gray-300 bg-white text-sm text-gray-700 shadow-sm ps-2"
+                  placeholder="Type Your Email..."
                 />
                 {errors.email && <span className="text-red-600 mt-2">** Email is required</span>}
               </div>
@@ -110,12 +111,13 @@ const SignIn = () => {
                   type="password"
                   id="password"
                   {...register("password", { required: true })}
-                  className="mt-1 w-full h-8 rounded-sm border-2 border-gray-300 bg-white text-sm text-gray-700 shadow-sm"
+                  className="mt-1 w-full h-8 rounded-sm border-2 border-gray-300 bg-white text-sm text-gray-700 shadow-sm ps-2"
+                  placeholder="Type Your Password..."
                 />
                 {errors.password && <span className="text-red-600 mt-2">** Password is required</span>}
               </div>
 
-              <div className="col-span-8 justify-center sm:flex sm:items-center sm:gap-4">
+              <div className="col-span-8 justify-center sm:flex sm:items-center sm:gap-4 text-center">
                 <button
                   className="inline-block shrink-0 rounded-sm border border-green-600 bg-green-600 px-12 py-2.5 mt-2 text-base font-medium text-white transition hover:bg-green-700 focus:outline-none focus:ring active:text-green-600"
                 >
@@ -142,12 +144,12 @@ const SignIn = () => {
             </div>
           </div>
         </div>
-      </div>
+      </section>
       <div className="bg-white text-xl font-medium fixed bottom-0 right-0 flex justify-center items-center rounded-sm">
         <Link href="/" className="py-3 px-5 text-black"><span className="text-green-600">Food</span> <span className="text-orange-500"> Masters</span> For Business</Link>
         <Link href="/" className="py-3 px-5 bg-green-500 text-white">Go To Home</Link>
       </div>
-    </section>
+    </main>
   )
 }
 
