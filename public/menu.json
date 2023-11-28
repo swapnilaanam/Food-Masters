@@ -1,0 +1,66 @@
+[
+    {
+        "name": "Biryani",
+        "img": "https://i.ibb.co/0CNxfMf/biryani.jpg"
+    },
+    {
+        "name": "Burger",
+        "img": "https://i.ibb.co/CPrJSgq/burger.jpg"
+    },
+    {
+        "name": "Chicken",
+        "img": "https://i.ibb.co/f9v67Qz/chicken.jpg"
+    },
+    {
+        "name": "Coffee & Tea",
+        "img": "https://i.ibb.co/xG4hFZP/coffee-tea.jpg"
+    },
+    {
+        "name": "Curry",
+        "img": "https://i.ibb.co/D8Hd0PP/curry.jpg"
+    },
+    {
+        "name": "Drinks",
+        "img": "https://i.ibb.co/KrZp1hR/drinks.jpg"
+    },
+    {
+        "name": "Grill & Tandoori",
+        "img": "https://i.ibb.co/0GTgrtk/grill-tandoori.jpg"
+    },
+    {
+        "name": "Kebab",
+        "img": "https://i.ibb.co/hM6qCMh/kebab.jpg"
+    },
+    {
+        "name": "Naan",
+        "img": "https://i.ibb.co/dLB290D/naan.jpg"
+    },
+    {
+        "name": "Pasta",
+        "img": "https://i.ibb.co/XxtpdVM/pasta.jpg"
+    },
+    {
+        "name": "Pizza",
+        "img": "https://i.ibb.co/tYGwK4y/pizza.jpg"
+    },
+    {
+        "name": "Rice",
+        "img": "https://i.ibb.co/pr0XrZS/rice.jpg"
+    },
+    {
+        "name": "Salad",
+        "img": "https://i.ibb.co/4Zhg149/salad.jpg"
+    },
+    {
+        "name": "Shakes",
+        "img": "https://i.ibb.co/G0g02N0/shake.jpg"
+    },
+    {
+        "name": "Soup",
+        "img": "https://i.ibb.co/Tcr9HrF/soup.jpg"
+    },
+    {
+        "name": "Steaks",
+        "img": "https://i.ibb.co/kQZqysX/steaks.jpg"
+    }
+]

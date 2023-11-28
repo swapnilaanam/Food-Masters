@@ -1,8 +1,9 @@
 import { Kanit } from 'next/font/google';
 import './globals.css';
 import AuthProvider from '@/providers/AuthProvider';
+import QueryProvider from '@/providers/QueryProvider';
 
-const kanit = Kanit({subsets: ['latin'], weight: ["400", "500", "600", "700"], variable: '--font-kanit'});
+const kanit = Kanit({ subsets: ['latin'], weight: ["400", "500", "600", "700"], variable: '--font-kanit' });
 
 export const metadata = {
   title: 'Food Masters || Home',
@@ -14,7 +15,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${kanit.className}`}>
         <AuthProvider>
-          {children}
+          <QueryProvider>
+            {children}
+          </QueryProvider>
         </AuthProvider>
       </body>
     </html>

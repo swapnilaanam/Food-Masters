@@ -15,7 +15,7 @@ const HomeBanner = () => {
             className="bg-white w-full h-14 rounded-l-full font-medium ps-4 focus:outline-none"
             placeholder="Search Restaurant By Name..."
           />
-          <input type="submit" className="bg-green-600 text-white text-lg font-medium px-10 h-14 rounded-r-full cursor-pointer" />
+          <input type="submit" value="Search" className="bg-green-600 text-white text-lg font-medium px-10 h-14 rounded-r-full cursor-pointer" />
         </form>
       </div>
     </section>
