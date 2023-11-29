@@ -12,7 +12,6 @@ const FoodCategories = () => {
     queryFn: async () => {
       try {
         const response = await axios.get('http://localhost:5000/categories');
-        // console.log()
         const categories = response.data.slice(0, 5);
         return categories;
       } catch (error) {

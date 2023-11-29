@@ -1,3 +1,4 @@
+import FeaturedRestaurants from "@/components/FeaturedRestaurants";
 import Features from "@/components/Features";
 import FoodCategories from "@/components/FoodCategories";
 import HomeBanner from "@/components/HomeBanner";
@@ -8,6 +9,7 @@ export default function Home() {
     <main>
       <HomeBanner />
       <FoodCategories />
+      <FeaturedRestaurants />
       <Features />
     </main>
   )

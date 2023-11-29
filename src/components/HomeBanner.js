@@ -3,9 +3,9 @@ import homeBanner from '@/assets/image/homebanner3.jpg';
 
 const HomeBanner = () => {
   return (
-    <section className="w-full h-[85vh] relative">
+    <section className="w-full h-[630px] relative">
       <Image src={homeBanner} alt="Home Page Banner" className="w-full h-full object-cover object-top" />
-      <div className="absolute top-0 w-full h-full flex flex-col justify-end items-center pb-32">
+      <div className="absolute top-0 w-full h-full flex flex-col justify-end items-center pb-20">
         <h2 className="text-5xl font-semibold text-green-600 mb-7">Food Masters</h2>
         <h4 className="text-xl font-medium text-slate-600 mb-12 text-center">Your Favourite Restaurants Food Delivered To Door Steps</h4>
         <form className="w-[23%] flex justify-center items-center">
