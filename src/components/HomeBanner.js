@@ -3,7 +3,7 @@ import homeBanner from '@/assets/image/homebanner3.jpg';
 
 const HomeBanner = () => {
   return (
-    <section className="w-full h-[630px] relative">
+    <section className="w-full h-[630px] home-banner relative">
       <Image src={homeBanner} alt="Home Page Banner" className="w-full h-full object-cover object-top" />
       <div className="absolute top-0 w-full h-full flex flex-col justify-end items-center pb-20">
         <h2 className="text-5xl font-semibold text-green-600 mb-7">Food Masters</h2>

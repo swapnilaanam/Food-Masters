@@ -21,9 +21,9 @@ const FeaturedRestaurants = () => {
 
   return (
     <section className="py-28">
-      <div className="max-w-7xl 2xl:max-w-[1320px] mx-auto h-[500px]">
+      <div className="max-w-7xl 2xl:max-w-[1320px] mx-auto h-[550px]">
         <div className="w-full h-full flex justify-between items-start">
-          <div className="w-[30%] h-full bg-green-400 flex flex-col justify-center items-center gap-24 p-10">
+          <div className="w-[30%] h-full bg-green-200 flex flex-col justify-center items-center gap-24 p-10">
             <h4 className="text-3xl font-medium">Featured Restaurants</h4>
             <Link href="/restaurants" className="text-xl bg-white font-medium px-10 py-2 rounded">{'All Restaurants >>'}</Link>
           </div>

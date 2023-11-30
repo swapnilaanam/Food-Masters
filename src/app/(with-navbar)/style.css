@@ -1,0 +1,23 @@
+.swiper {
+    width: 100%;
+    height: 330px;
+}
+
+.swiper-slide {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.swiper-button-prev, .swiper-button-next {
+    top: 120% !important;
+}
+
+@media only screen and (min-width: 1600px) {
+    .home-banner {
+        height: 780px;
+    }
+}
