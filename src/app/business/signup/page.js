@@ -53,7 +53,10 @@ const SignUp = () => {
                                                     restaurantPhoneNumber: '+88' + data.restaurantphone,
                                                     address: data.address,
                                                     city: data.city,
-                                                    country: 'Bangladesh'
+                                                    country: 'Bangladesh',
+                                                    openingTime: data.openingtime,
+                                                    closingTime: data.closingtime,
+                                                    tags: []
                                                 };
 
                                                 axios.post('http://localhost:5000/restaurants', newRestaurant)
@@ -203,6 +206,36 @@ const SignUp = () => {
                                 {errors.restaurantphone?.type === 'required' && <span className="text-red-600 mt-2">** Restaurant Phone Number is required</span>}
                                 {errors.restaurantphone?.type === 'maxLength' && <span className="text-red-600 mt-2">** Phone Number is greater than 11 digits</span>}
                                 {errors.restaurantphone?.type === 'pattern' && <span className="text-red-600 mt-2">** Phone Number is not valid</span>}
+                            </div>
+
+                            <div className="col-span-12 lg:col-span-6">
+                                <label htmlFor="openingtime" className="block text-base font-medium text-gray-700">
+                                    Opening Time:
+                                </label>
+
+                                <input
+                                    type="time"
+                                    id="openingtime"
+                                    {...register("openingtime", { required: true })}
+                                    className="mt-1 w-full h-8 rounded-sm border-2 border-gray-300 bg-white text-sm text-gray-700 shadow-sm ps-2"
+                                    defaultValue="12:00"
+                                />
+                                {errors.openingtime && <span className="text-red-600 mt-2">** Opening Time is required</span>}
+                            </div>
+
+                            <div className="col-span-12 lg:col-span-6">
+                                <label htmlFor="closingtime" className="block text-base font-medium text-gray-700">
+                                    Closing Time:
+                                </label>
+
+                                <input
+                                    type="time"
+                                    id="closingtime"
+                                    {...register("closingtime", { required: true })}
+                                    className="mt-1 w-full h-8 rounded-sm border-2 border-gray-300 bg-white text-sm text-gray-700 shadow-sm ps-2"
+                                    defaultValue="22:00"
+                                />
+                                {errors.closingtime && <span className="text-red-600 mt-2">** Opening Time is required</span>}
                             </div>
 
                             <div className="col-span-12 lg:col-span-6">

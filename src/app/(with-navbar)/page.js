@@ -6,6 +6,7 @@ import HomeBanner from "@/components/HomeBanner";
 import './style.css';
 import OrderBanner from "@/components/OrderBanner";
 import CustomerReview from "@/components/CustomerReview";
+import RestaurantBanner from "@/components/RestaurantBanner";
 
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <Features />
       <OrderBanner />
       <CustomerReview />
+      <RestaurantBanner />
     </main>
   )
 }

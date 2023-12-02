@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-const AddMenu = ({refetch}) => {
+const AddMenu = ({ refetch }) => {
     const [isAddFoodModalOpen, setIsAddFoodModalOpen] = useState(false);
 
     const { user } = useAuth();
@@ -30,7 +30,7 @@ const AddMenu = ({refetch}) => {
             body: formData
         })
             .then(res => res.json())
-            .then(async(imgResponse) => {
+            .then(async (imgResponse) => {
                 if (imgResponse.success) {
                     const imgURL = imgResponse?.data?.display_url;
 
@@ -47,16 +47,21 @@ const AddMenu = ({refetch}) => {
                         const response = await axios.post('http://localhost:5000/menus', newFood);
 
                         if (response.status === 201) {
-                            Swal.fire({
-                                position: "top-end",
-                                icon: "success",
-                                title: "New Food Added To The Menu!",
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                            reset();
-                            refetch();
-                            setIsAddFoodModalOpen(false);
+
+                            const res = await axios.patch(`http://localhost:5000/restaurants/${user?.email}`, { category: data?.foodcategory });
+
+                            if (res.status === 200) {
+                                Swal.fire({
+                                    position: "top-end",
+                                    icon: "success",
+                                    title: "New Food Added To The Menu!",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                                reset();
+                                refetch();
+                                setIsAddFoodModalOpen(false);
+                            }
                         }
                     } catch (error) {
                         console.log(error?.message);
@@ -89,8 +94,8 @@ const AddMenu = ({refetch}) => {
                 </button>
             </div>
             {isAddFoodModalOpen && (
-                <div 
-                className="fixed z-10 top-[50%] -translate-y-[50%] left-0 right-0 max-w-4xl mx-auto bg-orange-200 rounded-md p-4 shadow-xl shadow-orange-300">
+                <div
+                    className="fixed z-10 top-[50%] -translate-y-[50%] left-0 right-0 max-w-4xl mx-auto bg-orange-200 rounded-md p-4 shadow-xl shadow-orange-300">
                     <h2 className="text-center text-2xl font-semibold">Add Food</h2>
                     <form onSubmit={handleSubmit(onSubmit)} className="w-[70%] mx-auto mt-12 space-y-6">
                         <div>

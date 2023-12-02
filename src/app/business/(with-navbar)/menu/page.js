@@ -1,5 +1,5 @@
-import Menus from "@/components/Business/Menus"
-import BusinessBanner from "@/components/Shared/BusinessBanner"
+import Menus from "@/components/Business/Menus";
+import BusinessBanner from "@/components/Shared/BusinessBanner";
 
 const Menu = () => {
   return (
@@ -10,4 +10,4 @@ const Menu = () => {
   )
 }
 
-export default Menu
+export default Menu;
