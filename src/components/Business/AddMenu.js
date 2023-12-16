@@ -19,7 +19,32 @@ const AddMenu = ({ refetch }) => {
         reset
     } = useForm();
 
-    const onSubmit = async (data) => {
+    const { data: categories = [] } = useQuery({
+        queryKey: ["categories"],
+        queryFn: async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/categories');
+                // console.log(response.data);
+                return response.data;
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    });
+
+    const { data: restaurantInfo = {} } = useQuery({
+        queryKey: ['restaurantInfo', user?.email],
+        queryFn: async () => {
+          try {
+            const response = await axios.get(`http://localhost:5000/restaurants/${user?.email}`);
+            return response.data;
+          } catch (error) {
+            console.log(error?.message);
+          }
+        }
+      });
+
+      const onSubmit = async (data) => {
         const formData = new FormData();
         formData.append('image', data?.foodimage[0]);
 
@@ -40,7 +65,9 @@ const AddMenu = ({ refetch }) => {
                         foodImage: imgURL,
                         foodPrice: data?.foodprice,
                         foodDesc: data?.fooddesc,
-                        restaurantEmail: user?.email
+                        restaurantEmail: user?.email,
+                        restaurantId: restaurantInfo?._id,
+                        restaurantName: restaurantInfo?.restaurantName
                     }
 
                     try {
@@ -72,19 +99,6 @@ const AddMenu = ({ refetch }) => {
                 console.log(error?.message);
             })
     };
-
-    const { data: categories = [] } = useQuery({
-        queryKey: ["categories"],
-        queryFn: async () => {
-            try {
-                const response = await axios.get('http://localhost:5000/categories');
-                // console.log(response.data);
-                return response.data;
-            } catch (error) {
-                console.log(error);
-            }
-        }
-    })
 
     return (
         <section className="w-full">

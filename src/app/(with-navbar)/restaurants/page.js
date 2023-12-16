@@ -1,44 +1,76 @@
 "use client";
 
-import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import restaurantsBannerImg from "@/assets/image/restaurant-banner.jpg";
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import Restaurant from '@/components/Restaurant';
+import TopBanner from '@/components/Shared/TopBanner';
 
 
 const Restaurants = () => {
-    const { data: restaurants = [] } = useQuery({
+    const [currentCategory, setCurrentCategory] = useState("All");
+
+    const { data: categories = [] } = useQuery({
+        queryKey: ["categories"],
+        queryFn: async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/categories');
+                return response.data;
+            } catch (error) {
+                console.log(error?.message);
+            }
+        }
+    })
+
+    const { data: restaurants = [], refetch } = useQuery({
         queryKey: ["restaurants"],
         queryFn: async () => {
-            const response = await axios.get('http://localhost:5000/restaurants');
-            return response.data.filter((restaurant) => restaurant?.tags.length > 0);
+            try {
+                const response = await axios.get('http://localhost:5000/restaurants');
+                if (currentCategory === 'All') {
+                    return response.data.filter((restaurant) => restaurant?.tags.length > 0);
+                }
+                else {
+                    const filteredRestaurants = response.data.filter((restaurant) => restaurant?.tags.includes(currentCategory));
+                    return filteredRestaurants.filter((restaurant) => restaurant?.tags.length > 0);
+                }
+            } catch (error) {
+                console.log(error?.message);
+            }
         }
     });
 
+    useEffect(() => {
+        refetch();
+    }, [currentCategory]);
+
     return (
         <main>
-            <section>
-                <div className="w-full h-[500px] relative">
-                    <Image fill={true} src={restaurantsBannerImg} alt="Restaurants Banner" className="w-full h-full object-cover object-top" />
-                    <div className="absolute top-0 w-full h-full flex justify-center items-center">
-                        <h1 className="bg-green-600 text-white text-4xl tracking-wider font-semibold px-14 py-3.5 rounded shadow-xl">
-                            Restaurants
-                        </h1>
+            <TopBanner title="Restaurants" />
+            <section className="pt-14 pb-28">
+                <div className="max-w-7xl 2xl:max-w-[1320px] mx-auto px-4 xl:px-0">
+                    <h4 className="text-2xl font-medium mb-4">Filters: </h4>
+                    <div onClick={(e) => setCurrentCategory(e.target.innerText)} className="ps-4 w-full flex justify-start items-center gap-3 flex-wrap mb-16">
+                        <button className="bg-orange-200 hover:bg-green-600 hover:text-white px-5 py-1 rounded-sm">
+                            All
+                        </button>
+                        {
+                            categories.map((category) => <button className="bg-orange-200 hover:bg-green-600 hover:text-white px-5 py-1 rounded-sm">
+                                {category?.name}
+                            </button>)
+                        }
                     </div>
-                </div>
-            </section>
-            <section className="py-28">
-                <div className="flex justify-center items-start gap-14 flex-wrap">
-                    {
-                        restaurants?.map((restaurant) => <Restaurant key={restaurant?._id} restaurant={restaurant} />)
-                    }
+                    <div className="flex justify-center items-start gap-14 2xl:gap-20 flex-wrap">
+                        {
+                            restaurants.length === 0 ? <h4 className="mt-7 text-xl font-medium">No Restaurants Available...</h4> : 
+                            restaurants?.map((restaurant) => <Restaurant key={restaurant?._id} restaurant={restaurant} />)
+                        }
+                    </div>
                 </div>
             </section>
         </main>
     )
 }
 
-export default Restaurants
+export default Restaurants;

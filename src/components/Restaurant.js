@@ -20,20 +20,20 @@ const Restaurant = ({ restaurant }) => {
         }
     })
     return (
-        <Link href={`/${restaurant?._id}`}>
+        <Link href={`/restaurants/${restaurant?._id}`}>
             <div className="w-96 bg-orange-200 shadow-xl shadow-orange-50">
-                <div className="w-full h-[200px] relative">
+                <div className="w-full h-[250px] relative">
                     <Image fill={true} src={restaurant?.restaurantThumbnail} alt="Restaurant" className="w-full h-full object-cover rounded-t" />
                 </div>
                 <div className="pt-4 border-2 border-t-0 border-orange-200 rounded-b">
                     <h4 className="px-5 text-2xl font-medium">{restaurant?.restaurantName}</h4>
                     <div className="px-5 flex justify-start items-center gap-4 mt-4">
                         <GrMapLocation />
-                        <h6 className="font-medium">{restaurant?.address}, {restaurant?.city}</h6>
+                        <h6 className="text-sm">{restaurant?.address}, {restaurant?.city}</h6>
                     </div>
                     <div className="px-5 flex justify-start items-center gap-4 mt-4">
                         <RiTimerLine />
-                        <h6 className="font-medium">{restaurant?.openingTime} - {restaurant?.closingTime}</h6>
+                        <h6 className="text-sm">{restaurant?.openingTime} - {restaurant?.closingTime}</h6>
                     </div>
                     <div className="ps-5 flex justify-start items-center gap-4 flex-wrap mt-6 border-t-2 border-gray-600 py-5">
                         {
