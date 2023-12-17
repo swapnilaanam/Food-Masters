@@ -24,7 +24,7 @@ const Navbar = () => {
                 <li className="relative cursor-pointer">
                     <Link href="/cart">
                         <LuShoppingBag className="text-3xl font-medium" />
-                        <div className="bg-white text-center rounded-full px-3 py-1 absolute -top-5 left-4">
+                        <div className="bg-white text-center rounded-full w-10 h-10 flex justify-center items-center absolute -top-5 left-4">
                             {cart.cartItems?.reduce((prevValue, currentValue) => prevValue + currentValue.quantity, 0)}
                         </div>
                     </Link>

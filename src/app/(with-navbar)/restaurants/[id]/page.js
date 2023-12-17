@@ -1,6 +1,7 @@
 "use client";
 
 import Menus from "@/components/Menus";
+import RestaurantInfo from "@/components/RestaurantInfo";
 import TopBanner from "@/components/Shared/TopBanner";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -65,7 +66,8 @@ const Restaurant = () => {
             </div>
           </aside>
           <div className="w-[75%] bg-orange-50 border border-orange-200 p-5 pb-14 shadow-lg shadow-orange-100">
-            <Menus restaurantId={id} restaurant={restaurant} />
+            {/* <Menus restaurantId={id} restaurant={restaurant} /> */}
+            <RestaurantInfo restaurant={restaurant} />
           </div>
         </div>
       </section>

@@ -6,6 +6,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useContext } from "react";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const Menu = ({ menu }) => {
     const { refetch } = useContext(CartContext);
@@ -22,22 +23,96 @@ const Menu = ({ menu }) => {
             restaurantEmail: menu.restaurantEmail,
             restaurantId: menu.restaurantId,
             restaurantName: menu.restaurantName
-        }
+        };
+        
         try {
-            const response = await axios.post(`http://localhost:5000/carts/${user?.email}`, cartInfo);
+            const res = await axios.get(`http://localhost:5000/carts/${user?.email}`);
 
-            if (response.status === 200) {
-                refetch();
-                toast.success('Added To The Cart', {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
+            if (res.status === 200) {
+                if (res?.data) {
+                    if (res?.data?.cartItems.length !== 0) {
+                        if (res?.data?.cartItems[0].restaurantId !== cartInfo?.restaurantId) {
+                            Swal.fire({
+                                title: "Food Item From Different Restaurant!",
+                                text: "Your Previous Cart Items Will Removed As The Restaurants Are Different!",
+                                icon: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#3085d6",
+                                cancelButtonColor: "#d33",
+                                confirmButtonText: "Yes, Add It!"
+                            }).then(async (result) => {
+                                if (result.isConfirmed) {
+                                    const response = await axios.post(`http://localhost:5000/carts/${user?.email}`, cartInfo);
+
+                                    if (response.status === 200) {
+                                        refetch();
+                                        toast.success('Added To The Cart', {
+                                            position: "top-right",
+                                            autoClose: 5000,
+                                            hideProgressBar: false,
+                                            closeOnClick: true,
+                                            pauseOnHover: true,
+                                            draggable: true,
+                                            progress: undefined,
+                                            theme: "light",
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                        else {
+                            const response = await axios.post(`http://localhost:5000/carts/${user?.email}`, cartInfo);
+
+                            if (response.status === 200) {
+                                refetch();
+                                toast.success('Added To The Cart', {
+                                    position: "top-right",
+                                    autoClose: 5000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                    theme: "light",
+                                });
+                            }
+                        }
+                    }
+                    else {
+                        const response = await axios.post(`http://localhost:5000/carts/${user?.email}`, cartInfo);
+
+                        if (response.status === 200) {
+                            refetch();
+                            toast.success('Added To The Cart', {
+                                position: "top-right",
+                                autoClose: 5000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                theme: "light",
+                            });
+                        }
+                    }
+                }
+                else {
+                    const response = await axios.post(`http://localhost:5000/carts/${user?.email}`, cartInfo);
+
+                    if (response.status === 200) {
+                        refetch();
+                        toast.success('Added To The Cart', {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "light",
+                        });
+                    }
+                }
             }
         } catch (error) {
             console.log(error?.message);
