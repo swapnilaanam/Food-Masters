@@ -11,7 +11,13 @@ import { GrMapLocation } from "react-icons/gr";
 import { IoIosStar, IoMdStar } from "react-icons/io";
 import Rating from "react-rating";
 
+import './page.css';
+import RestaurantRatings from "@/components/restaurantRatings";
+import { useState } from "react";
+
 const Restaurant = () => {
+  const [currentRestaurantPageView, setCurrentRestaurantPageView] = useState("Menu");
+
   const { id } = useParams();
 
   const { data: restaurant = {} } = useQuery({
@@ -60,14 +66,38 @@ const Restaurant = () => {
           <aside className="w-[25%] bg-orange-100 border border-orange-200 drop-shadow-md py-10 px-5">
             <h3 className="text-xl mb-7">Restaurant Navigator</h3>
             <div className="flex flex-col items-stretch justify-center gap-5">
-              <button className="bg-green-500 text-white font-medium px-4 py-2">Menu</button>
-              <button className="bg-green-500 text-white font-medium px-7 py-2">Ratings</button>
-              <button className="bg-green-500 text-white font-medium px-7 py-2">Restaurant Info</button>
+              <button
+                className="bg-green-500 text-white font-medium px-4 py-2"
+                onClick={() => setCurrentRestaurantPageView("Menu")}
+              >
+                Menu
+              </button>
+              <button
+                className="bg-green-500 text-white font-medium px-7 py-2"
+                onClick={() => setCurrentRestaurantPageView("Restaurant Ratings")}
+              >
+                Ratings
+              </button>
+              <button
+                className="bg-green-500 text-white font-medium px-7 py-2"
+                onClick={() => setCurrentRestaurantPageView("Restaurant Info")}
+              >
+                Restaurant Info
+              </button>
             </div>
           </aside>
           <div className="w-[75%] bg-orange-50 border border-orange-200 p-5 pb-14 shadow-lg shadow-orange-100">
-            {/* <Menus restaurantId={id} restaurant={restaurant} /> */}
-            <RestaurantInfo restaurant={restaurant} />
+            {
+              currentRestaurantPageView === "Menu" && <Menus restaurantId={id} restaurant={restaurant} />
+            }
+            {
+              currentRestaurantPageView === "Restaurant Ratings" && <RestaurantRatings />
+            }
+            {
+              currentRestaurantPageView === "Restaurant Info" && <RestaurantInfo restaurant={restaurant} />
+            }
+
+
           </div>
         </div>
       </section>
