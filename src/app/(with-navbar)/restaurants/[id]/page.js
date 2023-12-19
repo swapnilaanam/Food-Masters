@@ -12,7 +12,7 @@ import { IoIosStar, IoMdStar } from "react-icons/io";
 import Rating from "react-rating";
 
 import './page.css';
-import RestaurantRatings from "@/components/restaurantRatings";
+import RestaurantRatings from "@/components/RestaurantRatings";
 import { useState } from "react";
 
 const Restaurant = () => {
