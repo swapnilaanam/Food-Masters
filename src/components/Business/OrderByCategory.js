@@ -3,7 +3,8 @@
 import useAuth from "@/app/hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { FcCandleSticks } from "react-icons/fc"
+import Image from "next/image";
+import { FcBullish, FcCandleSticks } from "react-icons/fc"
 
 import {
     ComposedChart,
@@ -12,7 +13,6 @@ import {
     Bar,
     XAxis,
     YAxis,
-    CartesianGrid,
     Tooltip,
     Legend,
     ResponsiveContainer,
@@ -30,7 +30,7 @@ const OrderByCategory = () => {
                 const tags = response.data.tags;
 
                 if (tags) {
-                    const response = await axios.get(`http://localhost:5000/orders//restaurant/${user?.email}`);
+                    const response = await axios.get(`http://localhost:5000/orders/restaurant/${user?.email}`);
 
                     const orders = response.data;
 
@@ -61,18 +61,77 @@ const OrderByCategory = () => {
                 console.log(error?.message);
             }
         }
-    })
+    });
+
+    const { data: mostPopularItems = [] } = useQuery({
+        queryKey: ["orderedItems", user?.email],
+        queryFn: async () => {
+            try {
+                if (user?.email) {
+                    const response = await axios.get(`http://localhost:5000/menus/${user?.email}`);
+
+                    if (response.status === 200) {
+                        const menus = response?.data;
+
+                        if (menus) {
+                            const res = await axios.get(`http://localhost:5000/orders/restaurant/${user?.email}`);
+
+                            if (res.status === 200) {
+                                const orders = res?.data;
+
+                                let mostPopularFoodItems = [];
+
+                                if (orders) {
+                                    for (let i = 0; i < menus.length; i++) {
+                                        let count = 0;
+                                        for (let j = 0; j < orders.length; j++) {
+                                            let orderedItems = orders[j].orderedItems;
+                                            for (let k = 0; k < orderedItems.length; k++) {
+                                                if (orderedItems[k].foodName === menus[i].foodName) {
+                                                    count += orderedItems[k].quantity;
+                                                }
+                                            }
+                                        }
+                                        mostPopularFoodItems.push({
+                                            foodName: menus[i].foodName,
+                                            foodImage: menus[i].foodImage,
+                                            foodPrice: menus[i].foodPrice,
+                                            count: count
+                                        });
+                                    }
+                                }
+                                else {
+                                    for (let i = 0; i < menus.length; i++) {
+                                        mostPopularFoodItems.push({
+                                            foodName: menus[i].foodName,
+                                            foodImage: menus[i].foodImage,
+                                            foodPrice: menus[i].foodPrice,
+                                            count: 0
+                                        });
+                                    }
+                                }
+                                let sortedMostPopularFoodItems = mostPopularFoodItems.sort((fItem, sItem) => sItem.count - fItem.count);
+                                return sortedMostPopularFoodItems.splice(0, 4);
+                            }
+                        }
+                    }
+                }
+            } catch (error) {
+                console.log(error?.message);
+            }
+        }
+    });
 
     return (
         <section className="max-w-7xl mx-auto py-14 grid grid-cols-12">
-            <div className="col-span-8 bg-orange-200 p-7">
+            <div className="col-span-7 bg-orange-200 p-7">
                 <div className="flex justify-start items-center gap-5 mb-10">
                     <FcCandleSticks className="text-2xl" />
                     <h4 className="text-xl font-medium">Orders By Category</h4>
                 </div>
                 <div className="w-full h-[300px]">
                     {
-                        !ordersByCategory ? <h4 className="text-xl font-medium text-center">
+                        !ordersByCategory ? <h4 className="text-xl font-medium text-center mt-12">
                             Not Enough Data To Show Visualization...
                         </h4>
                             :
@@ -101,8 +160,43 @@ const OrderByCategory = () => {
                     }
                 </div>
             </div>
-        </section>
+            <div className="col-start-9 col-span-4 bg-orange-200 p-7">
+                <div className="flex justify-start items-center gap-5">
+                    <FcBullish className="text-2xl" />
+                    <h4 className="text-xl font-medium">Best Selling Food Items</h4>
+                </div>
+                {
+                    mostPopularItems.length === 0 ? (
+                        <h2 className="text-xl font-medium text-center mt-12">Not Enough Data To Show Visualization...</h2>
+                    )
+                        : (
+                            <table className="border-separate border-spacing-y-7" >
+                                <tbody>
+                                    {mostPopularItems.map((mostPopularItem, index) => {
+                                        return (
+                                            <tr key={mostPopularItem._id} >
+                                                <td className="pr-4 font-semibold text-center">
+                                                    {index + 1}.
+                                                </td>
+                                                <td className="pr-4 w-16 h-16 rounded relative bg-white text-center">
+                                                    <Image fill={true} src={mostPopularItem.foodImage} alt="Most popular food item" className="rounded object-cover p-2" />
+                                                </td>
+                                                <td className="px-8 text-sm font-medium text-center">
+                                                    {mostPopularItem.foodName}
+                                                </td>
+                                                <td className="text-sm font-medium text-center">
+                                                    BDT. {mostPopularItem.foodPrice}
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                            </table>
+                        )
+                }
+            </div>
+        </section >
     )
 }
 
-export default OrderByCategory
+export default OrderByCategory;
