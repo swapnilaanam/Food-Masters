@@ -22,7 +22,7 @@ const CheckOut = () => {
   const { user, loading: userLoading } = useAuth();
   const { cart } = useContext(CartContext);
 
-  console.log(cart);
+  // console.log(cart);
 
   const { data: customerInfo = {} } = useQuery({
     queryKey: ["customerInfo", user?.email],

@@ -26,6 +26,12 @@ const Navbar = () => {
                 <li>
                     <Link href="/restaurants">Restaurants</Link>
                 </li>
+                <li>
+                    <Link href="/">Dashboard</Link>
+                </li>
+                <li>
+                    <Link href="/">Orders</Link>
+                </li>
                 <li className="relative cursor-pointer">
                     <Link href="/cart">
                         <LuShoppingBag className="text-3xl font-medium" />
@@ -38,12 +44,6 @@ const Navbar = () => {
                             }
                         </div>
                     </Link>
-                </li>
-                <li>
-                    <Link href="/">Orders</Link>
-                </li>
-                <li>
-                    <Link href="/">Dashboard</Link>
                 </li>
                 {
                     user ? (

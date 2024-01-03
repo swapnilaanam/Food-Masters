@@ -6,7 +6,7 @@ import axios from "axios";
 import Image from "next/image";
 
 
-const BusinessBanner = () => {
+const BusinessBanner = ({ title }) => {
   const { user, loading } = useAuth();
 
   const { data: restaurantInfo = {} } = useQuery({
@@ -26,7 +26,7 @@ const BusinessBanner = () => {
       <Image fill={true} src={restaurantInfo?.restaurantThumbnail} alt="Banner" className="w-full h-full object-cover" />
       <div className="absolute top-0 w-full h-full flex flex-col justify-center items-center">
         <h2 className="bg-green-600 px-10 py-3 text-4xl text-white font-medium rounded-sm">{restaurantInfo?.restaurantName}</h2>
-        <h4 className="bg-orange-600 px-10 py-2 text-3xl text-white font-medium rounded-sm">Menu</h4>
+        <h4 className="bg-orange-600 px-10 py-2 text-3xl text-white font-medium rounded-sm">{title}</h4>
       </div>
     </section>
   )

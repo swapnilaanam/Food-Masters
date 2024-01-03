@@ -11,7 +11,7 @@ const BusinessNavbar = () => {
     const [isProfileHoverOpen, setIsProfileHoverOpen] = useState(false);
 
     return (
-        <nav className="bg-green-300 w-full px-20 py-7 flex justify-between items-center">
+        <nav className="bg-green-200 w-full px-20 py-5 flex justify-between items-center">
             <h1 className="text-3xl font-semibold text-orange-500 tracking-wider">
                 <Link href="/">Food Masters</Link>
             </h1>
@@ -23,7 +23,7 @@ const BusinessNavbar = () => {
                     <Link href="/business/menu">Menu</Link>
                 </li>
                 <li>
-                    <Link href="/">Orders</Link>
+                    <Link href="/business/orders">Orders</Link>
                 </li>
                 {
                     user ? (

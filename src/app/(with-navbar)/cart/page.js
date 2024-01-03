@@ -11,7 +11,7 @@ const Cart = () => {
     const [subTotal, setSubTotal] = useState(0);
     const [vat, setVat] = useState(0);
     const [discount, setDiscount] = useState(0);
-    const [voucherCode, setVoucherCode] = useState('');
+    const [voucherCode, setVoucherCode] = useState(null);
 
     const { cart, refetch } = useContext(CartContext);
 
@@ -31,13 +31,12 @@ const Cart = () => {
 
         const voucherCode = form.vouchercode.value;
 
-        setVoucherCode(voucherCode);
-
         try {
             const response = await axios.post('http://localhost:5000/vouchers/verify', { voucherCode: voucherCode });
 
             if (response.status === 200 && response?.data?.voucherMatched === true) {
                 setDiscount(response?.data?.result?.discountAmount);
+                setVoucherCode(voucherCode);
             }
         } catch (error) {
             console.log(error?.message);
@@ -134,19 +133,16 @@ const Cart = () => {
                                     }
 
                                     <div className="flex justify-end">
-                                        <button disabled={subTotal > 0 ? false : true}
-                                            className="disabled:bg-green-200 block rounded bg-green-600 px-12 py-2.5 text-white transition hover:bg-green-500 mt-2">
-                                            <Link
-                                                href={{
-                                                    pathname: `/checkout`,
-                                                    query: { subtotal: subTotal, vat, voucherCode: voucherCode, discount, total: subTotal + vat + 20 - discount }
-                                                }}
-                                                aria-disabled={subTotal > 0 ? false : true}
-                                                className="pointer-events-none"
-                                            >
-                                                Checkout
-                                            </Link>
-                                        </button>
+                                        <Link
+                                            href={{
+                                                pathname: `/checkout`,
+                                                query: { subtotal: subTotal, vat, voucherCode: voucherCode, discount, total: subTotal + vat + 20 - discount }
+                                            }}
+                                            aria-disabled={subTotal > 0 ? "false" : "true"}
+                                            className={`disabled:bg-green-200 block rounded bg-green-600 px-12 py-2.5 text-white transition hover:bg-green-500 mt-2 ${subTotal <= 0 ? "pointer-events-none" : "pointer-events-auto"}`}
+                                        >
+                                            Checkout
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

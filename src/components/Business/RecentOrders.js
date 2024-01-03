@@ -63,9 +63,9 @@ const RecentOrders = () => {
                             <td className="px-4 text-center">{recentOrder?.orderedItems?.reduce((prev, current) => {
                               return prev + current.quantity
                             }, 0)}</td>
-                            <td className="px-4 text-center">{recentOrder.total}</td>
+                            <td className="px-4 text-center">BDT. {recentOrder.total}</td>
                             <td className="px-4 text-center">{recentOrder?.deliveryStatus}</td>
-                            <td className="text-center rounded">
+                            <td className="text-center rounded-r">
                               <Link href={`/orders/${recentOrder?._id}`} className="bg-green-600 text-white px-7 py-2 rounded" >
                                 View Details
                               </Link>

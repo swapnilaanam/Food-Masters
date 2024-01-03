@@ -4,7 +4,7 @@ import BusinessBanner from "@/components/Shared/BusinessBanner";
 const Menu = () => {
   return (
     <main>
-      <BusinessBanner />
+      <BusinessBanner title="Menu" />
       <Menus />
     </main>
   )
