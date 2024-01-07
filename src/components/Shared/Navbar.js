@@ -4,6 +4,7 @@ import useAuth from "@/app/hooks/useAuth";
 import { CartContext } from "@/providers/CartProvider";
 import Image from "next/image";
 import Link from "next/link"
+import { usePathname } from "next/navigation";
 import { useContext, useState } from "react";
 import { LuShoppingBag } from "react-icons/lu";
 
@@ -14,28 +15,38 @@ const Navbar = () => {
 
     const [isProfileHoverOpen, setIsProfileHoverOpen] = useState(false);
 
+    const pathName = usePathname();
+
     return (
-        <nav className="bg-orange-200 w-full px-10 py-7 flex justify-between items-center">
+        <nav className="bg-orange-200 w-full px-10 py-5 flex justify-between items-center">
             <h1 className="text-3xl font-semibold text-green-600">
                 <Link href="/">Food Masters</Link>
             </h1>
-            <ul className="flex justify-end items-center gap-10 text-xl font-medium uppercase">
+            <ul className="flex justify-end items-center gap-8 text-xl font-medium uppercase">
                 <li>
-                    <Link href="/">Home</Link>
+                    <Link href="/" className={`hover:text-green-600 ${pathName === "/" ? 'text-green-600' : 'text-black'}`}>
+                        Home
+                    </Link>
                 </li>
                 <li>
-                    <Link href="/restaurants">Restaurants</Link>
+                    <Link href="/restaurants" className={`hover:text-green-600 ${pathName === "/restaurants" ? 'text-green-600' : 'text-black'}`}>
+                        Restaurants
+                    </Link>
                 </li>
                 <li>
-                    <Link href="/">Dashboard</Link>
+                    <Link href="/dashboard" className={`hover:text-green-600 ${pathName === "/dashboard" ? 'text-green-600' : 'text-black'}`}>
+                        Dashboard
+                    </Link>
                 </li>
                 <li>
-                    <Link href="/">Orders</Link>
+                    <Link href="/orders" className={`hover:text-green-600 ${pathName === "/orders" ? 'text-green-600' : 'text-black'}`}>
+                        Orders
+                    </Link>
                 </li>
                 <li className="relative cursor-pointer">
                     <Link href="/cart">
                         <LuShoppingBag className="text-3xl font-medium" />
-                        <div className="bg-white text-center rounded-full w-10 h-10 flex justify-center items-center absolute -top-5 left-4">
+                        <div className="bg-white text-center rounded-full w-8 h-8 flex justify-center items-center absolute -top-4 left-4">
                             {
                                 !cart ?
                                     0

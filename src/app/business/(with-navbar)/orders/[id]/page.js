@@ -1,7 +1,7 @@
 "use client";
 
-import DeliveryTimeline from "@/components/Business/DeliveryTimeline";
-import OrderedItem from "@/components/Business/OrderedItem";
+import DeliveryTimeline from "@/components/Shared/DeliveryTimeline";
+import OrderedItem from "@/components/Shared/OrderedItem";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useParams } from "next/navigation";

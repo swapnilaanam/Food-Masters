@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { useEffect, useState } from "react";
-import DeliveryTimeline from "./DeliveryTimeline";
-import OrderDeliveryTimeline from "./OrderDeliveryTimeline";
+import OrderDeliveryTimeline from "../Shared/OrderDeliveryTimeline";
 import axios from "axios";
 import { toast } from "react-toastify";
 
