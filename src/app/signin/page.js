@@ -145,8 +145,8 @@ const SignIn = () => {
           </div>
         </div>
       </section>
-      <div className="bg-white text-xl font-medium fixed bottom-0 right-0 flex justify-center items-center rounded-sm">
-        <Link href="/" className="py-3 px-5 text-black"><span className="text-green-600">Food</span> <span className="text-orange-500"> Masters</span> For Business</Link>
+      <div className="bg-green-50 text-xl font-medium fixed bottom-0 right-0 flex justify-center items-center rounded-sm">
+        <Link href="/business/signin" className="py-3 px-5 text-black"><span className="text-green-600">Food</span> <span className="text-orange-500"> Masters</span> For Business</Link>
         <Link href="/" className="py-3 px-5 bg-green-500 text-white">Go To Home</Link>
       </div>
     </main>

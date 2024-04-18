@@ -14,6 +14,8 @@ import Rating from "react-rating";
 import './page.css';
 import RestaurantRatings from "@/components/RestaurantRatings";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { FaRegStar, FaStar } from "react-icons/fa";
 
 const Restaurant = () => {
   const [currentRestaurantPageView, setCurrentRestaurantPageView] = useState("Menu");
@@ -28,6 +30,23 @@ const Restaurant = () => {
         return response.data;
       } catch (error) {
         console.log(error?.message);
+      }
+    }
+  });
+
+  const { data: ratingsCount = 0 } = useQuery({
+    queryKey: ["ratingsCount", id],
+    queryFn: async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/ratings/${id}`);
+
+        if (response.status === 200) {
+          console.log(response?.data);
+          console.log(Number(response?.data?.reduce((total, current) => total + current.rating, 0) / response?.data.length));
+          return (response?.data?.reduce((total, current) => total + current.rating, 0) / response?.data.length);
+        }
+      } catch (error) {
+        toast.error(error?.message);
       }
     }
   });
@@ -50,10 +69,9 @@ const Restaurant = () => {
             </div>
             <div className="mt-4">
               <Rating
-                placeholderRating={0}
-                emptySymbol={<IoIosStar className="icon text-white w-7 h-7" />}
-                placeholderSymbol={<IoMdStar className="icon text-green-500 w-8 h-8" />}
-                fullSymbol={<IoMdStar className="icon text-green-500 w-7 h-7" />}
+                initialRating={ratingsCount}
+                emptySymbol={<FaRegStar className="text-green-600 text-3xl" />}
+                fullSymbol={<FaStar className="text-green-600 text-3xl" />}
                 readonly
               />
             </div>
@@ -64,22 +82,22 @@ const Restaurant = () => {
       <section className="py-28">
         <div className="max-w-7xl 2xl:max-w-[1320px] mx-auto flex justify-between items-start gap-16">
           <aside className="w-[25%] bg-orange-100 border border-orange-200 drop-shadow-md py-10 px-5">
-            <h3 className="text-xl mb-7">Restaurant Navigator</h3>
+            <h3 className="text-xl font-medium mb-7">Restaurant Navigator</h3>
             <div className="flex flex-col items-stretch justify-center gap-5">
               <button
-                className="bg-green-500 text-white font-medium px-4 py-2"
+                className="bg-green-600 text-white font-medium px-4 py-2"
                 onClick={() => setCurrentRestaurantPageView("Menu")}
               >
                 Menu
               </button>
               <button
-                className="bg-green-500 text-white font-medium px-7 py-2"
+                className="bg-green-600 text-white font-medium px-7 py-2"
                 onClick={() => setCurrentRestaurantPageView("Restaurant Ratings")}
               >
                 Ratings
               </button>
               <button
-                className="bg-green-500 text-white font-medium px-7 py-2"
+                className="bg-green-600 text-white font-medium px-7 py-2"
                 onClick={() => setCurrentRestaurantPageView("Restaurant Info")}
               >
                 Restaurant Info
@@ -91,7 +109,7 @@ const Restaurant = () => {
               currentRestaurantPageView === "Menu" && <Menus restaurantId={id} restaurant={restaurant} />
             }
             {
-              currentRestaurantPageView === "Restaurant Ratings" && <RestaurantRatings />
+              currentRestaurantPageView === "Restaurant Ratings" && <RestaurantRatings restaurantId={id} />
             }
             {
               currentRestaurantPageView === "Restaurant Info" && <RestaurantInfo restaurant={restaurant} />

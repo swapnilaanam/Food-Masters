@@ -41,6 +41,7 @@ const Order = ({ order, ordersRefetch }) => {
                 customerEmail: order?.customerEmail,
                 restaurantName: order?.restaurantName,
                 restaurantEmail: order?.restaurantEmail,
+                restaurantId: order?.restaurantId,
                 totalAmount: order?.total,
                 rating: Number(currentRating)
             };

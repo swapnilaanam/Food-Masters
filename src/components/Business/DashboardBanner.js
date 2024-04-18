@@ -65,12 +65,15 @@ const DashboardBanner = () => {
     queryKey: ["totalIncome", user?.email],
     queryFn: async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/orders/restaurant/${user?.email}`);
+        if (user?.email) {
+          const response = await axios.get(`http://localhost:5000/orders/restaurant/${user?.email}`);
 
-        if (response.status === 200) {
-          const deliveredOrders = res?.data?.map((order) => order.deliveryStatus === "Delivered");
+          if (response.status === 200) {
+            // console.log(response?.data);
+            const deliveredOrders = response?.data?.filter((order) => order.deliveryStatus === "Delivered");
 
-          return deliveredOrders.reduce((total, currentOrder) => total + currentOrder.total, 0);
+            return deliveredOrders.reduce((total, currentOrder) => total + currentOrder.total, 0);
+          }
         }
       }
       catch (error) {
@@ -107,7 +110,7 @@ const DashboardBanner = () => {
           <FcMoneyTransfer className="text-3xl" />
           <h4 className="text-2xl font-medium">Total Income</h4>
         </div>
-        <h6 className="text-3xl font-medium text-center mt-4">{totalIncome}</h6>
+        <h6 className="text-3xl font-medium text-center mt-4">BTD. {totalIncome}</h6>
       </div>
     </section>
   )

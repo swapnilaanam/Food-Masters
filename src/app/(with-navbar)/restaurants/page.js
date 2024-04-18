@@ -56,7 +56,7 @@ const Restaurants = () => {
                             All
                         </button>
                         {
-                            categories.map((category) => <button className="bg-orange-200 hover:bg-green-600 hover:text-white px-5 py-1 rounded-sm">
+                            categories.map((category) => <button key={category?._id} className="bg-orange-200 hover:bg-green-600 hover:text-white px-5 py-1 rounded-sm">
                                 {category?.name}
                             </button>)
                         }

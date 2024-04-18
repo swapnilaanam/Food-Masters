@@ -1,13 +1,12 @@
-import restaurantBannerVideo from "@/assets/video/restaurantBannerVideo.mp4";
+import React from 'react';
 import Link from "next/link";
+import video from '../../public/video.mp4'; // Make sure the path is correct
 
 const RestaurantBanner = () => {
     return (
         <section className="py-28">
             <div className="w-full h-[600px] relative">
-                <video className="w-full h-full object-cover" autoPlay={true} muted={true} loop={true}>
-                    <source src={restaurantBannerVideo} type="video/mp4"></source>
-                </video>
+                <iframe allow="autoplay" src="https://player.vimeo.com/video/926050444?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" className="absolute top-0 left-0 right-0 bottom-0 object-cover w-full h-full"></iframe>
                 <div className="bg-black bg-opacity-70 leading-relaxed w-full h-full absolute top-0 flex justify-center items-center px-20">
                     <div className="flex-1 mx-5">
                         <h4 className="text-5xl text-white font-medium">Want To Deliver Your Restaurant's Foods To Foodies Home?</h4>
@@ -28,4 +27,4 @@ const RestaurantBanner = () => {
     )
 }
 
-export default RestaurantBanner
+export default RestaurantBanner;
