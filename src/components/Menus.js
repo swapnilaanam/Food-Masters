@@ -12,7 +12,7 @@ const Menus = ({ restaurantId, restaurant }) => {
         queryKey: ["menus", restaurantId],
         queryFn: async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/menus`);
+                const response = await axios.get(`http://localhost:4000/menus`);
                 const filteredMenus = response.data.filter((menu) => menu?.restaurantId === restaurantId);
                 if (currentCategory === 'All') {
                     return filteredMenus;

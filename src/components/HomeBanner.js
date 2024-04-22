@@ -7,8 +7,8 @@ const HomeBanner = () => {
       <Image src={homeBanner} alt="Home Page Banner" className="w-full h-full object-cover object-top" />
       <div className="absolute top-0 w-full h-full flex flex-col justify-end items-center pb-20">
         <h2 className="text-5xl font-semibold text-green-600 mb-7">Food Masters</h2>
-        <h4 className="text-xl font-medium text-slate-600 mb-12 text-center">Your Favourite Restaurants Food Delivered To Door Steps</h4>
-        <form className="w-[23%] flex justify-center items-center">
+        <h4 className="text-lg font-medium text-slate-800 mb-12 text-center">Your Favourite Restaurants Food Delivered To Door Steps</h4>
+        <form className="w-[30%] flex justify-center items-center">
           <input
             type="search"
             name="searchbarhome"
@@ -22,4 +22,4 @@ const HomeBanner = () => {
   )
 }
 
-export default HomeBanner
+export default HomeBanner;

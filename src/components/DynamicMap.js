@@ -11,7 +11,7 @@ const DynamicMap = ({ restaurant }) => {
     useEffect(() => {
         const addressLoc = restaurant?.address?.split(",");
         if (addressLoc) {
-            axios.post('http://localhost:5000/locations', { loc: addressLoc[addressLoc.length - 1] })
+            axios.post('http://localhost:4000/locations', { loc: addressLoc[addressLoc.length - 1] })
                 .then((response) => {
                     setPos({ lat: response.data.lat, lng: response.data.lng });
                 })

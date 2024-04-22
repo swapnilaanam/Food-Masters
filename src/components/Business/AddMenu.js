@@ -23,7 +23,7 @@ const AddMenu = ({ refetch }) => {
         queryKey: ["categories"],
         queryFn: async () => {
             try {
-                const response = await axios.get('http://localhost:5000/categories');
+                const response = await axios.get('http://localhost:4000/categories');
                 // console.log(response.data);
                 return response.data;
             } catch (error) {
@@ -36,7 +36,7 @@ const AddMenu = ({ refetch }) => {
         queryKey: ['restaurantInfo', user?.email],
         queryFn: async () => {
           try {
-            const response = await axios.get(`http://localhost:5000/restaurants/${user?.email}`);
+            const response = await axios.get(`http://localhost:4000/restaurants/${user?.email}`);
             return response.data;
           } catch (error) {
             console.log(error?.message);
@@ -71,11 +71,11 @@ const AddMenu = ({ refetch }) => {
                     }
 
                     try {
-                        const response = await axios.post('http://localhost:5000/menus', newFood);
+                        const response = await axios.post('http://localhost:4000/menus', newFood);
 
                         if (response.status === 201) {
 
-                            const res = await axios.patch(`http://localhost:5000/restaurants/${user?.email}`, { category: data?.foodcategory });
+                            const res = await axios.patch(`http://localhost:4000/restaurants/${user?.email}`, { category: data?.foodcategory });
 
                             if (res.status === 200) {
                                 Swal.fire({

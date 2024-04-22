@@ -10,7 +10,7 @@ const FeaturedRestaurants = () => {
     queryKey: ["featuredRestaurants"],
     queryFn: async () => {
       try {
-        const response = await axios.get('http://localhost:5000/restaurants');
+        const response = await axios.get('http://localhost:4000/restaurants');
         const featured = response.data.slice(0, 3);
         return featured;
       } catch (error) {
@@ -23,7 +23,7 @@ const FeaturedRestaurants = () => {
     <section className="py-28">
       <div className="max-w-7xl mx-auto h-[550px]">
         <div className="w-full h-full flex justify-between items-start">
-          <div className="w-[30%] h-full bg-green-600 flex flex-col justify-center items-center gap-24 p-10 rounded-sm">
+          <div className="w-[30%] h-full bg-green-600 flex flex-col justify-center items-center gap-16 p-10 rounded-sm">
             <h4 className="text-3xl text-white font-medium">Featured Restaurants</h4>
             <Link href="/restaurants" className="text-xl bg-white font-medium px-10 py-2.5 rounded">{'All Restaurants >>'}</Link>
           </div>

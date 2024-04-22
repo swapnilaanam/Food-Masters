@@ -22,7 +22,7 @@ const Order = ({ order, ordersRefetch }) => {
 
         if (updatedDeliveryStatus !== "No Option To Select") {
             try {
-                const response = await axios.patch(`http://localhost:5000/orders/${id}`, {
+                const response = await axios.patch(`http://localhost:4000/orders/${id}`, {
                     deliveryStatus: updatedDeliveryStatus
                 });
 

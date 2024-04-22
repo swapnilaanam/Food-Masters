@@ -21,7 +21,7 @@ const EditMenu = ({ setIsEditFoodModalOpen, menu, setCurrentMenu, refetch }) => 
         }
 
         try {
-            const response = await axios.patch(`http://localhost:5000/menus/${menu?._id}`, editedFood);
+            const response = await axios.patch(`http://localhost:4000/menus/${menu?._id}`, editedFood);
             if(response.status === 200) {
                 reset();
                 refetch();

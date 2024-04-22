@@ -29,7 +29,7 @@ const CheckOut = () => {
     queryFn: async (req, res) => {
       try {
         if (user) {
-          const response = await axios.get(`http://localhost:5000/users/${user?.email}`);
+          const response = await axios.get(`http://localhost:4000/users/${user?.email}`);
           return response?.data;
         }
       } catch (error) {
@@ -55,7 +55,7 @@ const CheckOut = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:5000/orders', orderInfo);
+      const response = await axios.post('http://localhost:4000/orders', orderInfo);
       if(response.status === 200) {
         window.location.replace(response?.data.url);
       }

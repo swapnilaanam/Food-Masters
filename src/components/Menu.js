@@ -26,7 +26,7 @@ const Menu = ({ menu }) => {
         };
         
         try {
-            const res = await axios.get(`http://localhost:5000/carts/${user?.email}`);
+            const res = await axios.get(`http://localhost:4000/carts/${user?.email}`);
 
             if (res.status === 200) {
                 if (res?.data) {
@@ -42,7 +42,7 @@ const Menu = ({ menu }) => {
                                 confirmButtonText: "Yes, Add It!"
                             }).then(async (result) => {
                                 if (result.isConfirmed) {
-                                    const response = await axios.post(`http://localhost:5000/carts/${user?.email}`, cartInfo);
+                                    const response = await axios.post(`http://localhost:4000/carts/${user?.email}`, cartInfo);
 
                                     if (response.status === 200) {
                                         refetch();
@@ -61,7 +61,7 @@ const Menu = ({ menu }) => {
                             });
                         }
                         else {
-                            const response = await axios.post(`http://localhost:5000/carts/${user?.email}`, cartInfo);
+                            const response = await axios.post(`http://localhost:4000/carts/${user?.email}`, cartInfo);
 
                             if (response.status === 200) {
                                 refetch();
@@ -79,7 +79,7 @@ const Menu = ({ menu }) => {
                         }
                     }
                     else {
-                        const response = await axios.post(`http://localhost:5000/carts/${user?.email}`, cartInfo);
+                        const response = await axios.post(`http://localhost:4000/carts/${user?.email}`, cartInfo);
 
                         if (response.status === 200) {
                             refetch();
@@ -97,7 +97,7 @@ const Menu = ({ menu }) => {
                     }
                 }
                 else {
-                    const response = await axios.post(`http://localhost:5000/carts/${user?.email}`, cartInfo);
+                    const response = await axios.post(`http://localhost:4000/carts/${user?.email}`, cartInfo);
 
                     if (response.status === 200) {
                         refetch();

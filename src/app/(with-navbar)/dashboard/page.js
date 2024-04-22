@@ -20,7 +20,7 @@ const Dashboard = () => {
         queryFn: async () => {
             try {
                 if (user?.email) {
-                    const response = await axios.get(`http://localhost:5000/orders/customer/${user?.email}`);
+                    const response = await axios.get(`http://localhost:4000/orders/customer/${user?.email}`);
 
                     if (response?.status === 200) {
                         const deliveredOrders = response?.data?.filter((order) => order?.deliveryStatus === "Delivered");

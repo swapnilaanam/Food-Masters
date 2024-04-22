@@ -18,7 +18,7 @@ const Navbar = () => {
     const pathName = usePathname();
 
     return (
-        <nav className="bg-orange-200 w-full px-10 py-5 flex justify-between items-center">
+        <nav className="bg-orange-200 w-full px-10 py-8 flex justify-between items-center border-b border-gray-100">
             <h1 className="text-3xl font-semibold text-green-600">
                 <Link href="/">Food Masters</Link>
             </h1>
@@ -76,7 +76,7 @@ const Navbar = () => {
                     )
                         : (
                             <li>
-                                <Link href="/signin" className="px-7 py-2 bg-green-400 text-white rounded">Login</Link>
+                                <Link href="/signin" className="px-10 py-2 bg-green-600 text-white rounded">Login</Link>
                             </li>
                         )
                 }

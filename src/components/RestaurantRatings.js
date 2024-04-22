@@ -14,7 +14,7 @@ const RestaurantRatings = ({restaurantId}) => {
     queryKey: ['ratings'],
     queryFn: async() => {
       try {
-        const response = await axios.get(`http://localhost:5000/ratings/${restaurantId}`);
+        const response = await axios.get(`http://localhost:4000/ratings/${restaurantId}`);
 
         if(response?.status === 200) {
           setResRating(Number(response?.data?.reduce((total, rating) => total + rating?.rating, 0) / response?.data?.length));

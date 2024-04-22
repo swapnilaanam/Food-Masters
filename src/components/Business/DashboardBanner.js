@@ -13,7 +13,7 @@ const DashboardBanner = () => {
     queryKey: ["totalOrders", user?.email],
     queryFn: async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/orders/restaurant/${user?.email}`);
+        const response = await axios.get(`http://localhost:4000/orders/restaurant/${user?.email}`);
 
         if (response.status === 200) {
           let total = 0
@@ -33,7 +33,7 @@ const DashboardBanner = () => {
     queryKey: ["totalMenu", user?.email],
     queryFn: async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/menus/${user?.email}`);
+        const response = await axios.get(`http://localhost:4000/menus/${user?.email}`);
 
         if (response.status === 200) {
           return response?.data?.length;
@@ -49,7 +49,7 @@ const DashboardBanner = () => {
     queryKey: ["totalCategories", user?.email],
     queryFn: async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/restaurants/${user?.email}`);
+        const response = await axios.get(`http://localhost:4000/restaurants/${user?.email}`);
 
         if (response.status === 200) {
           return response?.data?.tags?.length;
@@ -66,7 +66,7 @@ const DashboardBanner = () => {
     queryFn: async () => {
       try {
         if (user?.email) {
-          const response = await axios.get(`http://localhost:5000/orders/restaurant/${user?.email}`);
+          const response = await axios.get(`http://localhost:4000/orders/restaurant/${user?.email}`);
 
           if (response.status === 200) {
             // console.log(response?.data);

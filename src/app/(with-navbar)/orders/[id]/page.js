@@ -17,7 +17,7 @@ const SingleOrder = () => {
         queryKey: ["orderInfo", id],
         queryFn: async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/orders/order/${id}`);
+                const response = await axios.get(`http://localhost:4000/orders/order/${id}`);
                 return response?.data;
             } catch (error) {
                 console.log(error?.message);
@@ -31,7 +31,7 @@ const SingleOrder = () => {
 
     const handleUpdateDeliveryStatus = async (status) => {
         try {
-            const response = await axios.patch(`http://localhost:5000/orders/${orderInfo?._id}`, {
+            const response = await axios.patch(`http://localhost:4000/orders/${orderInfo?._id}`, {
                 deliveryStatus: status
             });
 

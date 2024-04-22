@@ -10,9 +10,9 @@ import foodAnimation from '@/assets/animation/food.json';
 const Features = () => {
     return (
         <section className="py-28">
-            <div className="max-w-7xl 2xl:max-w-[1320px] mx-auto">
-                <h2 className="text-center text-3xl font-medium tracking-wider mb-20">How We Works</h2>
-                <div className="flex justify-between items-center gap-14 bg-orange-100 border-t-2 border-gray-50 shadow-xl rounded p-10">
+            <div className="max-w-7xl mx-auto bg-orange-100 border-t-2 border-gray-50 shadow-xl">
+                <h2 className="text-center text-3xl font-medium tracking-wider mt-16 mb-5">How We Works</h2>
+                <div className="flex justify-between items-center gap-14 rounded p-10">
                     <div className="pb-10 px-4 rounded-sm flex flex-col justify-center items-center w-[342px]">
                         <div className="w-52 h-52">
                             <Lottie animationData={foodAnimation} />

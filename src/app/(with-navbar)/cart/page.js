@@ -32,7 +32,7 @@ const Cart = () => {
         const voucherCode = form.vouchercode.value;
 
         try {
-            const response = await axios.post('http://localhost:5000/vouchers/verify', { voucherCode: voucherCode });
+            const response = await axios.post('http://localhost:4000/vouchers/verify', { voucherCode: voucherCode });
 
             if (response.status === 200 && response?.data?.voucherMatched === true) {
                 setDiscount(response?.data?.result?.discountAmount);

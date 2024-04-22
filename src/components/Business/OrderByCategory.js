@@ -25,12 +25,12 @@ const OrderByCategory = () => {
         queryKey: ["tags", user?.email],
         queryFn: async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/restaurants/${user?.email}`);
+                const response = await axios.get(`http://localhost:4000/restaurants/${user?.email}`);
 
                 const tags = response.data.tags;
 
                 if (tags) {
-                    const response = await axios.get(`http://localhost:5000/orders/restaurant/${user?.email}`);
+                    const response = await axios.get(`http://localhost:4000/orders/restaurant/${user?.email}`);
 
                     const orders = response.data;
 
@@ -68,13 +68,13 @@ const OrderByCategory = () => {
         queryFn: async () => {
             try {
                 if (user?.email) {
-                    const response = await axios.get(`http://localhost:5000/menus/${user?.email}`);
+                    const response = await axios.get(`http://localhost:4000/menus/${user?.email}`);
 
                     if (response.status === 200) {
                         const menus = response?.data;
 
                         if (menus) {
-                            const res = await axios.get(`http://localhost:5000/orders/restaurant/${user?.email}`);
+                            const res = await axios.get(`http://localhost:4000/orders/restaurant/${user?.email}`);
 
                             if (res.status === 200) {
                                 const orders = res?.data;

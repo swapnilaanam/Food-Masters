@@ -20,7 +20,7 @@ const Menus = () => {
         queryKey: ["menus", user?.email],
         queryFn: async (req, res) => {
             try {
-                const response = await axios.get(`http://localhost:5000/menus/${user?.email}`);
+                const response = await axios.get(`http://localhost:4000/menus/${user?.email}`);
 
                 const categorySet = new Set();
                 response.data?.filter(menu => categorySet.add(menu?.foodCategory));
@@ -57,7 +57,7 @@ const Menus = () => {
                 confirmButtonText: "Yes, delete it!"
             }).then(async (result) => {
                 if (result.isConfirmed) {
-                    const response = await axios.delete(`http://localhost:5000/menus/${id}`);
+                    const response = await axios.delete(`http://localhost:4000/menus/${id}`);
                     if (response.status === 200) {
                         refetch();
                         Swal.fire({

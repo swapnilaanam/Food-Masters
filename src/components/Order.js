@@ -20,7 +20,7 @@ const Order = ({ order, ordersRefetch }) => {
 
     const handleUpdateDeliveryStatus = async (status) => {
         try {
-            const response = await axios.patch(`http://localhost:5000/orders/${order?._id}`, {
+            const response = await axios.patch(`http://localhost:4000/orders/${order?._id}`, {
                 deliveryStatus: status
             });
 
@@ -47,12 +47,12 @@ const Order = ({ order, ordersRefetch }) => {
             };
 
             try {
-                const response = await axios.post('http://localhost:5000/ratings', {
+                const response = await axios.post('http://localhost:4000/ratings', {
                     ratingInfo
                 });
 
                 if (response?.status === 201) {
-                    const res = await axios.patch(`http://localhost:5000/orders/${order._id}`, {
+                    const res = await axios.patch(`http://localhost:4000/orders/${order._id}`, {
                         isRated: true
                     });
 

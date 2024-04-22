@@ -15,10 +15,10 @@ export default function Home() {
       <HomeBanner />
       <FoodCategories />
       <FeaturedRestaurants />
-      <Features />
       <OrderBanner />
-      <CustomerReview />
+      <Features />
       <RestaurantBanner />
+      <CustomerReview />
     </main>
   )
 }

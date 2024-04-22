@@ -11,7 +11,7 @@ const FoodCategories = () => {
     queryKey: ["categories"],
     queryFn: async () => {
       try {
-        const response = await axios.get('http://localhost:5000/categories');
+        const response = await axios.get('http://localhost:4000/categories');
         const categories = response.data.slice(0, 5);
         return categories;
       } catch (error) {
@@ -25,7 +25,7 @@ const FoodCategories = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-start">
           <h4 className="text-3xl font-medium">Food Categories</h4>
-          <Link href="/allcategories" className="text-xl text-green-700 font-medium">{'All Categories >>'}</Link>
+          <Link href="/allcategories" className="text-xl text-green-600 font-medium">{'All Categories >>'}</Link>
         </div>
         <div className="mt-20 flex justify-around items-center gap-16">
           {

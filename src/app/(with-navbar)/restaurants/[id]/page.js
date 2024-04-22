@@ -26,7 +26,7 @@ const Restaurant = () => {
     queryKey: ["restaurant", id],
     queryFn: async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/restaurants/restaurant/${id}`);
+        const response = await axios.get(`http://localhost:4000/restaurants/restaurant/${id}`);
         return response.data;
       } catch (error) {
         console.log(error?.message);
@@ -38,7 +38,7 @@ const Restaurant = () => {
     queryKey: ["ratingsCount", id],
     queryFn: async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/ratings/${id}`);
+        const response = await axios.get(`http://localhost:4000/ratings/${id}`);
 
         if (response.status === 200) {
           console.log(response?.data);
@@ -56,18 +56,18 @@ const Restaurant = () => {
     <main>
       <TopBanner title="Restaurant" />
 
-      <section className="w-full h-[170px] bg-orange-200 drop-shadow-md">
-        <div className="max-w-7xl 2xl:max-w-[1320px] mx-auto h-full flex justify-start items-start gap-5">
-          <div className="w-[200px] h-[200px] relative bg-orange-200 -top-16 rounded-full">
+      <section className="w-full h-[220px] bg-orange-100 drop-shadow-md">
+        <div className="max-w-7xl mx-auto h-full flex justify-start items-start gap-5">
+          <div className="w-[180px] h-[180px] relative bg-green-50 -top-14 rounded-full">
             <Image fill={true} src={restaurant?.restaurantThumbnail} alt="Restaurant" className="w-full h-full p-4 object-cover rounded-full" />
           </div>
-          <div>
+          <div className="mt-2 ms-2">
             <h2 className="text-4xl font-medium mt-4">{restaurant?.restaurantName}</h2>
-            <div className="flex justify-start items-center gap-4 mt-4">
+            <div className="ms-4 flex justify-start items-center gap-4 mt-4">
               <GrMapLocation />
               <h4>{restaurant?.address}, {restaurant?.city}</h4>
             </div>
-            <div className="mt-4">
+            <div className="mt-4 ms-4">
               <Rating
                 initialRating={ratingsCount}
                 emptySymbol={<FaRegStar className="text-green-600 text-3xl" />}

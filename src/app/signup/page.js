@@ -53,7 +53,7 @@ const SignUp = () => {
                                                     country: 'Bangladesh'
                                                 };
 
-                                                axios.post('http://localhost:5000/users', newUser)
+                                                axios.post('http://localhost:4000/users', newUser)
                                                     .then(res => {
                                                         if (res.status === 201) {
                                                             Swal.fire('You are signed up for food masters successfully!');

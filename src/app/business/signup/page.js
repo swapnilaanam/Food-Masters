@@ -59,7 +59,7 @@ const SignUp = () => {
                                                     tags: []
                                                 };
 
-                                                axios.post('http://localhost:5000/restaurants', newRestaurant)
+                                                axios.post('http://localhost:4000/restaurants', newRestaurant)
                                                     .then(res => {
                                                         if (res.status === 201) {
                                                             Swal.fire('You are signed up for food masters business successfully!');
