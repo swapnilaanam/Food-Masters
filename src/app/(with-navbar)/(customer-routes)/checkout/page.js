@@ -1,6 +1,6 @@
 "use client";
 
-import useAuth from "@/app/hooks/useAuth";
+import useAuth from "@/hooks/useAuth";
 import { CartContext } from "@/providers/CartProvider";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";

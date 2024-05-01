@@ -11,7 +11,7 @@ const Features = () => {
     return (
         <section className="py-28">
             <div className="max-w-7xl mx-auto bg-orange-100 border-t-2 border-gray-50 shadow-xl">
-                <h2 className="text-center text-3xl font-medium tracking-wider mt-16 mb-5">How We Works</h2>
+                <h2 className="text-center text-3xl font-medium tracking-wider mt-16 mb-5">How We Work</h2>
                 <div className="flex justify-between items-center gap-14 rounded p-10">
                     <div className="pb-10 px-4 rounded-sm flex flex-col justify-center items-center w-[342px]">
                         <div className="w-52 h-52">

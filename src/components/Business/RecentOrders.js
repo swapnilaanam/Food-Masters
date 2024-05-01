@@ -1,6 +1,6 @@
 "use client";
 
-import useAuth from "@/app/hooks/useAuth"
+import useAuth from "@/hooks/useAuth"
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios";
 import Link from "next/link";
@@ -32,7 +32,7 @@ const RecentOrders = () => {
             <FcShipped className="text-2xl" />
             <h4 className="text-xl font-medium">Recent Orders</h4>
           </div>
-          <Link href={'/orders'} className="bg-green-600 text-white px-7 py-2 rounded">All Orders</Link>
+          <Link href={'/business/orders'} className="bg-green-600 text-white px-7 py-2 rounded">All Orders</Link>
         </div>
         <div>
           {
@@ -66,7 +66,7 @@ const RecentOrders = () => {
                             <td className="px-4 text-center">BDT. {recentOrder.total}</td>
                             <td className="px-4 text-center">{recentOrder?.deliveryStatus}</td>
                             <td className="text-center rounded-r">
-                              <Link href={`/orders/${recentOrder?._id}`} className="bg-green-600 text-white px-7 py-2 rounded" >
+                              <Link href={`/business/orders/${recentOrder?._id}`} className="bg-green-600 text-white px-7 py-2 rounded" >
                                 View Details
                               </Link>
                             </td>

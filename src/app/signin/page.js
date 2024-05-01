@@ -1,19 +1,35 @@
 "use client";
 
 import Lottie from 'lottie-react';
-import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 
 import authAnimation from '@/assets/animation/authAnimation.json';
 import { FaGoogle } from "react-icons/fa";
-import { AuthContext } from '@/providers/AuthProvider';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
+import useAuth from '@/hooks/useAuth';
+import { useQuery } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 
 const SignIn = () => {
-  const { signInUser, signInGoogle } = useContext(AuthContext);
+  const { signInUser, signInGoogle, signOutUser } = useAuth();
+
+  const { data: restaurants } = useQuery({
+    queryKey: ['restaurants'],
+    queryFn: async () => {
+      try {
+        const response = await axios.get('http://localhost:4000/restaurants');
+
+        if (response?.status === 200) {
+          return response?.data;
+        }
+      } catch (error) {
+        console.log(error?.message);
+      }
+    }
+  });
 
   const {
     register,
@@ -27,9 +43,24 @@ const SignIn = () => {
   const onSubmit = (data) => {
     signInUser(data.email, data.password)
       .then(result => {
-        Swal.fire("Signed In Successfully!");
+        const isExist = restaurants.find((restaurant) => restaurant?.restaurantEmail === result?.user?.email);
+
+        if(isExist) {
+          signOutUser();
+          toast.error('Business Accounts Are Not Allowed')
+          return reset();
+        }
+
+        toast.success("Signed In Successfully!");
         reset();
-        router.push('/');
+
+        const masterHistory = localStorage.getItem('masterHistory');
+
+        if (masterHistory) {
+          return router.push(masterHistory);
+        }
+
+        return router.push('/');
       })
       .catch(error => {
         Swal.fire({
@@ -42,6 +73,15 @@ const SignIn = () => {
   const handleGoogleSignIn = () => {
     signInGoogle()
       .then(result => {
+
+        const isExist = restaurants.find((restaurant) => restaurant?.restaurantEmail === result?.user?.email);
+
+        if(isExist) {
+          signOutUser();
+          toast.error('Business Accounts Are Not Allowed')
+          return reset();
+        }
+
         const loggedUser = result.user;
 
         const newUser = {
@@ -59,8 +99,15 @@ const SignIn = () => {
           })
           .catch(error => console.log(error));
 
-        Swal.fire('You Are Signed In Successfully!');
-        router.push('/');
+        toast.success('You Are Signed In Successfully!');
+
+        const masterHistory = localStorage.getItem('masterHistory');
+
+        if (masterHistory) {
+          return router.push(masterHistory);
+        }
+
+        return router.push('/');
       })
       .catch(error => {
         Swal.fire({
@@ -76,7 +123,7 @@ const SignIn = () => {
         <div
           className="flex items-end bg-green-100 lg:col-span-5 lg:h-full xl:col-span-6"
         >
-          <Lottie animationData={authAnimation} className="w-full"/>
+          <Lottie animationData={authAnimation} className="w-full" />
         </div>
 
         <div

@@ -1,6 +1,6 @@
 'use client';
 
-import useAuth from "@/app/hooks/useAuth"
+import useAuth from "@/hooks/useAuth"
 import CustomerDashboardStats from "@/components/CustomerDashboardStats";
 import CustomerRecentOrders from "@/components/CustomerRecentOrders";
 import TopBanner from "@/components/Shared/TopBanner"

@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import AddMenu from "./AddMenu";
-import useAuth from "@/app/hooks/useAuth";
+import useAuth from "@/hooks/useAuth";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import EditMenu from "./EditMenu";

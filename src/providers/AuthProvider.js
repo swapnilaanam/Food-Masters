@@ -26,21 +26,24 @@ const AuthProvider = ({children}) => {
     };
 
     const signInUser = (email, password) => {
+        setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     };
 
     const signInGoogle = () => {
+        setLoading(true);
         return signInWithPopup(auth, googleProvider);
     };
 
     const signOutUser = () => {
+        setLoading(true);
         return signOut(auth);
     };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
-            console.log('Current User:', currentUser);
+            // console.log('Current User:', currentUser);
             setLoading(false);
         });
 

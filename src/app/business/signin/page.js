@@ -1,19 +1,34 @@
 "use client";
 
 import Lottie from 'lottie-react';
-import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
 
 import authAnimation from '@/assets/animation/authAnimation.json';
-import { FaGoogle } from "react-icons/fa";
-import { AuthContext } from '@/providers/AuthProvider';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
+import useAuth from '@/hooks/useAuth';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const SignIn = () => {
-    const { signInUser } = useContext(AuthContext);
+    const { signInUser } = useAuth();
+
+    const { data: customers } = useQuery({
+        queryKey: ['customers'],
+        queryFn: async () => {
+            try {
+                const response = await axios.get('http://localhost:4000/users');
+
+                if (response?.status === 200) {
+                    return response?.data;
+                }
+            } catch (error) {
+                console.log(error?.message);
+            }
+        }
+    });
 
     const {
         register,
@@ -25,9 +40,16 @@ const SignIn = () => {
     const router = useRouter();
 
     const onSubmit = (data) => {
+        const isExist = customers.find((customer) => customer?.email === data?.restaurantemail);
+
+        if (isExist) {
+            toast.error('This email is associated with a customer account!');
+            return reset();
+        }
+
         signInUser(data.restaurantemail, data.password)
             .then(result => {
-                Swal.fire("Signed In Successfully!");
+                toast.success("Signed In Successfully!");
                 reset();
                 router.push('/business/dashboard');
             })

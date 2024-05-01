@@ -1,18 +1,44 @@
 "use client";
 
-import useAuth from "@/app/hooks/useAuth";
+import useAuth from "@/hooks/useAuth";
+import useIsCustomer from "@/hooks/useIsCustomer";
 import { CartContext } from "@/providers/CartProvider";
 import axios from "axios";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
 const Menu = ({ menu }) => {
     const { refetch } = useContext(CartContext);
-    const { user } = useAuth();
+
+    const router = useRouter();
+    const pathName = usePathname();
+
+    const { user, signOutUser } = useAuth();
+    const [isCustomer, isCustomerLoading] = useIsCustomer();
 
     const handleAddToCart = async (menu) => {
+        if (!isCustomerLoading && !isCustomer) {
+            toast.error('Login using customer account!', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+
+            if(user) {
+                await signOutUser();
+            }
+            localStorage.setItem('masterHistory', pathName);
+            return router.push('/signin');
+        }
+
         const cartInfo = {
             foodId: menu._id,
             foodName: menu.foodName,
@@ -24,7 +50,7 @@ const Menu = ({ menu }) => {
             restaurantId: menu.restaurantId,
             restaurantName: menu.restaurantName
         };
-        
+
         try {
             const res = await axios.get(`http://localhost:4000/carts/${user?.email}`);
 
@@ -67,7 +93,7 @@ const Menu = ({ menu }) => {
                                 refetch();
                                 toast.success('Added To The Cart', {
                                     position: "top-right",
-                                    autoClose: 5000,
+                                    autoClose: 1500,
                                     hideProgressBar: false,
                                     closeOnClick: true,
                                     pauseOnHover: true,
@@ -122,7 +148,7 @@ const Menu = ({ menu }) => {
     return (
         <div className="w-[400px] flex justify-start items-start bg-orange-200 rounded relative shadow">
             <div className="w-[40%] h-[220px] relative">
-                <Image fill={true} src={menu?.foodImage} className="w-full h-full object-cover rounded-tl rounded-bl" />
+                <Image fill={true} src={menu?.foodImage} alt={menu?.foodName} className="w-full h-full object-cover rounded-tl rounded-bl" />
             </div>
             <div className="w-[60%] ps-7 py-2 pr-1">
                 <h4 className="text-lg font-medium">{menu?.foodName}</h4>

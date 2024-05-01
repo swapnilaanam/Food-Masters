@@ -1,6 +1,6 @@
 "use client"
 
-import useAuth from "@/app/hooks/useAuth";
+import useAuth from "@/hooks/useAuth";
 import Order from "@/components/Order";
 import TopBanner from "@/components/Shared/TopBanner";
 import { useQuery } from "@tanstack/react-query";

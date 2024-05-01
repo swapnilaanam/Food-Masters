@@ -1,6 +1,6 @@
 "use client"
 
-import useAuth from "@/app/hooks/useAuth";
+import useAuth from "@/hooks/useAuth";
 import Image from "next/image";
 import Link from "next/link"
 import { useState } from "react";
@@ -11,9 +11,9 @@ const BusinessNavbar = () => {
     const [isProfileHoverOpen, setIsProfileHoverOpen] = useState(false);
 
     return (
-        <nav className="bg-green-200 w-full px-20 py-5 flex justify-between items-center">
+        <nav className="bg-green-200 w-full px-20 py-7 flex justify-between items-center">
             <h1 className="text-3xl font-semibold text-orange-500 tracking-wider">
-                <Link href="/">Food Masters</Link>
+                <Link href="/business/dashboard">Food Masters</Link>
             </h1>
             <ul className="flex justify-end items-center gap-10 text-xl font-medium uppercase">
                 <li>

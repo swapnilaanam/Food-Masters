@@ -1,19 +1,35 @@
 "use client";
 
 import Lottie from 'lottie-react';
-import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
-import { AuthContext } from '@/providers/AuthProvider';
 import authAnimation from '@/assets/animation/authAnimation.json';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import useAuth from '@/hooks/useAuth';
+import { useQuery } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 
 
 const SignUp = () => {
-    const { signUpUser, updateUser, signOutUser } = useContext(AuthContext);
+    const { signUpUser, updateUser, signOutUser } = useAuth();
+
+    const { data: restaurants } = useQuery({
+        queryKey: ['restaurants'],
+        queryFn: async () => {
+          try {
+            const response = await axios.get('http://localhost:4000/restaurants');
+    
+            if (response?.status === 200) {
+              return response?.data;
+            }
+          } catch (error) {
+            console.log(error?.message);
+          }
+        }
+      });
 
     const {
         register,
@@ -25,6 +41,13 @@ const SignUp = () => {
     const router = useRouter();
 
     const onSubmit = (data) => {
+        const isExist = restaurants.find((restaurant) => restaurant?.restaurantEmail === data?.email);
+
+        if(isExist) {
+            toast.error('This email is associated with a business account!')
+            return reset();
+        }
+
         if (data.password === data.passwordconfirm) {
             const formData = new FormData();
             formData.append('image', data.profilepic[0]);

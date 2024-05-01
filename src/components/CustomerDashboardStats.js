@@ -1,6 +1,5 @@
 import { FcMoneyTransfer, FcPaid } from "react-icons/fc"
-import { Tooltip } from "react-leaflet"
-import { Legend, Pie, PieChart, ResponsiveContainer } from "recharts"
+import { Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts"
 
 const CustomerDashboardStats = ({orders, totalSpent, totalPendingOrders, totalDeliveredOrders, totalCancelledOrders}) => {
     const ordersData = [
