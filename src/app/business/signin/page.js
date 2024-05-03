@@ -51,7 +51,14 @@ const SignIn = () => {
             .then(result => {
                 toast.success("Signed In Successfully!");
                 reset();
-                router.push('/business/dashboard');
+
+                const masterBusinessHistory = localStorage.getItem('masterBusinessHistory');
+
+                if(masterBusinessHistory) {
+                    return router.push(masterBusinessHistory);
+                }
+
+                return router.push('/business/dashboard');
             })
             .catch(error => {
                 Swal.fire({

@@ -1,6 +1,7 @@
 "use client";
 
 import useAuth from "@/hooks/useAuth";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 import useIsCustomer from "@/hooks/useIsCustomer";
 import { CartContext } from "@/providers/CartProvider";
 import axios from "axios";
@@ -19,11 +20,13 @@ const Menu = ({ menu }) => {
     const { user, signOutUser } = useAuth();
     const [isCustomer, isCustomerLoading] = useIsCustomer();
 
+    const [axiosSecure] = useAxiosSecure();
+
     const handleAddToCart = async (menu) => {
         if (!isCustomerLoading && !isCustomer) {
             toast.error('Login using customer account!', {
                 position: "top-right",
-                autoClose: 2000,
+                autoClose: 1500,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -68,13 +71,13 @@ const Menu = ({ menu }) => {
                                 confirmButtonText: "Yes, Add It!"
                             }).then(async (result) => {
                                 if (result.isConfirmed) {
-                                    const response = await axios.post(`http://localhost:4000/carts/${user?.email}`, cartInfo);
+                                    const response = await axiosSecure.post(`/carts/${user?.email}`, cartInfo);
 
                                     if (response.status === 200) {
                                         refetch();
                                         toast.success('Added To The Cart', {
                                             position: "top-right",
-                                            autoClose: 5000,
+                                            autoClose: 1500,
                                             hideProgressBar: false,
                                             closeOnClick: true,
                                             pauseOnHover: true,
@@ -87,7 +90,7 @@ const Menu = ({ menu }) => {
                             });
                         }
                         else {
-                            const response = await axios.post(`http://localhost:4000/carts/${user?.email}`, cartInfo);
+                            const response = await axiosSecure.post(`/carts/${user?.email}`, cartInfo);
 
                             if (response.status === 200) {
                                 refetch();
@@ -105,13 +108,13 @@ const Menu = ({ menu }) => {
                         }
                     }
                     else {
-                        const response = await axios.post(`http://localhost:4000/carts/${user?.email}`, cartInfo);
+                        const response = await axiosSecure.post(`/carts/${user?.email}`, cartInfo);
 
                         if (response.status === 200) {
                             refetch();
                             toast.success('Added To The Cart', {
                                 position: "top-right",
-                                autoClose: 5000,
+                                autoClose: 1500,
                                 hideProgressBar: false,
                                 closeOnClick: true,
                                 pauseOnHover: true,
@@ -123,13 +126,13 @@ const Menu = ({ menu }) => {
                     }
                 }
                 else {
-                    const response = await axios.post(`http://localhost:4000/carts/${user?.email}`, cartInfo);
+                    const response = await axiosSecure.post(`/carts/${user?.email}`, cartInfo);
 
                     if (response.status === 200) {
                         refetch();
                         toast.success('Added To The Cart', {
                             position: "top-right",
-                            autoClose: 5000,
+                            autoClose: 1500,
                             hideProgressBar: false,
                             closeOnClick: true,
                             pauseOnHover: true,

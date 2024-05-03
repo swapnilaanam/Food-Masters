@@ -4,19 +4,21 @@ import useAuth from "@/hooks/useAuth";
 import Order from "@/components/Order";
 import TopBanner from "@/components/Shared/TopBanner";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useEffect, useState } from "react";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const Orders = () => {
     const [currentOption, setCurrentOption] = useState("Current");
 
     const { user } = useAuth();
 
+    const [axiosSecure] = useAxiosSecure();
+
     const { data: orders = [], refetch: ordersRefetch } = useQuery({
         queryKey: ["orders", user?.email],
         queryFn: async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/orders/customer/${user?.email}`);
+                const response = await axiosSecure.get(`/orders/customer/${user?.email}`);
 
                 if (response.status === 200) {
                     if (currentOption === "Current") {

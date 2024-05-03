@@ -3,10 +3,11 @@
 import { useQuery } from "@tanstack/react-query";
 import AddMenu from "./AddMenu";
 import useAuth from "@/hooks/useAuth";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import EditMenu from "./EditMenu";
 import Swal from "sweetalert2";
+import useAxiosSecureBusiness from "@/hooks/useAxiosSecureBusiness";
+import Image from "next/image";
 
 const Menus = () => {
     const [availableCategory, setAvailableCategory] = useState([]);
@@ -16,11 +17,13 @@ const Menus = () => {
 
     const { user } = useAuth();
 
+    const [axiosSecureBusiness] = useAxiosSecureBusiness();
+
     const { data: menus = [], refetch } = useQuery({
         queryKey: ["menus", user?.email],
         queryFn: async (req, res) => {
             try {
-                const response = await axios.get(`http://localhost:4000/menus/${user?.email}`);
+                const response = await axiosSecureBusiness.get(`/menus/${user?.email}`);
 
                 const categorySet = new Set();
                 response.data?.filter(menu => categorySet.add(menu?.foodCategory));
@@ -57,7 +60,7 @@ const Menus = () => {
                 confirmButtonText: "Yes, delete it!"
             }).then(async (result) => {
                 if (result.isConfirmed) {
-                    const response = await axios.delete(`http://localhost:4000/menus/${id}`);
+                    const response = await axiosSecureBusiness.delete(`/menus/${id}`);
                     if (response.status === 200) {
                         refetch();
                         Swal.fire({
@@ -106,8 +109,8 @@ const Menus = () => {
                         menus.map(menu => {
                             return (
                                 <div key={menu?._id} className="w-[400px] flex justify-start items-start bg-orange-200 rounded relative shadow">
-                                    <div className="w-[40%] h-[220px]">
-                                        <img src={menu?.foodImage} className="w-full h-full object-cover rounded-tl rounded-bl" />
+                                    <div className="w-[40%] h-[220px] relative">
+                                        <Image fill={true} src={menu?.foodImage} alt="Food Image" className="w-full h-full object-cover rounded-tl rounded-bl" />
                                     </div>
                                     <div className="w-[60%] ps-7 py-2 pr-1">
                                         <h4 className="text-lg font-medium">{menu?.foodName}</h4>

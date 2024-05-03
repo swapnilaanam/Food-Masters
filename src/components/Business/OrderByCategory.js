@@ -1,6 +1,8 @@
 "use client";
 
 import useAuth from "@/hooks/useAuth";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
+import useAxiosSecureBusiness from "@/hooks/useAxiosSecureBusiness";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
@@ -21,6 +23,8 @@ import {
 const OrderByCategory = () => {
     const { user } = useAuth();
 
+    const [axiosSecureBusiness] = useAxiosSecureBusiness();
+
     const { data: ordersByCategory = [] } = useQuery({
         queryKey: ["tags", user?.email],
         queryFn: async () => {
@@ -30,7 +34,7 @@ const OrderByCategory = () => {
                 const tags = response.data.tags;
 
                 if (tags) {
-                    const response = await axios.get(`http://localhost:4000/orders/restaurant/${user?.email}`);
+                    const response = await axiosSecureBusiness.get(`http://localhost:4000/orders/restaurant/${user?.email}`);
 
                     const orders = response.data;
 
@@ -68,13 +72,13 @@ const OrderByCategory = () => {
         queryFn: async () => {
             try {
                 if (user?.email) {
-                    const response = await axios.get(`http://localhost:4000/menus/${user?.email}`);
+                    const response = await axiosSecureBusiness.get(`/menus/${user?.email}`);
 
                     if (response.status === 200) {
                         const menus = response?.data;
 
                         if (menus) {
-                            const res = await axios.get(`http://localhost:4000/orders/restaurant/${user?.email}`);
+                            const res = await axiosSecureBusiness.get(`/orders/restaurant/${user?.email}`);
 
                             if (res.status === 200) {
                                 const orders = res?.data;

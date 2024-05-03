@@ -12,10 +12,13 @@ import Swal from 'sweetalert2';
 import useAuth from '@/hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
+import useAxiosSecure from '@/hooks/useAxiosSecure';
 
 const SignIn = () => {
   const { signInUser, signInGoogle, signOutUser } = useAuth();
 
+  const [axiosSecure] = useAxiosSecure();
+ 
   const { data: restaurants } = useQuery({
     queryKey: ['restaurants'],
     queryFn: async () => {
@@ -91,7 +94,7 @@ const SignIn = () => {
           country: "Bangladesh"
         };
 
-        axios.post('http://localhost:4000/users', newUser)
+        axiosSecure.post('/users', newUser)
           .then(res => {
             if (res.status === 201) {
               console.log("Data saved successfully!");

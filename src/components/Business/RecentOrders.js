@@ -1,19 +1,22 @@
 "use client";
 
 import useAuth from "@/hooks/useAuth"
+import useAxiosSecure from "@/hooks/useAxiosSecure";
+import useAxiosSecureBusiness from "@/hooks/useAxiosSecureBusiness";
 import { useQuery } from "@tanstack/react-query"
-import axios from "axios";
 import Link from "next/link";
 import { FcShipped } from "react-icons/fc"
 
 const RecentOrders = () => {
   const { user } = useAuth();
 
+  const [axiosSecureBusiness] = useAxiosSecureBusiness();
+
   const { data: recentOrders = [] } = useQuery({
     queryKey: ["recentOrders", user?.email],
     queryFn: async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/orders/restaurant/${user?.email}`);
+        const response = await axiosSecureBusiness.get(`/orders/restaurant/${user?.email}`);
 
         if (response.status === 200) {
           return response?.data;
@@ -84,4 +87,4 @@ const RecentOrders = () => {
   )
 }
 
-export default RecentOrders
+export default RecentOrders;

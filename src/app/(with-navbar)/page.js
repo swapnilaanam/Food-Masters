@@ -1,3 +1,5 @@
+'use client';
+
 import FeaturedRestaurants from "@/components/FeaturedRestaurants";
 import Features from "@/components/Features";
 import FoodCategories from "@/components/FoodCategories";
@@ -10,6 +12,7 @@ import RestaurantBanner from "@/components/RestaurantBanner";
 
 
 export default function Home() {
+
   return (
     <main>
       <HomeBanner />

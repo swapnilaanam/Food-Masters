@@ -1,6 +1,7 @@
 "use client";
 
 import useAuth from "@/hooks/useAuth";
+import useAxiosSecureBusiness from "@/hooks/useAxiosSecureBusiness";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
@@ -11,6 +12,8 @@ const AddMenu = ({ refetch }) => {
     const [isAddFoodModalOpen, setIsAddFoodModalOpen] = useState(false);
 
     const { user } = useAuth();
+
+    const [axiosSecureBusiness] = useAxiosSecureBusiness();
 
     const {
         register,
@@ -71,11 +74,11 @@ const AddMenu = ({ refetch }) => {
                     }
 
                     try {
-                        const response = await axios.post('http://localhost:4000/menus', newFood);
+                        const response = await axiosSecureBusiness.post('/menus', newFood);
 
                         if (response.status === 201) {
 
-                            const res = await axios.patch(`http://localhost:4000/restaurants/${user?.email}`, { category: data?.foodcategory });
+                            const res = await axiosSecureBusiness.patch(`/restaurants/${user?.email}`, { category: data?.foodcategory });
 
                             if (res.status === 200) {
                                 Swal.fire({
@@ -103,7 +106,7 @@ const AddMenu = ({ refetch }) => {
     return (
         <section className="w-full">
             <div className="text-center mt-12">
-                <button className="bg-green-500 px-12 py-3 text-xl text-white font-medium rounded" onClick={() => setIsAddFoodModalOpen(true)}>
+                <button className="bg-green-600 px-12 py-2.5 text-xl text-white font-medium rounded" onClick={() => setIsAddFoodModalOpen(true)}>
                     Add Food
                 </button>
             </div>

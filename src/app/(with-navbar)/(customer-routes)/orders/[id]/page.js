@@ -2,8 +2,8 @@
 
 import DeliveryTimeline from "@/components/Shared/DeliveryTimeline";
 import OrderedItem from "@/components/Shared/OrderedItem";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -13,11 +13,13 @@ const SingleOrder = () => {
 
     const { id } = useParams();
 
+    const [axiosSecure] = useAxiosSecure();
+
     const { data: orderInfo = {}, refetch: orderInfoRefetch } = useQuery({
         queryKey: ["orderInfo", id],
         queryFn: async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/orders/order/${id}`);
+                const response = await axiosSecure.get(`/orders/order/${id}`);
                 return response?.data;
             } catch (error) {
                 console.log(error?.message);
@@ -31,14 +33,20 @@ const SingleOrder = () => {
 
     const handleUpdateDeliveryStatus = async (status) => {
         try {
-            const response = await axios.patch(`http://localhost:4000/orders/${orderInfo?._id}`, {
+            const response = await axiosSecure.patch(`/orders/${orderInfo?._id}`, {
                 deliveryStatus: status
             });
 
-            if (response.status === 200) {
-                toast.success(`Order is now, ${status}`);
+            if (response.status === 200 && status !== 'Cancelled') {
+                toast.success(`Order is now ${status}`);
                 orderInfoRefetch();
             }
+
+            if (response.status === 200 && status === 'Cancelled') {
+                toast.error(`Order is now ${status}`);
+                orderInfoRefetch();
+            }
+
         } catch (error) {
             console.log(error?.message)
         }
@@ -110,7 +118,7 @@ const SingleOrder = () => {
                                 {
                                     orderInfo?.deliveryStatus === "Pending" && (
                                         <div className="flex justify-center items-center gap-10">
-                                            <button onClick={() => handleUpdateDeliveryStatus("In Kitchen")} className="bg-red-600 text-white px-5 py-2 rounded cursor-pointer text-sm font-medium">
+                                            <button onClick={() => handleUpdateDeliveryStatus("Cancelled")} className="bg-red-600 text-white px-5 py-2 rounded cursor-pointer text-sm font-medium">
                                                 Cancel The Order
                                             </button>
                                         </div>

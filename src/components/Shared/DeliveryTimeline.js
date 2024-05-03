@@ -1,7 +1,5 @@
-import axios from 'axios'
 import React from 'react'
-import { IoIosCloseCircleOutline, IoMdCheckmarkCircleOutline } from 'react-icons/io'
-import { toast } from 'react-toastify';
+import { IoIosCloseCircleOutline, IoMdCheckmarkCircleOutline } from 'react-icons/io';
 
 const DeliveryTimeline = ({ orderInfo }) => {
 

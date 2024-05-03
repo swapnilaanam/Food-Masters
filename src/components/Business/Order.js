@@ -1,13 +1,15 @@
 import Link from "next/link"
 import { useEffect, useState } from "react";
 import OrderDeliveryTimeline from "../Shared/OrderDeliveryTimeline";
-import axios from "axios";
 import { toast } from "react-toastify";
+import useAxiosSecureBusiness from "@/hooks/useAxiosSecureBusiness";
 
 const Order = ({ order, ordersRefetch }) => {
     const [totalOrderNumber, setTotalOrderNumber] = useState(0);
 
     const [deliveryStatusDialog, setDeliveryStatusDialog] = useState(false);
+
+    const [axiosSecureBusiness] = useAxiosSecureBusiness();
 
     useEffect(() => {
         setTotalOrderNumber(order?.orderedItems?.reduce((total, prev) => total + prev.quantity, 0));
@@ -22,12 +24,12 @@ const Order = ({ order, ordersRefetch }) => {
 
         if (updatedDeliveryStatus !== "No Option To Select") {
             try {
-                const response = await axios.patch(`http://localhost:4000/orders/${id}`, {
+                const response = await axiosSecureBusiness.patch(`/orders/${id}`, {
                     deliveryStatus: updatedDeliveryStatus
                 });
 
                 if (response.status === 200) {
-                    toast.success(`Order is now, ${status}`);
+                    toast.success(`Order is now, ${updatedDeliveryStatus}`);
                     ordersRefetch();
                     setDeliveryStatusDialog(false);
                 }

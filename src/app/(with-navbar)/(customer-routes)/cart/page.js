@@ -1,8 +1,8 @@
 "use client"
 
 import CartItem from '@/components/CartItem';
+import useAxiosSecure from '@/hooks/useAxiosSecure';
 import { CartContext } from '@/providers/CartProvider';
-import axios from 'axios';
 import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react'
 
@@ -14,6 +14,8 @@ const Cart = () => {
     const [voucherCode, setVoucherCode] = useState(null);
 
     const { cart, refetch } = useContext(CartContext);
+
+    const [axiosSecure] = useAxiosSecure();
 
     useEffect(() => {
         setSubTotal(cart?.cartItems?.reduce((total, currentCartItem) => total + (currentCartItem.foodPrice * currentCartItem.quantity), 0));
@@ -32,7 +34,7 @@ const Cart = () => {
         const voucherCode = form.vouchercode.value;
 
         try {
-            const response = await axios.post('http://localhost:4000/vouchers/verify', { voucherCode: voucherCode });
+            const response = await axiosSecure.post('/verify', { voucherCode: voucherCode });
 
             if (response.status === 200 && response?.data?.voucherMatched === true) {
                 setDiscount(response?.data?.result?.discountAmount);

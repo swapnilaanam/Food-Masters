@@ -1,6 +1,7 @@
 "use client";
 
 import useAuth from "@/hooks/useAuth";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { CartContext } from "@/providers/CartProvider";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -19,8 +20,10 @@ const CheckOut = () => {
   const discount = params.get("discount");
   const total = params.get("total");
 
-  const { user, loading: userLoading } = useAuth();
+  const { user, loading } = useAuth();
   const { cart } = useContext(CartContext);
+
+  const [axiosSecure] = useAxiosSecure();
 
   // console.log(cart);
 
@@ -55,7 +58,8 @@ const CheckOut = () => {
     };
 
     try {
-      const response = await axios.post('http://localhost:4000/orders', orderInfo);
+      const response = await axiosSecure.post('/orders', orderInfo);
+      // console.log(response?.data?.url);
       if(response.status === 200) {
         window.location.replace(response?.data.url);
       }
@@ -127,12 +131,12 @@ const CheckOut = () => {
                 }
               </ul>
               <div className="flex-1 w-full flex justify-center items-start">
-                <div className="flex flex-col justify-start items-end flex-1 gap-[25px]">
+                <div className="flex flex-col justify-start items-end flex-1 gap-[32px]">
                   <h2 className="text-lg font-medium">Customer Name: </h2>
                   <h3 className="text-lg font-medium">Email: </h3>
                   <h4 className="text-lg font-medium">Address: </h4>
                 </div>
-                <div className="flex flex-col justify-start flex-1 gap-5">
+                <div className="flex flex-col justify-start flex-2 gap-7">
                   <span className="ms-4 font-normal bg-white px-4 py-1 rounded">{customerInfo?.name}</span>
                   <span className="ms-4 font-normal bg-white px-4 py-1 rounded">{customerInfo?.email}</span>
                   <span className="ms-4 font-normal bg-white px-4 py-1 rounded">{customerInfo?.address}, {customerInfo?.city}</span>

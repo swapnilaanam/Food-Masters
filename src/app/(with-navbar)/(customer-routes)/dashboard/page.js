@@ -5,8 +5,8 @@ import CustomerDashboardStats from "@/components/CustomerDashboardStats";
 import CustomerRecentOrders from "@/components/CustomerRecentOrders";
 import TopBanner from "@/components/Shared/TopBanner"
 import { useQuery } from "@tanstack/react-query"
-import axios from "axios";
 import { useState } from "react";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 const Dashboard = () => {
     const [totalPendingOrders, setTotalPendingOrders] = useState(0);
@@ -15,12 +15,14 @@ const Dashboard = () => {
     const [totalSpent, setTotalSpent] = useState(0);
     const { user } = useAuth();
 
+    const [axiosSecure] = useAxiosSecure();
+
     const { data: orders = [] } = useQuery({
         queryKey: ['orders', user?.email],
         queryFn: async () => {
             try {
                 if (user?.email) {
-                    const response = await axios.get(`http://localhost:4000/orders/customer/${user?.email}`);
+                    const response = await axiosSecure.get(`/orders/customer/${user?.email}`);
 
                     if (response?.status === 200) {
                         const deliveredOrders = response?.data?.filter((order) => order?.deliveryStatus === "Delivered");
@@ -66,4 +68,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard
+export default Dashboard;

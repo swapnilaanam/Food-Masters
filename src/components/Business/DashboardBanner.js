@@ -1,6 +1,8 @@
 "use client";
 
 import useAuth from "@/hooks/useAuth";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
+import useAxiosSecureBusiness from "@/hooks/useAxiosSecureBusiness";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { FcCandleSticks, FcMoneyTransfer, FcPaid } from "react-icons/fc"
@@ -9,19 +11,16 @@ import { IoFastFoodOutline } from "react-icons/io5"
 const DashboardBanner = () => {
   const { user } = useAuth();
 
+  const [axiosSecureBusiness] = useAxiosSecureBusiness();
+
   const { data: totalOrders = 0 } = useQuery({
     queryKey: ["totalOrders", user?.email],
     queryFn: async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/orders/restaurant/${user?.email}`);
+        const response = await axiosSecureBusiness.get(`/orders/restaurant/${user?.email}`);
 
         if (response.status === 200) {
-          let total = 0
-          const orders = response?.data?.map((orders) => {
-            total += orders.orderedItems.reduce((total, current) => total + current.quantity, 0);
-          });
-
-          return total;
+          return response?.data?.length;
         }
       } catch (error) {
         console.log(error?.message);
@@ -33,7 +32,7 @@ const DashboardBanner = () => {
     queryKey: ["totalMenu", user?.email],
     queryFn: async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/menus/${user?.email}`);
+        const response = await axiosSecureBusiness.get(`/menus/${user?.email}`);
 
         if (response.status === 200) {
           return response?.data?.length;
@@ -66,7 +65,7 @@ const DashboardBanner = () => {
     queryFn: async () => {
       try {
         if (user?.email) {
-          const response = await axios.get(`http://localhost:4000/orders/restaurant/${user?.email}`);
+          const response = await axiosSecureBusiness.get(`http://localhost:4000/orders/restaurant/${user?.email}`);
 
           if (response.status === 200) {
             // console.log(response?.data);

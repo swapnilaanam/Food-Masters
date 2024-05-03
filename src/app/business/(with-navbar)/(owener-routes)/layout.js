@@ -6,24 +6,20 @@ import useIsOwner from '@/hooks/useIsOwner';
 import { usePathname, useRouter } from 'next/navigation';
 
 import { useEffect } from 'react';
-import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
-const OwnerRoutesLayout = ({children}) => {
-    const { signOutUser } = useAuth();
+const OwnerRoutesLayout = ({ children }) => {
+    const { user, loading, signOutUser } = useAuth();
     const [isOwner, isOwnerLoading] = useIsOwner();
 
     const router = useRouter();
     const pathName = usePathname();
 
-    const logOutTheUser = async () => {
-        await signOutUser();
-    };
-
     useEffect(() => {
-        if (!isOwnerLoading && isOwner === false) {
+        if (!loading && !isOwnerLoading && isOwner === false) {
             localStorage.setItem('masterBusinessHistory', pathName);
-            toast.error('Login With Your Customer Account To Use This Feature!');
-            logOutTheUser();
+            Swal.fire('Login With Your Customer Account To Use This Feature!');
+            signOutUser();
             return router.push('/business/signin');
         }
 
@@ -31,14 +27,15 @@ const OwnerRoutesLayout = ({children}) => {
             localStorage.removeItem('masterBusinessHistory');
         }
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isOwner, isOwnerLoading, pathName, router, signOutUser]);
+    }, [isOwner, isOwnerLoading, loading, pathName, router, signOutUser]);
 
-    if (isOwnerLoading) {
+    if (loading || isOwnerLoading) {
         return <LoadingSpinner />;
     }
 
-    return children;
+    if (!loading && user?.email && !isOwnerLoading && isOwner) {
+        return children;
+    }
 }
 
 export default OwnerRoutesLayout;

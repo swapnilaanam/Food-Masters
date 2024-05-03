@@ -1,10 +1,11 @@
-"use client"
+"use client";
 
-import axios from "axios";
+import useAxiosSecureBusiness from "@/hooks/useAxiosSecureBusiness";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
 const EditMenu = ({ setIsEditFoodModalOpen, menu, setCurrentMenu, refetch }) => {
+    const [axiosSecureBusiness] = useAxiosSecureBusiness();
 
     const {
         register,
@@ -21,7 +22,7 @@ const EditMenu = ({ setIsEditFoodModalOpen, menu, setCurrentMenu, refetch }) => 
         }
 
         try {
-            const response = await axios.patch(`http://localhost:4000/menus/${menu?._id}`, editedFood);
+            const response = await axiosSecureBusiness.patch(`/menus/${menu?._id}`, editedFood);
             if(response.status === 200) {
                 reset();
                 refetch();
@@ -107,4 +108,4 @@ const EditMenu = ({ setIsEditFoodModalOpen, menu, setCurrentMenu, refetch }) => 
     )
 }
 
-export default EditMenu
+export default EditMenu;

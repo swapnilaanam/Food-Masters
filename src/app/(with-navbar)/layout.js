@@ -7,13 +7,13 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 const WithNavbarLayout = ({ children }) => {
-  const { signOutUser } = useAuth();
   const [isOwner, isOwnerLoading] = useIsOwner();
+  const { signOutUser } = useAuth();
 
   const pathName = usePathname();
 
   useEffect(() => {
-    if ((!isOwnerLoading && isOwner) && (pathName === '/' || pathName === '/restaurants' || pathName === '/cart')) {
+    if ((!isOwnerLoading && isOwner) && (pathName === '/' || pathName === '/restaurant' || pathName === '/cart')) {
       signOutUser();
     }
   }, [isOwner, isOwnerLoading, pathName, signOutUser]);

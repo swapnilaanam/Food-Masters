@@ -2,19 +2,21 @@
 
 import DeliveryTimeline from "@/components/Shared/DeliveryTimeline";
 import OrderedItem from "@/components/Shared/OrderedItem";
+import useAxiosSecureBusiness from "@/hooks/useAxiosSecureBusiness";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useParams } from "next/navigation";
 import { toast } from "react-toastify";
 
 const SingleOrder = () => {
   const { id } = useParams();
+  
+  const [axiosSecureBusiness] = useAxiosSecureBusiness();
 
   const { data: orderInfo = {}, refetch: orderInfoRefetch } = useQuery({
     queryKey: ["orderInfo", id],
     queryFn: async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/orders/order/${id}`);
+        const response = await axiosSecureBusiness.get(`/orders/order/${id}`);
         return response?.data;
       } catch (error) {
         console.log(error?.message);
@@ -24,7 +26,7 @@ const SingleOrder = () => {
 
   const handleUpdateDeliveryStatus = async (status) => {
     try {
-      const response = await axios.patch(`http://localhost:4000/orders/${orderInfo?._id}`, {
+      const response = await axiosSecureBusiness.patch(`/orders/${orderInfo?._id}`, {
         deliveryStatus: status
       });
 

@@ -3,16 +3,18 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import OrderDeliveryTimeline from './Shared/OrderDeliveryTimeline';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import Rating from 'react-rating';
 import { IoIosStar, IoMdStar } from 'react-icons/io';
 import { CiFaceFrown, CiFaceMeh } from "react-icons/ci";
+import useAxiosSecure from '@/hooks/useAxiosSecure';
 
 const Order = ({ order, ordersRefetch }) => {
     const [totalOrderNumber, setTotalOrderNumber] = useState(0);
     const [isRatingDialogOpen, setIsRatingDialogOpen] = useState(false);
     const [currentRating, setCurrentRating] = useState(0);
+
+    const [axiosSecure] = useAxiosSecure();
 
     useEffect(() => {
         setTotalOrderNumber(order?.orderedItems?.reduce((total, prev) => total + prev.quantity, 0));
@@ -20,12 +22,17 @@ const Order = ({ order, ordersRefetch }) => {
 
     const handleUpdateDeliveryStatus = async (status) => {
         try {
-            const response = await axios.patch(`http://localhost:4000/orders/${order?._id}`, {
+            const response = await axiosSecure.patch(`/orders/${order?._id}`, {
                 deliveryStatus: status
             });
 
-            if (response.status === 200) {
-                toast.success(`Order is now, ${status}`);
+            if (response.status === 200 && status !== 'Cancelled') {
+                toast.success(`Order is now ${status}`);
+                ordersRefetch();
+            }
+
+            if (response.status === 200 && status === 'Cancelled') {
+                toast.error(`Order is now ${status}`);
                 ordersRefetch();
             }
         } catch (error) {
@@ -47,12 +54,12 @@ const Order = ({ order, ordersRefetch }) => {
             };
 
             try {
-                const response = await axios.post('http://localhost:4000/ratings', {
+                const response = await axiosSecure.post('/ratings', {
                     ratingInfo
                 });
 
                 if (response?.status === 201) {
-                    const res = await axios.patch(`http://localhost:4000/orders/${order._id}`, {
+                    const res = await axiosSecure.patch(`/orders/${order._id}`, {
                         isRated: true
                     });
 

@@ -1,11 +1,12 @@
 import Image from 'next/image';
-import axios from 'axios';
 
 import { FaMinus, FaPlus, FaTrashAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
+import useAxiosSecure from '@/hooks/useAxiosSecure';
 
 const CartItem = ({ userEmail, cartItem, refetch }) => {
+    const [axiosSecure] = useAxiosSecure();
 
     const handleQuantityChange = async (actionType, cartItem) => {
         if (actionType === 'All') {
@@ -20,11 +21,11 @@ const CartItem = ({ userEmail, cartItem, refetch }) => {
             }).then(async (result) => {
                 if (result.isConfirmed) {
                     try {
-                        const response = await axios.patch(`http://localhost:4000/carts/${userEmail}`, { actionType, foodId: cartItem.foodId });
+                        const response = await axiosSecure.patch(`/carts/${userEmail}`, { actionType, foodId: cartItem.foodId });
 
                         if (response.status === 200) {
                             refetch();
-                            toast.success("Food Item Removed From The Cart!")
+                            toast.error("Food Item Removed From The Cart!")
                         }
                     } catch (error) {
                         console.log(error?.message);
@@ -34,7 +35,7 @@ const CartItem = ({ userEmail, cartItem, refetch }) => {
         }
         else {
             try {
-                const response = await axios.patch(`http://localhost:4000/carts/${userEmail}`, { actionType, foodId: cartItem.foodId });
+                const response = await axiosSecure.patch(`/carts/${userEmail}`, { actionType, foodId: cartItem.foodId });
 
                 if (response.status === 200) {
                     refetch();

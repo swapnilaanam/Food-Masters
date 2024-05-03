@@ -11,10 +11,13 @@ import axios from 'axios';
 import useAuth from '@/hooks/useAuth';
 import { toast } from 'react-toastify';
 import { useQuery } from '@tanstack/react-query';
+import useAxiosSecureBusiness from '@/hooks/useAxiosSecureBusiness';
 
 
 const SignUp = () => {
     const { signUpUser, updateUser, signOutUser } = useAuth();
+
+    const [axiosSecureBusiness] = useAxiosSecureBusiness();
 
     const { data: customers } = useQuery({
         queryKey: ['customers'],
@@ -82,7 +85,7 @@ const SignUp = () => {
                                                     tags: []
                                                 };
 
-                                                axios.post('http://localhost:4000/restaurants', newRestaurant)
+                                                axiosSecureBusiness.post('/restaurants', newRestaurant)
                                                     .then(res => {
                                                         if (res.status === 201) {
                                                             Swal.fire('You are signed up for food masters business successfully!');

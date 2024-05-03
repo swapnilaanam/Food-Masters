@@ -4,19 +4,21 @@ import useAuth from "@/hooks/useAuth";
 import Order from "@/components/Business/Order";
 import BusinessBanner from "@/components/Shared/BusinessBanner"
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useEffect, useState } from "react";
+import useAxiosSecureBusiness from "@/hooks/useAxiosSecureBusiness";
 
 const Orders = () => {
     const [currentOption, setCurrentOption] = useState("Pending");
 
     const { user } = useAuth();
 
+    const [axiosSecureBusiness] = useAxiosSecureBusiness();
+
     const { data: orders = [], refetch: ordersRefetch } = useQuery({
         queryKey: ["orders", user?.email],
         queryFn: async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/orders/restaurant/${user?.email}`);
+                const response = await axiosSecureBusiness.get(`/orders/restaurant/${user?.email}`);
 
                 if (response.status === 200) {
                     // console.log(response);
@@ -78,4 +80,4 @@ const Orders = () => {
     )
 }
 
-export default Orders
+export default Orders;
