@@ -43,7 +43,7 @@ const Restaurants = () => {
 
     useEffect(() => {
         refetch();
-    }, [currentCategory]);
+    }, [currentCategory, refetch]);
 
     return (
         <main>

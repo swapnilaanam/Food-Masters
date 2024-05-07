@@ -18,7 +18,7 @@ const OwnerRoutesLayout = ({ children }) => {
     useEffect(() => {
         if (!loading && !isOwnerLoading && isOwner === false) {
             localStorage.setItem('masterBusinessHistory', pathName);
-            Swal.fire('Login With Your Customer Account To Use This Feature!');
+            Swal.fire('Login With Your Business Account To Use This Feature!');
             signOutUser();
             return router.push('/business/signin');
         }

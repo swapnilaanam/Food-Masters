@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import OrderDeliveryTimeline from './Shared/OrderDeliveryTimeline';
 import { toast } from 'react-toastify';
 import Rating from 'react-rating';
@@ -13,6 +13,7 @@ const Order = ({ order, ordersRefetch }) => {
     const [totalOrderNumber, setTotalOrderNumber] = useState(0);
     const [isRatingDialogOpen, setIsRatingDialogOpen] = useState(false);
     const [currentRating, setCurrentRating] = useState(0);
+    const feedbackTextRef = useRef(null);
 
     const [axiosSecure] = useAxiosSecure();
 
@@ -41,7 +42,8 @@ const Order = ({ order, ordersRefetch }) => {
     };
 
     const handleFoodRating = async () => {
-        if (currentRating > 0) {
+        // console.log(feedbackTextRef?.current?.value);
+        if (currentRating > 0 && feedbackTextRef?.current?.value) {
             const ratingInfo = {
                 orderId: order?._id,
                 customerName: order?.customerName,
@@ -50,7 +52,8 @@ const Order = ({ order, ordersRefetch }) => {
                 restaurantEmail: order?.restaurantEmail,
                 restaurantId: order?.restaurantId,
                 totalAmount: order?.total,
-                rating: Number(currentRating)
+                rating: Number(currentRating),
+                feedbackText: feedbackTextRef?.current?.value
             };
 
             try {
@@ -141,9 +144,6 @@ const Order = ({ order, ordersRefetch }) => {
                     {
                         order?.deliveryStatus === "Delivered" && (
                             <div className="flex justify-center items-center gap-7">
-                                <button className="bg-green-600 text-white text-sm rounded py-1.5 px-4">
-                                    Reorder
-                                </button>
                                 {
                                     order?.isRated === false && (
                                         <button onClick={() => setIsRatingDialogOpen(true)} className="bg-green-600 text-white text-sm rounded py-1.5 px-4">
@@ -195,6 +195,8 @@ const Order = ({ order, ordersRefetch }) => {
                                 fractions={2}
                                 onClick={(rate) => setCurrentRating(rate)}
                             />
+                            <textarea name="feedback_text" className="w-full h-20 border border-orange-400 px-4 py-2" placeholder="Give your feedback here..." ref={feedbackTextRef}>
+                            </textarea>
                             <button onClick={handleFoodRating} className="text-white bg-green-600 px-5 py-1.5">
                                 Rate The Food
                             </button>

@@ -55,7 +55,7 @@ const Menu = ({ menu }) => {
         };
 
         try {
-            const res = await axios.get(`http://localhost:4000/carts/${user?.email}`);
+            const res = await axiosSecure.get(`/carts/${user?.email}`);
 
             if (res.status === 200) {
                 if (res?.data) {

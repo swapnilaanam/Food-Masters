@@ -23,6 +23,9 @@ const BusinessNavbar = () => {
                     <Link href="/business/menu">Menu</Link>
                 </li>
                 <li>
+                    <Link href="/business/vouchers">Vouchers</Link>
+                </li>
+                <li>
                     <Link href="/business/orders">Orders</Link>
                 </li>
                 {

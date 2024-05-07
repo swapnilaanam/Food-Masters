@@ -12,13 +12,14 @@ import { IoIosStar, IoMdStar } from "react-icons/io";
 import Rating from "react-rating";
 
 import './page.css';
-import RestaurantRatings from "@/components/RestaurantRatings";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { FaRegStar, FaStar } from "react-icons/fa";
+import RestaurantVouchers from "@/components/RestaurantVouchers";
 
 const Restaurant = () => {
   const [currentRestaurantPageView, setCurrentRestaurantPageView] = useState("Menu");
+  const [ratedByCount, setRatedByCount] = useState();
 
   const { id } = useParams();
 
@@ -41,8 +42,7 @@ const Restaurant = () => {
         const response = await axios.get(`http://localhost:4000/ratings/${id}`);
 
         if (response.status === 200) {
-          console.log(response?.data);
-          console.log(Number(response?.data?.reduce((total, current) => total + current.rating, 0) / response?.data.length));
+          setRatedByCount(response?.data?.length);
           return (response?.data?.reduce((total, current) => total + current.rating, 0) / response?.data.length);
         }
       } catch (error) {
@@ -67,13 +67,18 @@ const Restaurant = () => {
               <GrMapLocation />
               <h4>{restaurant?.address}, {restaurant?.city}</h4>
             </div>
-            <div className="mt-4 ms-4">
+            <div className="mt-4 ms-4 flex justify-start items-center">
               <Rating
                 initialRating={ratingsCount}
                 emptySymbol={<FaRegStar className="text-green-600 text-3xl" />}
                 fullSymbol={<FaStar className="text-green-600 text-3xl" />}
                 readonly
+                className="mt-1.5"
               />
+              <div className="mx-3 text-2xl font-medium"> - </div>
+              <div className="text-2xl font-medium">
+                {ratingsCount || 0} ({ratedByCount})
+              </div>
             </div>
           </div>
         </div>
@@ -92,9 +97,9 @@ const Restaurant = () => {
               </button>
               <button
                 className="bg-green-600 text-white font-medium px-7 py-2"
-                onClick={() => setCurrentRestaurantPageView("Restaurant Ratings")}
+                onClick={() => setCurrentRestaurantPageView("Restaurant Vouchers")}
               >
-                Ratings
+                Vouchers
               </button>
               <button
                 className="bg-green-600 text-white font-medium px-7 py-2"
@@ -109,7 +114,7 @@ const Restaurant = () => {
               currentRestaurantPageView === "Menu" && <Menus restaurantId={id} restaurant={restaurant} />
             }
             {
-              currentRestaurantPageView === "Restaurant Ratings" && <RestaurantRatings restaurantId={id} />
+              currentRestaurantPageView === "Restaurant Vouchers" && <RestaurantVouchers restaurantEmail={restaurant?.restaurantEmail} />
             }
             {
               currentRestaurantPageView === "Restaurant Info" && <RestaurantInfo restaurant={restaurant} />

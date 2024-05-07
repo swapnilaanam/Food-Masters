@@ -9,6 +9,10 @@ import './style.css';
 import OrderBanner from "@/components/OrderBanner";
 import CustomerReview from "@/components/CustomerReview";
 import RestaurantBanner from "@/components/RestaurantBanner";
+import Footer from "@/components/Shared/Footer";
+import VouchersBanner from "@/components/VouchersBanner";
+import PaymentPartners from "@/components/PaymentPartners";
+import FAQS from "@/components/FAQS";
 
 
 export default function Home() {
@@ -18,10 +22,14 @@ export default function Home() {
       <HomeBanner />
       <FoodCategories />
       <FeaturedRestaurants />
-      <OrderBanner />
+      <VouchersBanner />
       <Features />
-      <RestaurantBanner />
+      <OrderBanner />
       <CustomerReview />
+      <RestaurantBanner />
+      <FAQS />
+      <PaymentPartners />
+      <Footer />
     </main>
   )
 }

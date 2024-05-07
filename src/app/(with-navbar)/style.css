@@ -16,8 +16,36 @@
     top: 120% !important;
 }
 
+
+.voucher-text {
+    animation: voucherTextAnimation;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out  ;
+}
+
+.voucher-button {
+    animation: voucherButtonAnimation;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes voucherButtonAnimation {
+    0% {opacity: 80%;}
+    50% {opacity: 100%;}
+    100% {opacity: 80%;}
+}
+
+@keyframes voucherTextAnimation {
+    0% {background-color: black; color: black;}
+    50% { background-color: rgb(220, 38, 38); color: white;}
+    100% { background-color: rgb(220, 38, 38); color: white;}
+      
+}
+
 @media only screen and (min-width: 1600px) {
     .home-banner {
         height: 780px;
     }
 }
+

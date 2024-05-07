@@ -5,6 +5,8 @@ import useAxiosSecure from '@/hooks/useAxiosSecure';
 import { CartContext } from '@/providers/CartProvider';
 import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react'
+import { toast } from 'react-toastify';
+import './page.css';
 
 
 const Cart = () => {
@@ -34,14 +36,27 @@ const Cart = () => {
         const voucherCode = form.vouchercode.value;
 
         try {
-            const response = await axiosSecure.post('/verify', { voucherCode: voucherCode });
+            const response = await axiosSecure.post('/vouchers/verify', { voucherCode: voucherCode, email: cart?.cartItems[0]?.restaurantEmail, subTotal: subTotal });
 
             if (response.status === 200 && response?.data?.voucherMatched === true) {
-                setDiscount(response?.data?.result?.discountAmount);
+                const discountedAmount = Math.round((Number(subTotal) * response?.data?.result?.discountPercentage) / 100);
+                setDiscount(discountedAmount);
                 setVoucherCode(voucherCode);
+                toast.success('Voucher Applied');
             }
         } catch (error) {
             console.log(error?.message);
+            const res = JSON.parse(error?.request?.response);
+
+            if (error?.request?.status === 404) {
+                toast.error(res?.message, {
+                    className: 'toast-position',
+                    autoClose: 1500,
+                })
+            }
+            if (error?.request?.status === 410) {
+                toast.error('Voucher Expired!')
+            }
         }
     }
 
@@ -56,7 +71,16 @@ const Cart = () => {
 
                         <div className="mt-8">
                             <ul className="space-y-5">
-                                {cart?.cartItems?.map((cartItem) => <CartItem key={cartItem?.foodId} userEmail={cart?.userEmail} cartItem={cartItem} refetch={refetch} />)}
+                                {
+                                    cart?.cartItems?.length === 0 && (
+                                        <h2 className="text-xl font-medium text-black text-center uppercase py-2">
+                                            No food is currently added to the cart!
+                                        </h2>
+                                    )
+                                }
+                                {
+                                    cart?.cartItems?.map((cartItem) => <CartItem key={cartItem?.foodId} userEmail={cart?.userEmail} cartItem={cartItem} refetch={refetch} />)
+                                }
                             </ul>
 
                             <div className="mt-8 flex flex-col items-end border-t-2 border-white pt-8">

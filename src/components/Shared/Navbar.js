@@ -11,11 +11,12 @@ import { LuShoppingBag } from "react-icons/lu";
 
 const Navbar = () => {
     const { user, signOutUser } = useAuth();
-    const { cart } = useContext(CartContext);
 
     const [isProfileHoverOpen, setIsProfileHoverOpen] = useState(false);
 
     const pathName = usePathname();
+
+    const { cart } = useContext(CartContext);
 
     return (
         <nav className="bg-orange-200 w-full px-10 py-8 flex justify-between items-center border-b border-gray-100">
@@ -48,10 +49,7 @@ const Navbar = () => {
                         <LuShoppingBag className="text-3xl font-medium" />
                         <div className="bg-white text-center rounded-full w-8 h-8 flex justify-center items-center absolute -top-4 left-4">
                             {
-                                !cart ?
-                                    0
-                                    :
-                                    cart?.cartItems?.reduce((prevValue, currentValue) => prevValue + currentValue.quantity, 0)
+                                cart?.cartItems?.reduce((total, cartItem) => total + cartItem?.quantity, 0)
                             }
                         </div>
                     </Link>
