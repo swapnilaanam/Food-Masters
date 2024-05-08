@@ -9,7 +9,7 @@ import Image from "next/image";
 
 const PaymentPartners = () => {
   return (
-    <section className="pt-16 pb-28">
+    <section className="pt-16 pb-28 px-4 lg:px-7">
       <h2 className="text-center text-4xl font-medium mb-20">Payment Partners</h2>
       <div className="max-w-7xl mx-auto flex justify-center items-center">
         <Marquee speed={80}>

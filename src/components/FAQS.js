@@ -13,7 +13,7 @@ const FAQS = () => {
     }
 
     return (
-        <section className="pt-16 pb-28">
+        <section className="pt-16 pb-28 px-4">
             <h2 className="text-4xl text-center font-medium">
                 Frequently Asked Questions
             </h2>
@@ -21,7 +21,7 @@ const FAQS = () => {
                 Get answers to the most common questions about our service.
             </p>
             <div className="mt-24 max-w-7xl mx-auto flex flex-col gap-12">
-                <div className="flex justify-center items-start gap-14">
+                <div className="flex flex-col lg:flex-row justify-center lg:items-start gap-14">
                     <div onClick={() => showAnswer('faq-1')} className="flex-1 bg-orange-100 px-7 py-7 rounded border-2 border-orange-50 hover:cursor-pointer flex flex-col justify-start" style={{height: '110px', transition: '0.2s'}}>
                         <h4 className="text-xl font-medium">
                             Can we order food from two different restaurant in a single order?
@@ -39,7 +39,7 @@ const FAQS = () => {
                         </p>
                     </div>
                 </div>
-                <div className="flex justify-center items-start gap-14">
+                <div className="flex flex-col lg:flex-row justify-center lg:items-start gap-14">
                     <div onClick={() => showAnswer('faq-3')} className="flex-1 bg-orange-100 px-7 py-7 rounded border-2 border-orange-50 hover:cursor-pointer flex flex-col justify-start" style={{height: '110px', transition: '0.2s'}}>
                         <h4 className="text-xl font-medium">
                             Can I track my order?

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const FeaturedRestaurant = ({ restaurant, picHeight }) => {
     return (
-        <div className="flex-1 w-full relative" style={{ height: `${picHeight}%` }}>
+        <div className="flex-1 w-full h-full relative">
             <Link href={`/restaurants/${restaurant?._id}`}>
                 <Image fill={true} src={restaurant?.restaurantThumbnail} alt="Featured Restaurants" className="w-full h-full object-cover" />
                 <div className="absolute bottom-0 ms-4 mb-5 flex flex-col justify-center items-start gap-4">

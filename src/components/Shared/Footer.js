@@ -5,8 +5,8 @@ import { MdEmail } from "react-icons/md";
 
 const Footer = () => {
     return (
-        <footer className="mt-28 w-full bg-orange-50">
-            <div className="py-20 flex justify-center items-center gap-20">
+        <footer className="px-4 lg:px-0 mt-28 w-full bg-orange-100">
+            <div className="py-20 flex flex-col xl:flex-row justify-center items-center gap-20">
                 <section className="flex-1 flex flex-col items-center">
                     <h4 className="text-2xl font-semibold tracking-wide mb-10">
                         Get In Touch With Us
@@ -38,7 +38,7 @@ const Footer = () => {
                     <h2 className="text-green-600 text-4xl font-semibold mb-5">
                         Food Masters
                     </h2>
-                    <div className="flex justify-center items-center gap-7 text-lg">
+                    <div className="flex flex-col md:flex-row justify-center items-center gap-7 text-lg">
                         <Link href="/" className="hover:text-green-600 duration-200">Home</Link>
                         <Link href="/restaurants"  className="hover:text-green-600 duration-200">Restaurants</Link>
                         <Link href="/orders" className="hover:text-green-600 duration-200">Orders</Link>

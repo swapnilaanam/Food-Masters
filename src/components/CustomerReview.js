@@ -52,10 +52,12 @@ const CustomerReview = () => {
   }
 
   return (
-    <section className="pt-16 pb-28">
-      <h2 className="text-center text-4xl font-medium tracking-wide mb-20">Foodies Reviews</h2>
-      <div className="max-w-7xl mx-auto flex justify-center items-center gap-14">
-        <div className="w-[50%] h-full flex flex-col justify-center items-center">
+    <section className="pt-16 pb-28 px-4 lg:px-0">
+      <h2 className="text-center text-4xl font-medium tracking-wide mb-20">
+        Foodies Reviews
+      </h2>
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-center items-center gap-14">
+        <div className="w-full lg:w-[50%] h-full flex flex-col justify-center items-center">
           {
             feedbacks?.length === 0 ? (
               <h2 className="text-center text-xl font-medium">
@@ -92,7 +94,7 @@ const CustomerReview = () => {
                     feedbacks?.map((feedback) => {
                       return (
                         (
-                          <SwiperSlide className="bg-orange-200 rounded" key={feedback?._id}>
+                          <SwiperSlide className="bg-orange-100 rounded" key={feedback?._id}>
                             <div className="w-full h-full flex flex-col justify-center items-center py-10">
                               <div className="pb-2">
                                 <Rating
@@ -118,7 +120,7 @@ const CustomerReview = () => {
                                 <div className="flex justify-start">
                                   <TbChevronsUpLeft className="font-semibold text-4xl text-green-600 -translate-x-7 animate-pulse" />
                                 </div>
-                                <h6 className="text-black font-medium tracking-wider">
+                                <h6 className="text-black text-sm md:text-base font-medium tracking-wider">
                                   {feedback?.customerName}
                                 </h6>
                                 <div className="flex justify-end">
@@ -136,7 +138,7 @@ const CustomerReview = () => {
             )
           }
         </div>
-        <div className="w-[40%] h-full flex justify-end items-center">
+        <div className="w-full lg:w-[40%] h-full flex justify-end items-center">
           <Lottie animationData={reviewAnimation} className="w-[90%] h-[90%]" />
         </div>
       </div>

@@ -22,9 +22,9 @@ export default function Home() {
       <HomeBanner />
       <FoodCategories />
       <FeaturedRestaurants />
-      <VouchersBanner />
-      <Features />
       <OrderBanner />
+      <Features />
+      <VouchersBanner />
       <CustomerReview />
       <RestaurantBanner />
       <FAQS />
@@ -32,4 +32,5 @@ export default function Home() {
       <Footer />
     </main>
   )
+  
 }
