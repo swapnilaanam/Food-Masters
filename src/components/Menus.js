@@ -33,7 +33,7 @@ const Menus = ({ restaurantId, restaurant }) => {
     return (
         <div>
             <h4 className="text-2xl mb-4">Filters</h4>
-            <ul className="mb-10 ps-2 flex justify-start items-center gap-5">
+            <ul className="mb-10 ps-2 flex flex-wrap justify-start items-center gap-5">
                 <li
                     onClick={(e) => setCurrentCategory(e.target.innerText)}
                     className="px-5 py-2 text-sm bg-orange-200 rounded-sm cursor-pointer hover:bg-green-200"

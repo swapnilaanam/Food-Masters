@@ -1,7 +1,5 @@
 import { FcCellPhone, FcClock } from "react-icons/fc"
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
 const DynamicMap = dynamic(() => import("@/components/DynamicMap"), { ssr: false });
 
@@ -21,7 +19,7 @@ const RestaurantInfo = ({ restaurant }) => {
                     <h6 className="text-lg tracking-wider">{restaurant?.restaurantPhoneNumber}</h6>
                 </div>
                 <h4 className="text-2xl my-4">Location</h4>
-                <div>
+                <div className="w-full overflow-hidden">
                     <DynamicMap restaurant={restaurant} />
                 </div>
             </div>

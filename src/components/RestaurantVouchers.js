@@ -35,7 +35,7 @@ const RestaurantVouchers = ({ restaurantEmail }) => {
           </h4>
         )
       }
-      <div className="mt-12 flex justify-center items-center gap-12">
+      <div className="mt-12 flex flex-wrap justify-center items-center gap-12">
         {
           vouchers.map((voucher) => <Voucher voucher={voucher} isRestaurantNameShown={false} isCopyCodeShown={true} key={voucher?._id} />)
         }

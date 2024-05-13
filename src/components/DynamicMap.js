@@ -22,7 +22,7 @@ const DynamicMap = ({ restaurant }) => {
         <div className="ms-4">
             {
                 pos && (
-                    <MapContainer center={[pos.lat, pos.lng]} zoom={20} scrollWheelZoom={false} className="border-2 border-orange-400">
+                    <MapContainer center={[pos.lat, pos.lng]} zoom={20} scrollWheelZoom={false} className="border-2 border-orange-400 max-w-full">
                         <TileLayer
                             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
