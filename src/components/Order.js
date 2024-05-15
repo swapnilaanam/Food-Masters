@@ -81,49 +81,49 @@ const Order = ({ order, ordersRefetch }) => {
 
     return (
         <>
-            <div className="bg-orange-100 rounded px-7 drop-shadow-lg">
+            <div className="bg-orange-100 rounded md:px-7 drop-shadow-lg">
                 <OrderDeliveryTimeline orderInfo={order} />
                 <div className="flex justify-center items-center">
                     <div className='w-full space-y-1'>
-                        <div className="flex justify-center items-center gap-2 w-[460px]">
-                            <h4 className="text-lg font-medium leading-8 w-[40%] text-right">
+                        <div className="flex flex-col md:flex-row justify-center items-center w-full md:w-[460px]">
+                            <h4 className="text-lg font-medium leading-8 w-full md:w-[40%] text-center md:text-right">
                                 Order Number:
                             </h4>
-                            <h4 className="ms-2 text-base font-normal leading-8 w-1/2 mt-[1px]">{order?._id}</h4>
+                            <h4 className="md:ms-2 text-base font-normal leading-8 text-center md:text-left w-full md:w-1/2 mt-[1px]">{order?._id}</h4>
                         </div>
-                        <div className="flex justify-center items-center gap-2 w-[460px]">
-                            <h4 className="text-lg font-medium leading-8 w-[40%] text-right">
+                        <div className="flex flex-col md:flex-row justify-center items-center gap-2 w-[460px]">
+                            <h4 className="text-lg font-medium leading-8 w-full md:w-[40%] text-center md:text-right">
                                 Restaurant Name:
                             </h4>
-                            <h4 className="ms-2 text-base font-normal leading-8 w-1/2 mt-[1px]">{order?.restaurantName}</h4>
+                            <h4 className="md:ms-2 text-base font-normal leading-8 w-full md:w-1/2 text-center md:text-left mt-[1px]">{order?.restaurantName}</h4>
                         </div>
-                        <div className="flex justify-center items-center gap-2 w-[460px]">
-                            <h4 className="text-lg font-medium leading-8 w-[40%] text-right">
+                        <div className="flex flex-col md:flex-row justify-center items-center gap-2 w-[460px]">
+                            <h4 className="text-lg font-medium leading-8 w-full md:w-[40%] text-center md:text-right">
                                 Order Quantity:
                             </h4>
-                            <h4 className="ms-2 text-base font-normal leading-8 rounded-sm w-1/2 mt-[1px]">
+                            <h4 className="md:ms-2 text-base font-normal leading-8 rounded-sm w-full md:w-1/2 text-center md:text-left mt-[1px]">
                                 <span className="bg-slate-800 text-white px-4 py-0.5 rounded-sm">{totalOrderNumber}</span>
                             </h4>
                         </div>
-                        <div className="flex justify-center items-center gap-2 w-[460px]">
-                            <h4 className="text-lg font-medium leading-8 w-[40%] text-right">
+                        <div className="flex flex-col md:flex-row justify-center items-center gap-2 w-[460px]">
+                            <h4 className="text-lg font-medium leading-8 w-full md:w-[40%] text-center md:text-right">
                                 Total Amount:
                             </h4>
-                            <h4 className="ms-2 text-base font-normal leading-8 rounded-sm w-1/2 mt-[1px]">
+                            <h4 className="md:ms-2 text-base font-normal leading-8 rounded-sm w-full md:w-1/2 text-center md:text-left mt-[1px]">
                                 <span className="bg-green-600 text-white px-3 py-0.5 rounded-sm"> BDT. {order?.total}</span>
                             </h4>
                         </div>
-                        <div className="flex justify-center items-center gap-2 w-[460px]">
-                            <h4 className="text-lg font-medium leading-8 w-[40%] text-right">
+                        <div className="flex flex-col md:flex-row justify-center items-center gap-2 w-[460px]">
+                            <h4 className="text-lg font-medium leading-8 w-full md:w-[40%] text-center md:text-right">
                                 Delivery Address:
                             </h4>
-                            <h4 className="ms-2 text-base font-normal leading-8 w-1/2 mt-[1px]">
+                            <h4 className="md:ms-2 text-base font-normal leading-8 w-full md:w-1/2 text-center md:text-left mt-[1px]">
                                 {order?.customerAddress}, {order?.customerCity}
                             </h4>
                         </div>
                     </div>
                 </div>
-                <div className="py-7 flex justify-center items-center gap-7">
+                <div className="py-7 flex flex-col md:flex-row justify-center items-center gap-5 md:gap-7">
                     <Link href={`/orders/${order?._id}`} className="bg-slate-700 text-sm text-white rounded py-1.5 px-4">
                         View Details
                     </Link>

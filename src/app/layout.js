@@ -3,6 +3,7 @@ import './globals.css';
 import AuthProvider from '@/providers/AuthProvider';
 import QueryProvider from '@/providers/QueryProvider';
 import CartProvider from '@/providers/CartProvider';
+import MenuProvider from '@/providers/MenuProvider';
 import { ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -20,9 +21,11 @@ export default function RootLayout({ children }) {
       <body className={`${kanit.className}`}>
         <AuthProvider>
           <QueryProvider>
-            <CartProvider>
-              {children}
-            </CartProvider>
+            <MenuProvider>
+              <CartProvider>
+                {children}
+              </CartProvider>
+            </MenuProvider>
           </QueryProvider>
         </AuthProvider>
         <ToastContainer />

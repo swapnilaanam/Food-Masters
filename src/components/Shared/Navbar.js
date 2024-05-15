@@ -1,6 +1,7 @@
 "use client"
 
 import useAuth from "@/hooks/useAuth";
+import useMenu from "@/hooks/useMenu";
 import { CartContext } from "@/providers/CartProvider";
 import Image from "next/image";
 import Link from "next/link"
@@ -12,8 +13,8 @@ import { RiMenu5Fill } from "react-icons/ri";
 
 const Navbar = () => {
     const { user, signOutUser } = useAuth();
+    const {isMenuOpen, setIsMenuOpen} = useMenu();
 
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isProfileHoverOpen, setIsProfileHoverOpen] = useState(false);
     const [cartCount, setCartCount] = useState(0);
 

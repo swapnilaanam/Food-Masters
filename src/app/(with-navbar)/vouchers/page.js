@@ -1,10 +1,14 @@
 'use client';
 
 import Voucher from "@/components/Shared/Voucher";
+import useMenu from "@/hooks/useMenu";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useEffect } from "react";
 
 const Vouchers = () => {
+    const {setIsMenuOpen} = useMenu();
+
     const { data: vouchers = [] } = useQuery({
         queryKey: ['vouchers'],
         queryFn: async () => {
@@ -20,12 +24,16 @@ const Vouchers = () => {
         }
     });
 
+    useEffect(() => {
+        setIsMenuOpen(false);
+    }, [setIsMenuOpen]);
+
     return (
-        <section className="py-24">
+        <section className="py-24 px-4 2xl:px-0">
             <h2 className="text-center text-3xl font-semibold">
                 All The Vouchers
             </h2>
-            <div className="mt-20 max-w-7xl mx-auto flex justify-center items-center gap-20">
+            <div className="mt-20 max-w-7xl mx-auto flex flex-wrap justify-center items-center gap-20">
                 {
                     vouchers?.map((voucher) => {
                         return (

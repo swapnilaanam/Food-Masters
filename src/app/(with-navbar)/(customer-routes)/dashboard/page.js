@@ -5,8 +5,9 @@ import CustomerDashboardStats from "@/components/CustomerDashboardStats";
 import CustomerRecentOrders from "@/components/CustomerRecentOrders";
 import TopBanner from "@/components/Shared/TopBanner"
 import { useQuery } from "@tanstack/react-query"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
+import useMenu from "@/hooks/useMenu";
 
 const Dashboard = () => {
     const [totalPendingOrders, setTotalPendingOrders] = useState(0);
@@ -14,6 +15,7 @@ const Dashboard = () => {
     const [totalCancelledOrders, setTotalCancelledOrders] = useState(0);
     const [totalSpent, setTotalSpent] = useState(0);
     const { user } = useAuth();
+    const {setIsMenuOpen} = useMenu();
 
     const [axiosSecure] = useAxiosSecure();
 
@@ -41,20 +43,24 @@ const Dashboard = () => {
             }
         }
     });
+    
+    useEffect(() => {
+        setIsMenuOpen(false);
+    }, [setIsMenuOpen]);
 
     return (
         <section>
             <TopBanner title="Customer Dashboard" />
             <CustomerDashboardStats orders={orders} totalSpent={totalSpent} totalPendingOrders={totalPendingOrders} totalDeliveredOrders={totalDeliveredOrders} totalCancelledOrders={totalCancelledOrders} />
-            <div className="max-w-7xl mx-auto flex justify-center items-start gap-20 pb-20">
+            <div className="max-w-7xl mx-auto flex flex-col xl:flex-row xl:justify-center xl:items-start gap-20 pb-20 px-4">
                 <div className="flex-1 bg-orange-200 p-10 rounded-sm">
                     <h2 className="text-2xl font-semibold mb-12">Personal Information</h2>
-                    <div className="ms-4 space-y-4">
-                        <h4 className="text-xl font-medium">
+                    <div className="ms-4 space-y-4 text-center md:text-left">
+                        <h4 className="text-xl font-medium flex md:block flex-col items-center justify-center gap-2">
                             Name:
                             <span className="ms-4 text-lg font-normal">{user?.displayName}</span>
                         </h4>
-                        <h4 className="text-xl font-medium">
+                        <h4 className="text-xl font-medium flex md:block flex-col items-center justify-center gap-2">
                             Email:
                             <span className="ms-4 text-lg font-normal">{user?.email}</span>
                         </h4>

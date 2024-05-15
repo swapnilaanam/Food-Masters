@@ -2,16 +2,16 @@
 
 import useAuth from "@/hooks/useAuth";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
+import useMenu from "@/hooks/useMenu";
 import { CartContext } from "@/providers/CartProvider";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 const CheckOut = () => {
-
   const params = useSearchParams();
 
   const subTotal = params.get("subtotal");
@@ -20,7 +20,8 @@ const CheckOut = () => {
   const discount = params.get("discount");
   const total = params.get("total");
 
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
+  const {setIsMenuOpen} = useMenu();
   const { cart } = useContext(CartContext);
 
   const [axiosSecure] = useAxiosSecure();
@@ -40,6 +41,10 @@ const CheckOut = () => {
       }
     }
   });
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [setIsMenuOpen]);
 
   const handlePlaceTheOrder = async () => {
     const singleCartItem = cart?.cartItems[0];
@@ -71,15 +76,15 @@ const CheckOut = () => {
 
   return (
     <main>
-      <section className="py-20">
-        <div className="mx-auto max-w-7xl 2xl:max-w-[1320px] bg-orange-100 px-4 py-10 sm:px-6 sm:py-10 lg:px-7 rounded-sm shadow-lg">
-          <div className="px-24">
+      <section className="py-20 px-4 2xl:px-0">
+        <div className="mx-auto max-w-7xl bg-orange-100 px-4 py-10 sm:px-6 sm:py-10 lg:px-7 rounded-sm shadow-lg">
+          <div className="xl:px-24">
             <header className="text-center">
               <h1 className="text-xl font-bold text-gray-900 sm:text-3xl mb-10">CheckOut</h1>
             </header>
 
-            <div className="mt-8 flex justify-center items-start">
-              <ul className="space-y-5 border-r-2 border-gray-400 flex-1">
+            <div className="mt-8 flex flex-col lg:flex-row justify-normal lg:justify-center items-center lg:items-stretch">
+              <ul className="space-y-5 border-b-2 lg:border-b-0 lg:border-r-2 border-gray-400 lg:flex-1 pb-12 lg:pb-0">
                 {
                   cart?.cartItems?.map((cartItem) => {
                     return (
@@ -109,7 +114,7 @@ const CheckOut = () => {
                           </dl>
                         </div>
 
-                        <div className="flex flex-1 items-center justify-end gap-2 pr-14">
+                        <div className="flex flex-1 items-center justify-end gap-2 lg:pr-14">
                           <form>
                             <label htmlFor="Line1Qty" className="sr-only"> Quantity </label>
 
@@ -130,22 +135,22 @@ const CheckOut = () => {
                   })
                 }
               </ul>
-              <div className="flex-1 w-full flex justify-center items-start">
-                <div className="flex flex-col justify-start items-end flex-1 gap-[32px]">
-                  <h2 className="text-lg font-medium">Customer Name: </h2>
-                  <h3 className="text-lg font-medium">Email: </h3>
-                  <h4 className="text-lg font-medium">Address: </h4>
+              <div className="pt-12 lg:pt-0 flex-1 flex justify-center items-start">
+                <div className="flex flex-col justify-start items-end lg:flex-1 gap-[32px]">
+                  <h2 className="text-xs md:text-lg font-medium mt-1 md:mt-0">Customer Name: </h2>
+                  <h3 className="text-xs md:text-lg font-medium mt-1 md:mt-0 lg:mt-0.5 xl:mt-0">Email: </h3>
+                  <h4 className="text-xs md:text-lg font-medium mt-1 md:mt-0">Address: </h4>
                 </div>
-                <div className="flex flex-col justify-start flex-2 gap-7">
-                  <span className="ms-4 font-normal bg-white px-4 py-1 rounded">{customerInfo?.name}</span>
-                  <span className="ms-4 font-normal bg-white px-4 py-1 rounded">{customerInfo?.email}</span>
-                  <span className="ms-4 font-normal bg-white px-4 py-1 rounded">{customerInfo?.address}, {customerInfo?.city}</span>
+                <div className="flex flex-col justify-start gap-7">
+                  <span className="ms-4 text-xs md:text-base font-normal bg-white px-4 py-1 rounded">{customerInfo?.name}</span>
+                  <span className="ms-4 text-xs md:text-base font-normal bg-white px-4 py-1 rounded">{customerInfo?.email}</span>
+                  <span className="ms-4 text-xs md:text-base font-normal bg-white px-4 py-1 rounded">{customerInfo?.address}, {customerInfo?.city}</span>
                 </div>
               </div>
             </div>
 
             <div className="mt-8 flex flex-col items-end border-t-2 border-white pt-8">
-              <div className="w-screen max-w-lg space-y-4">
+              <div className="w-full md:w-screen max-w-lg space-y-4">
                 <dl className="space-y-2 text-gray-700">
                   <div className="flex justify-between">
                     <dt>Subtotal</dt>

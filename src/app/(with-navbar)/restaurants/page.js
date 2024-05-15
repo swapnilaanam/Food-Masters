@@ -6,10 +6,13 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import Restaurant from '@/components/Restaurant';
 import TopBanner from '@/components/Shared/TopBanner';
+import useMenu from '@/hooks/useMenu';
 
 
 const Restaurants = () => {
     const [currentCategory, setCurrentCategory] = useState("All");
+
+    const {setIsMenuOpen} = useMenu();
 
     const { data: categories = [] } = useQuery({
         queryKey: ["categories"],
@@ -44,6 +47,10 @@ const Restaurants = () => {
     useEffect(() => {
         refetch();
     }, [currentCategory, refetch]);
+
+    useEffect(() => {
+        setIsMenuOpen(false);
+    }, [setIsMenuOpen]);
 
     return (
         <main>

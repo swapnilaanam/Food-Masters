@@ -22,17 +22,17 @@ const SignUp = () => {
     const { data: restaurants } = useQuery({
         queryKey: ['restaurants'],
         queryFn: async () => {
-          try {
-            const response = await axios.get('http://localhost:4000/restaurants');
-    
-            if (response?.status === 200) {
-              return response?.data;
+            try {
+                const response = await axios.get('http://localhost:4000/restaurants');
+
+                if (response?.status === 200) {
+                    return response?.data;
+                }
+            } catch (error) {
+                console.log(error?.message);
             }
-          } catch (error) {
-            console.log(error?.message);
-          }
         }
-      });
+    });
 
     const {
         register,
@@ -46,7 +46,7 @@ const SignUp = () => {
     const onSubmit = (data) => {
         const isExist = restaurants.find((restaurant) => restaurant?.restaurantEmail === data?.email);
 
-        if(isExist) {
+        if (isExist) {
             toast.error('This email is associated with a business account!')
             return reset();
         }
@@ -112,7 +112,7 @@ const SignUp = () => {
     };
 
     return (
-        <main className="bg-orange-100 py-24 min-h-screen flex justify-center items-center px-4 lg:px-0">
+        <main className="bg-orange-100 py-24 min-h-screen flex justify-center items-center px-4 2xl:px-0">
             <section className="max-w-7xl mx-auto lg:grid lg:grid-cols-12 bg-white">
                 <div
                     className="flex items-end bg-green-100 lg:col-span-5 lg:h-full xl:col-span-6"
@@ -239,8 +239,8 @@ const SignUp = () => {
                     </div>
                 </main>
             </section>
-            <div className="bg-white text-xl font-medium fixed bottom-0 right-0 flex justify-center items-center rounded-sm">
-                <Link href="/business/dashboard" className="py-3 px-5 text-black"><span className="text-green-600">Food Masters</span> For Business</Link>
+            <div className="bg-green-50 text-sm md:text-xl font-medium fixed bottom-0 right-0 flex justify-center items-center rounded-sm">
+                <Link href="/business/signin" className="py-3 px-5 text-black"><span className="text-green-600">Food</span> <span className="text-orange-500"> Masters</span> For Business</Link>
                 <Link href="/" className="py-3 px-5 bg-green-500 text-white">Go To Home</Link>
             </div>
         </main>

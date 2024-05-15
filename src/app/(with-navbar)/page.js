@@ -13,9 +13,16 @@ import Footer from "@/components/Shared/Footer";
 import VouchersBanner from "@/components/VouchersBanner";
 import PaymentPartners from "@/components/PaymentPartners";
 import FAQS from "@/components/FAQS";
+import useMenu from "@/hooks/useMenu";
+import { useEffect } from "react";
 
 
 export default function Home() {
+  const {setIsMenuOpen} = useMenu();
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [setIsMenuOpen]);
 
   return (
     <main>
@@ -32,5 +39,5 @@ export default function Home() {
       <Footer />
     </main>
   )
-  
+
 }

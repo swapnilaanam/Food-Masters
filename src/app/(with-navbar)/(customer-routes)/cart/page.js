@@ -7,9 +7,12 @@ import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
 import './page.css';
+import useMenu from '@/hooks/useMenu';
 
 
 const Cart = () => {
+    const {setIsMenuOpen} = useMenu();
+
     const [subTotal, setSubTotal] = useState(0);
     const [vat, setVat] = useState(0);
     const [discount, setDiscount] = useState(0);
@@ -18,6 +21,10 @@ const Cart = () => {
     const { cart, refetch } = useContext(CartContext);
 
     const [axiosSecure] = useAxiosSecure();
+
+    useEffect(() => {
+        setIsMenuOpen(false);
+    }, [setIsMenuOpen]);
 
     useEffect(() => {
         setSubTotal(cart?.cartItems?.reduce((total, currentCartItem) => total + (currentCartItem.foodPrice * currentCartItem.quantity), 0));
@@ -62,7 +69,7 @@ const Cart = () => {
 
     return (
         <main>
-            <section className="py-20">
+            <section className="py-20 px-4 2xl:px-0">
                 <div className="mx-auto max-w-7xl 2xl:max-w-[1320px] bg-orange-100 px-4 py-10 sm:px-6 sm:py-10 lg:px-7 rounded-sm shadow-lg">
                     <div className="mx-auto max-w-3xl">
                         <header className="text-center">
@@ -85,7 +92,7 @@ const Cart = () => {
 
                             <div className="mt-8 flex flex-col items-end border-t-2 border-white pt-8">
                                 <div className="w-full mb-7">
-                                    <form onSubmit={handleVerifyVoucher} className="flex justify-end items-center gap-10">
+                                    <form onSubmit={handleVerifyVoucher} className="flex flex-col md:flex-row justify-end items-center gap-10">
                                         <input
                                             type="text"
                                             name="vouchercode"
@@ -101,7 +108,7 @@ const Cart = () => {
                                         />
                                     </form>
                                 </div>
-                                <div className="w-screen max-w-lg space-y-4">
+                                <div className="mt-5 md:mt-0 w-full md:w-screen max-w-lg space-y-4">
                                     <dl className="space-y-2 text-gray-700">
                                         <div className="flex justify-between">
                                             <dt>Subtotal</dt>

@@ -2,7 +2,7 @@ import Image from "next/image"
 
 const OrderedItem = ({orderedItemInfo}) => {
     return (
-        <li key={orderedItemInfo?.foodId} className="flex items-center gap-10">
+        <li key={orderedItemInfo?.foodId} className="flex justify-normal md:justify-center xl:justify-normal items-center gap-10">
             <div className="w-16 h-16 relative">
                 <Image
                     fill={true}
@@ -28,7 +28,7 @@ const OrderedItem = ({orderedItemInfo}) => {
                 </dl>
             </div>
 
-            <div className="flex flex-1 items-center justify-end gap-2 pr-14">
+            <div className="flex xl:flex-1 items-center xl:justify-end gap-2 xl:pr-14">
                 <form>
                     <label htmlFor="Line1Qty" className="sr-only"> Quantity </label>
 

@@ -3,7 +3,25 @@ import { IoIosCloseCircleOutline, IoMdCheckmarkCircleOutline } from "react-icons
 const OrderDeliveryTimeline = ({ orderInfo }) => {
     return (
         <section className="py-10">
-            <div className="flex justify-center items-center">
+            {
+                orderInfo?.deliveryStatus !== 'Cancelled' && (
+                    <div className="flex md:hidden justify-center">
+                        <div className="w-fit text-center font-medium text-xl bg-green-600 text-white px-12 py-2 rounded-sm">
+                            {orderInfo?.deliveryStatus}
+                        </div>
+                    </div>
+                )
+            }
+            {
+                orderInfo?.deliveryStatus === 'Cancelled' && (
+                    <div className="flex md:hidden justify-center">
+                        <div className="w-fit text-center font-medium text-xl bg-red-600 text-white px-12 py-2 rounded-sm">
+                            {orderInfo?.deliveryStatus}
+                        </div>
+                    </div>
+                )
+            }
+            <div className="hidden md:flex justify-center items-center">
                 <div className="flex items-center">
                     {
                         orderInfo?.deliveryStatus !== "Cancelled" && (

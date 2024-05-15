@@ -12,16 +12,19 @@ import { IoIosStar, IoMdStar } from "react-icons/io";
 import Rating from "react-rating";
 
 import './page.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import RestaurantVouchers from "@/components/RestaurantVouchers";
+import useMenu from "@/hooks/useMenu";
 
 const Restaurant = () => {
   const [currentRestaurantPageView, setCurrentRestaurantPageView] = useState("Menu");
   const [ratedByCount, setRatedByCount] = useState();
 
   const { id } = useParams();
+
+  const {setIsMenuOpen} = useMenu();
 
   const { data: restaurant = {} } = useQuery({
     queryKey: ["restaurant", id],
@@ -51,6 +54,9 @@ const Restaurant = () => {
     }
   });
 
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [setIsMenuOpen]);
 
   return (
     <main>

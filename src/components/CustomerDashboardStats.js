@@ -9,7 +9,7 @@ const CustomerDashboardStats = ({orders, totalSpent, totalPendingOrders, totalDe
     ];
 
     return (
-        <div className="py-20 max-w-7xl mx-auto flex justify-center gap-16">
+        <div className="py-20 max-w-7xl mx-auto flex flex-wrap xl:flex-nowrap justify-center gap-16 xl:gap-12 2xl:gap-16 px-4">
             <div className="bg-orange-200
              p-10 w-96 h-56 rounded drop-shadow-lg flex flex-col justify-center items-center">
                 <div className="flex justify-center items-center gap-5">
