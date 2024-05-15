@@ -124,7 +124,7 @@ const SignIn = () => {
     <main className="bg-orange-100 py-24 min-h-screen flex justify-center items-center px-4 2xl:px-0">
       <section className="max-w-7xl mx-auto lg:grid lg:grid-cols-12 bg-white">
         <div
-          className="flex items-end bg-green-100 lg:col-span-5 lg:h-full xl:col-span-6"
+          className="flex items-center bg-green-100 lg:col-span-5 lg:h-full xl:col-span-6"
         >
           <Lottie animationData={authAnimation} className="w-full" />
         </div>

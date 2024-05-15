@@ -1,12 +1,15 @@
 import BusinessNavbar from '@/components/Shared/BusinessNavbar'
+import BusinessMenuProvider from '@/providers/BusinessMenuProvider'
 
 const BusinessLayout = ({ children }) => {
   return (
     <>
-      <header>
-        <BusinessNavbar />
-      </header>
-      {children}
+      <BusinessMenuProvider>
+        <header>
+          <BusinessNavbar />
+        </header>
+        {children}
+      </BusinessMenuProvider>
     </>
   )
 }
