@@ -25,14 +25,14 @@ const Vouchers = () => {
     return (
         <main>
             <BusinessBanner title="Voucher" />
-            <section className="py-12">
+            <section className="py-12 px-4 2xl:px-0">
                 <AddVoucher refetch={refetch} />
                 {
                     vouchers?.length === 0 && (
                         <h4 className="mt-14 text-center text-2xl font-medium">No Vouchers Are Available Right Now...</h4>
                     )
                 }
-                <div className="py-20 max-w-7xl mx-auto flex justify-center items-center gap-20">
+                <div className="py-20 max-w-7xl mx-auto flex justify-center items-center gap-20 flex-wrap">
                     {
                         vouchers?.map((voucher) => (
                             <Voucher voucher={voucher} isRestaurantNameShown={false} isCopyCodeShown={false} key={voucher?._id} />

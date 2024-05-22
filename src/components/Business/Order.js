@@ -41,35 +41,35 @@ const Order = ({ order, ordersRefetch }) => {
 
     return (
         <>
-            <div className="bg-orange-100 rounded px-7 drop-shadow-lg">
+            <div className="w-full md:w-[515px] bg-orange-100 rounded px-7 drop-shadow-lg">
                 <OrderDeliveryTimeline orderInfo={order} />
                 <div className="flex justify-center items-center gap-2">
                     <div className="flex flex-col items-end">
-                        <h4 className="text-lg font-medium leading-8">
+                        <h4 className="text-xs md:text-lg font-medium md:leading-8">
                             Order Number:
                         </h4>
-                        <h4 className="text-lg font-medium leading-8">
+                        <h4 className="text-xs md:text-lg font-medium md:leading-8">
                             Customer Name:
                         </h4>
-                        <h4 className="text-lg font-medium leading-8">
+                        <h4 className="text-xs md:text-lg font-medium md:leading-8">
                             Delivery Address:
                         </h4>
-                        <h4 className="text-lg font-medium leading-8">
+                        <h4 className="text-xs md:text-lg font-medium md:leading-8">
                             Order Quantity:
                         </h4>
-                        <h4 className="text-lg font-medium leading-8">
+                        <h4 className="text-xs md:text-lg font-medium md:leading-8">
                             Total Amount:
                         </h4>
                     </div>
                     <div className="flex flex-col items-start">
-                        <h4 className="ms-2 text-base font-normal leading-8 mt-1">{order?._id}</h4>
-                        <h4 className="ms-2 text-base font-normal leading-8">{order?.customerName}</h4>
-                        <h4 className="ms-2 text-base font-normal leading-8">{order?.customerAddress}, {order?.customerCity}</h4>
-                        <h4 className="ms-2 text-base font-normal leading-8">{totalOrderNumber}</h4>
-                        <h4 className="ms-2 text-base font-normal leading-8">BDT. {order?.total}</h4>
+                        <h4 className="ms-2 text-xs md:text-base font-normal md:leading-8 mt-1">{order?._id}</h4>
+                        <h4 className="ms-2 text-xs md:text-base font-normal md:leading-8">{order?.customerName}</h4>
+                        <h4 className="ms-2 text-xs md:text-base font-normal md:leading-8">{order?.customerAddress}, {order?.customerCity}</h4>
+                        <h4 className="ms-2 text-xs md:text-base font-normal md:leading-8">{totalOrderNumber}</h4>
+                        <h4 className="ms-2 text-xs md:text-base font-normal md:leading-8">BDT. {order?.total}</h4>
                     </div>
                 </div>
-                <div className="py-7 flex justify-center items-center gap-7">
+                <div className="py-7 flex flex-col md:flex-row justify-center items-center gap-5 md:gap-7">
                     <Link href={`/business/orders/${order?._id}`} className="bg-green-600 text-white text-sm rounded py-1.5 px-4">
                         View Details
                     </Link>

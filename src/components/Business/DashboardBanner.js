@@ -82,7 +82,7 @@ const DashboardBanner = () => {
   });
 
   return (
-    <section className="max-w-7xl mx-auto py-14 flex justify-between items-center">
+    <section className="max-w-7xl mx-auto py-14 px-4 2xl:px-0 flex flex-wrap xl:flex-nowrap justify-center xl:justify-between items-center gap-14 xl:gap-0">
       <div className="bg-orange-200 p-10 w-72 rounded drop-shadow-lg">
         <div className="flex justify-center items-center gap-5">
           <FcPaid className="text-4xl" />

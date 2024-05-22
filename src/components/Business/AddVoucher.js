@@ -2,9 +2,10 @@
 
 import useAuth from "@/hooks/useAuth";
 import useAxiosSecureBusiness from "@/hooks/useAxiosSecureBusiness";
+import useBusinessMenu from "@/hooks/useBusinessMenu";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -12,6 +13,7 @@ const AddVoucher = ({ refetch }) => {
     const [isAddVoucherModalOpen, setIsAddVoucherModalOpen] = useState(false);
 
     const { user } = useAuth();
+    const {setIsBusinessMenuOpen} = useBusinessMenu();
 
     const [axiosSecureBusiness] = useAxiosSecureBusiness();
 
@@ -33,6 +35,10 @@ const AddVoucher = ({ refetch }) => {
             }
         }
     });
+
+    useEffect(() => {
+        setIsBusinessMenuOpen(false);
+    }, [setIsBusinessMenuOpen]);
 
     const onSubmit = async (data) => {
         let minAmount;
@@ -96,7 +102,7 @@ const AddVoucher = ({ refetch }) => {
             </div>
             {isAddVoucherModalOpen && (
                 <div
-                    className="fixed z-10 top-[52%] -translate-y-[50%] left-0 right-0 max-w-2xl mx-auto bg-orange-100 rounded-md p-4 shadow-xl shadow-orange-50">
+                    className="fixed z-10 top-[52%] -translate-y-[50%] left-5 lg:left-0 right-5 lg:right-0 max-w-2xl mx-auto bg-orange-100 rounded-md p-4 shadow-xl shadow-orange-50">
                     <h2 className="text-center text-2xl font-semibold">Add Food</h2>
                     <form onSubmit={handleSubmit(onSubmit)} className="w-[60%] mx-auto mt-12 space-y-6">
                         <div>

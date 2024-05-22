@@ -112,9 +112,9 @@ const AddMenu = ({ refetch }) => {
             </div>
             {isAddFoodModalOpen && (
                 <div
-                    className="fixed z-10 top-[50%] -translate-y-[50%] left-0 right-0 max-w-4xl mx-auto bg-orange-200 rounded-md p-4 shadow-xl shadow-orange-300">
+                    className="fixed z-10 top-[50%] -translate-y-[50%] left-5 lg:left-0 right-5 lg:right-0 max-w-4xl mx-auto bg-orange-200 rounded-md p-2 lg:p-4 shadow-xl shadow-orange-300">
                     <h2 className="text-center text-2xl font-semibold">Add Food</h2>
-                    <form onSubmit={handleSubmit(onSubmit)} className="w-[70%] mx-auto mt-12 space-y-6">
+                    <form onSubmit={handleSubmit(onSubmit)} className="w-[70%] mx-auto mt-5 xl:mt-12 space-y-5 lg:space-y-3 xl:space-y-6">
                         <div>
                             <label htmlFor="foodname" className="block text-base font-medium text-gray-700">
                                 Food Name:
@@ -182,7 +182,7 @@ const AddMenu = ({ refetch }) => {
                             <textarea
                                 id="fooddesc"
                                 {...register("fooddesc")}
-                                className="mt-2 w-full h-20 rounded-sm border-2 border-gray-300 bg-white text-sm text-gray-700 shadow-sm ps-2 pt-2"
+                                className="mt-2 w-full h-20 lg:h-10 xl:h-20 rounded-sm border-2 border-gray-300 bg-white text-sm text-gray-700 shadow-sm ps-2 pt-2"
                                 placeholder="Tell About Your Food..."
                             />
                         </div>

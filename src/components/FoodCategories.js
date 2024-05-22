@@ -21,7 +21,7 @@ const FoodCategories = () => {
   });
 
   return (
-    <section className="py-28 px-4 md:px-7">
+    <section className="pt-28 pb-16 xl:py-28 px-4 md:px-7">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-5 md:gap-0">
           <h4 className="text-3xl font-medium">Food Categories</h4>

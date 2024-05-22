@@ -6,11 +6,13 @@ import BusinessBanner from "@/components/Shared/BusinessBanner"
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import useAxiosSecureBusiness from "@/hooks/useAxiosSecureBusiness";
+import useBusinessMenu from "@/hooks/useBusinessMenu";
 
 const Orders = () => {
     const [currentOption, setCurrentOption] = useState("Pending");
 
     const { user } = useAuth();
+    const {setIsBusinessMenuOpen} = useBusinessMenu();
 
     const [axiosSecureBusiness] = useAxiosSecureBusiness();
 
@@ -39,15 +41,19 @@ const Orders = () => {
     });
 
     useEffect(() => {
+        setIsBusinessMenuOpen(false);
+    }, [setIsBusinessMenuOpen]);
+
+    useEffect(() => {
         ordersRefetch();
     }, [currentOption, ordersRefetch]);
 
     return (
         <main>
             <BusinessBanner title="Orders" />
-            <section className="max-w-7xl mx-auto">
-                <section className="py-20 ">
-                    <div className="flex justify-center items-start gap-10 flex-wrap">
+            <section className="max-w-7xl mx-auto px-4 2xl:px-0">
+                <section className="py-20">
+                    <div className="flex justify-center items-start gap-5 md:gap-10 flex-wrap">
                         <div onClick={() => setCurrentOption("All")} className={`px-7 py-2 text-lg font-medium rounded cursor-pointer uppercase text-wide ${currentOption === "All" ? "bg-green-600 text-white" : "bg-orange-200 text-black"}`}>
                             All
                         </div>
@@ -68,7 +74,7 @@ const Orders = () => {
                         </div>
                     </div>
                 </section>
-                <section className="pb-20 flex justify-center items-center flex-wrap gap-20 relative">
+                <section className="pb-20 flex justify-center items-center flex-wrap gap-12 xl:gap-20 relative">
                     {
                         orders?.length === 0 ? <h4 className="text-xl font-medium text-center py-16">
                             No Orders To Show...

@@ -8,6 +8,7 @@ import EditMenu from "./EditMenu";
 import Swal from "sweetalert2";
 import useAxiosSecureBusiness from "@/hooks/useAxiosSecureBusiness";
 import Image from "next/image";
+import useBusinessMenu from "@/hooks/useBusinessMenu";
 
 const Menus = () => {
     const [availableCategory, setAvailableCategory] = useState([]);
@@ -16,6 +17,7 @@ const Menus = () => {
     const [currentMenu, setCurrentMenu] = useState(null);
 
     const { user } = useAuth();
+    const {setIsBusinessMenuOpen} = useBusinessMenu();
 
     const [axiosSecureBusiness] = useAxiosSecureBusiness();
 
@@ -43,6 +45,10 @@ const Menus = () => {
             }
         }
     });
+
+    useEffect(() => {
+        setIsBusinessMenuOpen(false);
+    }, [setIsBusinessMenuOpen]);
 
     useEffect(() => {
         refetch();
@@ -79,11 +85,11 @@ const Menus = () => {
     }
 
     return (
-        <section>
-            <div className="max-w-7xl 2xl:max-w-[1320px] mx-auto">
+        <section className="px-4 2xl:px-0">
+            <div className="max-w-7xl mx-auto">
                 <AddMenu refetch={refetch} />
                 <div className="flex justify-end mt-12">
-                    <div className="w-[20%] flex justify-center items-center gap-5">
+                    <div className="w-full md:w-[30%] lg:w-[25%] xl:w-[20%] flex justify-center items-start gap-5">
                         <label htmlFor="foodcategory" className="block text-lg font-medium text-gray-900">
                             Category:
                         </label>
@@ -92,7 +98,7 @@ const Menus = () => {
                             name="foodcategory"
                             defaultValue="All Food"
                             id="foodcategory"
-                            className="h-8 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm ps-2"
+                            className="h-8 w-full rounded-lg bg-orange-100 border-gray-300 text-gray-700 sm:text-sm ps-2"
                             onChange={(e) => setCurrentCategory(e.target.value)}
                         >
                             <option>All Food</option>

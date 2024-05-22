@@ -4,6 +4,7 @@ import useAuth from "@/hooks/useAuth";
 import useBusinessMenu from "@/hooks/useBusinessMenu";
 import Image from "next/image";
 import Link from "next/link"
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { RiMenu5Fill } from "react-icons/ri";
 
@@ -14,18 +15,28 @@ const BusinessNavbar = () => {
 
     const [isProfileHoverOpen, setIsProfileHoverOpen] = useState(false);
 
+    const pathName = usePathname();
+
     const navLinks = <>
         <li>
-            <Link href="/business/dashboard">Dashboard</Link>
+            <Link href="/business/dashboard" className={pathName === '/business/dashboard' ? 'text-green-600 font-semibold' : 'text-black font-medium'}>
+                Dashboard
+            </Link>
         </li>
         <li>
-            <Link href="/business/menu">Menu</Link>
+            <Link href="/business/menu" className={pathName === '/business/menu' ? 'text-green-600 font-semibold' : 'text-black font-medium'}>
+                Menu
+            </Link>
         </li>
         <li>
-            <Link href="/business/vouchers">Vouchers</Link>
+            <Link href="/business/vouchers" className={pathName === '/business/vouchers' ? 'text-green-600 font-semibold' : 'text-black font-medium'}>
+                Vouchers
+            </Link>
         </li>
         <li>
-            <Link href="/business/orders">Orders</Link>
+            <Link href="/business/orders" className={pathName === '/business/orders' ? 'text-green-600 font-semibold' : 'text-black font-medium'}>
+                Orders
+            </Link>
         </li>
         {
             user ? (
@@ -57,7 +68,7 @@ const BusinessNavbar = () => {
         <nav className="bg-orange-200 w-full px-7 lg:px-10 py-8 flex flex-col xl:flex-row justify-center xl:justify-between items-center border-b border-gray-100">
             <div className="w-full flex justify-between items-center">
                 <h1 className="text-4xl font-semibold text-green-600">
-                    <Link href="/">Food Masters</Link>
+                    <Link href="/business/dashboard">Food Masters</Link>
                 </h1>
                 <button onClick={() => setIsBusinessMenuOpen(!isBusinessMenuOpen)} className="mt-1 xl:hidden flex justify-center items-center">
                     <RiMenu5Fill className="text-4xl" />

@@ -127,8 +127,8 @@ const OrderByCategory = () => {
     });
 
     return (
-        <section className="max-w-7xl mx-auto py-14 grid grid-cols-12">
-            <div className="col-span-7 bg-orange-200 p-7">
+        <section className="max-w-7xl mx-auto px-4 2xl:px-0 py-14 grid grid-cols-12">
+            <div className="col-span-12 xl:col-span-7 bg-orange-200 p-5 md:p-7">
                 <div className="flex justify-start items-center gap-5 mb-10">
                     <FcCandleSticks className="text-2xl" />
                     <h4 className="text-xl font-medium">Orders By Category</h4>
@@ -164,7 +164,7 @@ const OrderByCategory = () => {
                     }
                 </div>
             </div>
-            <div className="col-start-9 col-span-4 bg-orange-200 p-7">
+            <div className="mt-14 xl:mt-0 xl:col-start-9 col-span-12 xl:col-span-4 bg-orange-200 p-5 md:p-7">
                 <div className="flex justify-start items-center gap-5">
                     <FcBullish className="text-2xl" />
                     <h4 className="text-xl font-medium">Best Selling Food Items</h4>
@@ -174,7 +174,7 @@ const OrderByCategory = () => {
                         <h2 className="text-xl font-medium text-center mt-12">Not Enough Data To Show Visualization...</h2>
                     )
                         : (
-                            <table className="border-separate border-spacing-y-7" >
+                            <table className="w-full border-separate border-spacing-y-7" >
                                 <tbody>
                                     {mostPopularItems.map((mostPopularItem, index) => {
                                         return (

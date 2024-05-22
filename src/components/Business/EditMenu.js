@@ -43,7 +43,7 @@ const EditMenu = ({ setIsEditFoodModalOpen, menu, setCurrentMenu, refetch }) => 
 
     return (
         <div>
-            <div className="fixed z-20 top-[50%] -translate-y-[50%] left-0 right-0 max-w-4xl mx-auto bg-orange-200 rounded-md p-10 shadow-xl shadow-orange-300">
+            <div className="fixed z-20 top-[50%] -translate-y-[50%] left-5 lg:left-0 right-5 lg:right-0 max-w-4xl mx-auto bg-orange-200 rounded-md p-5 md:p-10 shadow-xl shadow-orange-300">
                 <h2 className="text-center text-2xl font-semibold">Edit Food</h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="w-[70%] mx-auto mt-12 space-y-6">
                     <div>

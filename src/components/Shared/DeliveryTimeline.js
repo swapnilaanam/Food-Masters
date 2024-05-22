@@ -10,7 +10,7 @@ const DeliveryTimeline = ({ orderInfo }) => {
             {
                 orderInfo?.deliveryStatus !== "Cancelled" && (
                     <div className="flex xl:hidden justify-center">
-                        <h4 className="w-fit text-xl font-medium text-center bg-green-600 text-white px-12 py-2 rounded-md">
+                        <h4 className="w-fit text-xl font-medium text-center bg-green-600 text-white px-12 py-2 rounded-md whitespace-nowrap">
                             {orderInfo?.deliveryStatus}
                         </h4>
                     </div>

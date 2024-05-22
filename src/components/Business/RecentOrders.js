@@ -28,9 +28,9 @@ const RecentOrders = () => {
   });
 
   return (
-    <section className="max-w-7xl mx-auto py-14">
+    <section className="max-w-7xl mx-auto py-14 px-4 2xl:px-0">
       <div className="col-span-12 bg-orange-200 p-7">
-        <div className="flex justify-between items-start mb-4">
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-start mb-4 gap-5 md:gap-0">
           <div className="flex justify-start items-center gap-5">
             <FcShipped className="text-2xl" />
             <h4 className="text-xl font-medium">Recent Orders</h4>
@@ -43,42 +43,66 @@ const RecentOrders = () => {
               <h4 className="text-lg font-medium mt-12">No Orders Received Yet...</h4>
             )
               : (
-                <table className="w-full table-sm border-separate border-spacing-y-7">
-                  <thead>
-                    <tr>
-                      <th></th>
-                      <th className="bg-green-600 text-white py-2">Order Id</th>
-                      <th className="bg-green-600 text-white py-2">Customer Name</th>
-                      <th className="bg-green-600 text-white py-2">Ordered Items</th>
-                      <th className="bg-green-600 text-white py-2">Order Total</th>
-                      <th className="bg-green-600 text-white py-2">Delivery Status</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {
-                      recentOrders.map((recentOrder, index) => {
-                        return (
-                          <tr key={recentOrder?._id} className="bg-white">
-                            <td className="px-4 py-4 text-center rounded-l">{index + 1}.</td>
-                            <td className="px-2 text-center">{recentOrder._id}</td>
-                            <td className="px-2 text-center">{recentOrder?.customerName}</td>
-                            <td className="px-4 text-center">{recentOrder?.orderedItems?.reduce((prev, current) => {
-                              return prev + current.quantity
-                            }, 0)}</td>
-                            <td className="px-4 text-center">BDT. {recentOrder.total}</td>
-                            <td className="px-4 text-center">{recentOrder?.deliveryStatus}</td>
-                            <td className="text-center rounded-r">
-                              <Link href={`/business/orders/${recentOrder?._id}`} className="bg-green-600 text-white px-7 py-2 rounded" >
-                                View Details
-                              </Link>
-                            </td>
-                          </tr>
-                        )
-                      })
-                    }
-                  </tbody>
-                </table>
+                <div className="overflow-auto">
+                  <table className="w-full table-sm border-separate border-spacing-y-7">
+                    <thead>
+                      <tr>
+                        <th className="hidden lg:block text-white text-xs py-2 rounded-l-sm"></th>
+                        <th className="bg-green-600 text-white text-xs py-2 rounded-l-sm">
+                          Order Id
+                        </th>
+                        <th className="hidden lg:block bg-green-600 text-white text-xs py-2 rounded-l-sm">
+                          Customer Name
+                        </th>
+                        <th className="bg-green-600 text-white text-xs py-2 rounded-l-sm">
+                          Ordered Items
+                        </th>
+                        <th className="bg-green-600 text-white text-xs py-2 rounded-l-sm">
+                          Order Total
+                        </th>
+                        <th className="bg-green-600 text-white text-xs py-2 rounded-l-sm">
+                          Delivery Status
+                        </th>
+                        <th className="bg-green-600 text-white text-xs py-2 rounded-l-sm">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        recentOrders.map((recentOrder, index) => {
+                          return (
+                            <tr key={recentOrder?._id} className="bg-white text-xs">
+                              <td className="hidden lg:block px-2 py-4 text-center rounded-l-sm">
+                                {index + 1}.
+                              </td>
+                              <td className="px-2 py-4 text-center rounded-l-sm">
+                                {recentOrder._id}
+                              </td>
+                              <td className="hidden lg:block px-2 py-4 text-center rounded-l-sm">
+                                {recentOrder?.customerName}
+                              </td>
+                              <td className="px-2 py-4 text-center rounded-l-sm">
+                                {recentOrder?.orderedItems?.reduce((prev, current) => {
+                                  return prev + current.quantity
+                                }, 0)}
+                              </td>
+                              <td className="px-2 py-4 text-center rounded-l-sm">
+                                BDT. {recentOrder.total}
+                              </td>
+                              <td className="px-2 py-4 text-center rounded-l-sm">
+                                {recentOrder?.deliveryStatus}
+                              </td>
+                              <td className="px-2 py-4 text-center rounded-l-sm">
+                                <Link href={`/business/orders/${recentOrder?._id}`} className="w-full bg-green-600 text-white px-5 md:px-7 py-2 rounded whitespace-nowrap" >
+                                  View Details
+                                </Link>
+                              </td>
+                            </tr>
+                          )
+                        })
+                      }
+                    </tbody>
+                  </table>
+                </div>
               )
           }
         </div>
