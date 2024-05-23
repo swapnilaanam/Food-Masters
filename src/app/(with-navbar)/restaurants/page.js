@@ -7,12 +7,16 @@ import axios from 'axios';
 import Restaurant from '@/components/Restaurant';
 import TopBanner from '@/components/Shared/TopBanner';
 import useMenu from '@/hooks/useMenu';
+import { useSearchParams } from 'next/navigation';
 
 
 const Restaurants = () => {
     const [currentCategory, setCurrentCategory] = useState("All");
 
-    const {setIsMenuOpen} = useMenu();
+    const searchParams = useSearchParams();
+    const pathName = searchParams.get('category');
+
+    const { setIsMenuOpen } = useMenu();
 
     const { data: categories = [] } = useQuery({
         queryKey: ["categories"],
@@ -49,6 +53,13 @@ const Restaurants = () => {
     }, [currentCategory, refetch]);
 
     useEffect(() => {
+        if (pathName) {
+            setCurrentCategory(pathName);
+        }
+
+    }, [pathName]);
+
+    useEffect(() => {
         setIsMenuOpen(false);
     }, [setIsMenuOpen]);
 
@@ -58,20 +69,24 @@ const Restaurants = () => {
             <section className="pt-14 pb-28">
                 <div className="max-w-7xl mx-auto px-4 xl:px-0">
                     <h4 className="text-2xl font-medium mb-4">Filters: </h4>
-                    <div onClick={(e) => setCurrentCategory(e.target.innerText)} className="ps-4 w-full flex justify-start items-center gap-3 flex-wrap mb-16">
-                        <button className="bg-orange-200 hover:bg-green-600 hover:text-white px-5 py-1 rounded-sm">
+                    <div onClick={(e) => {
+                        setCurrentCategory(e.target.innerText);
+                        window.history.replaceState(null, '', '/restaurants')
+                    }
+                    } className="ps-4 w-full flex justify-start items-center gap-3 flex-wrap mb-16">
+                        <button className={`hover:bg-green-600 hover:text-white px-5 py-1 rounded-sm ${currentCategory === 'All' ? 'bg-green-600 text-white' : 'bg-orange-200 text-black'}`}>
                             All
                         </button>
                         {
-                            categories.map((category) => <button key={category?._id} className="bg-orange-200 hover:bg-green-600 hover:text-white px-5 py-1 rounded-sm">
+                            categories.map((category) => <button key={category?._id} className={`hover:bg-green-600 hover:text-white px-5 py-1 rounded-sm ${currentCategory === category?.name ? 'bg-green-600 text-white' : 'bg-orange-200 text-black'}`}>
                                 {category?.name}
                             </button>)
                         }
                     </div>
                     <div className="flex justify-center items-stretch gap-20 flex-wrap">
                         {
-                            restaurants.length === 0 ? <h4 className="mt-7 text-xl font-medium">No Restaurants Available...</h4> : 
-                            restaurants?.map((restaurant) => <Restaurant key={restaurant?._id} restaurant={restaurant} />)
+                            restaurants.length === 0 ? <h4 className="mt-7 text-xl font-medium">No Restaurants Available...</h4> :
+                                restaurants?.map((restaurant) => <Restaurant key={restaurant?._id} restaurant={restaurant} />)
                         }
                     </div>
                 </div>
