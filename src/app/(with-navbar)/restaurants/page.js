@@ -11,10 +11,10 @@ import { useSearchParams } from 'next/navigation';
 
 
 const Restaurants = () => {
-    const [currentCategory, setCurrentCategory] = useState("All");
-
     const searchParams = useSearchParams();
     const pathName = searchParams.get('category');
+
+    const [currentCategory, setCurrentCategory] = useState(pathName || 'All');
 
     const { setIsMenuOpen } = useMenu();
 
@@ -51,13 +51,6 @@ const Restaurants = () => {
     useEffect(() => {
         refetch();
     }, [currentCategory, refetch]);
-
-    useEffect(() => {
-        if (pathName) {
-            setCurrentCategory(pathName);
-        }
-
-    }, [pathName]);
 
     useEffect(() => {
         setIsMenuOpen(false);
