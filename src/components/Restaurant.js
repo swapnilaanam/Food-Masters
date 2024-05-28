@@ -30,7 +30,7 @@ const Restaurant = ({ restaurant }) => {
     return (
         <Link href={`/restaurants/${restaurant?._id}`} 
         data-aos="zoom-in-left"
-        data-aos-offset="100" 
+        data-aos-offset="50" 
         data-aos-duration="1500">
             <div className="w-[340px] h-full bg-orange-100 shadow-lg shadow-gray-200">
                 <div className="w-full h-[220px] relative">
