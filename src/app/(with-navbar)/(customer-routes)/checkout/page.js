@@ -33,7 +33,7 @@ const CheckOut = () => {
     queryFn: async (req, res) => {
       try {
         if (user) {
-          const response = await axios.get(`http://localhost:4000/users/${user?.email}`);
+          const response = await axios.get(`https://food-masters-server-production.up.railway.app/users/${user?.email}`);
           return response?.data;
         }
       } catch (error) {

@@ -26,7 +26,7 @@ const AddMenu = ({ refetch }) => {
         queryKey: ["categories"],
         queryFn: async () => {
             try {
-                const response = await axios.get('http://localhost:4000/categories');
+                const response = await axios.get('https://food-masters-server-production.up.railway.app/categories');
                 // console.log(response.data);
                 return response.data;
             } catch (error) {
@@ -39,7 +39,7 @@ const AddMenu = ({ refetch }) => {
         queryKey: ['restaurantInfo', user?.email],
         queryFn: async () => {
           try {
-            const response = await axios.get(`http://localhost:4000/restaurants/${user?.email}`);
+            const response = await axios.get(`https://food-masters-server-production.up.railway.app/restaurants/${user?.email}`);
             return response.data;
           } catch (error) {
             console.log(error?.message);

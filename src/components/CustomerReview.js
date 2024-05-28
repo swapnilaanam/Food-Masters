@@ -27,7 +27,7 @@ const CustomerReview = () => {
     queryKey: ['feedbacks'],
     queryFn: async () => {
       try {
-        const response = await axios.get('http://localhost:4000/ratings');
+        const response = await axios.get('https://food-masters-server-production.up.railway.app/ratings');
 
         if (response?.status === 200) {
           return response?.data?.slice(0, 5);

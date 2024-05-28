@@ -29,7 +29,7 @@ const Restaurant = () => {
     queryKey: ["restaurant", id],
     queryFn: async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/restaurants/restaurant/${id}`);
+        const response = await axios.get(`https://food-masters-server-production.up.railway.app/restaurants/restaurant/${id}`);
         return response.data;
       } catch (error) {
         console.log(error?.message);
@@ -41,7 +41,7 @@ const Restaurant = () => {
     queryKey: ["ratingsCount", id],
     queryFn: async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/ratings/${id}`);
+        const response = await axios.get(`https://food-masters-server-production.up.railway.app/ratings/${id}`);
 
         if (response.status === 200) {
           setRatedByCount(response?.data?.length);

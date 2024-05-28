@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:4000'
+    baseURL: 'https://food-masters-server-production.up.railway.app'
 });
 
 const useAxiosSecure = () => {

@@ -48,7 +48,7 @@ const DashboardBanner = () => {
     queryKey: ["totalCategories", user?.email],
     queryFn: async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/restaurants/${user?.email}`);
+        const response = await axios.get(`https://food-masters-server-production.up.railway.app/restaurants/${user?.email}`);
 
         if (response.status === 200) {
           return response?.data?.tags?.length;
@@ -65,7 +65,7 @@ const DashboardBanner = () => {
     queryFn: async () => {
       try {
         if (user?.email) {
-          const response = await axiosSecureBusiness.get(`http://localhost:4000/orders/restaurant/${user?.email}`);
+          const response = await axiosSecureBusiness.get(`https://food-masters-server-production.up.railway.app/orders/restaurant/${user?.email}`);
 
           if (response.status === 200) {
             // console.log(response?.data);

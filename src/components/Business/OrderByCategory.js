@@ -28,12 +28,12 @@ const OrderByCategory = () => {
         queryKey: ["tags", user?.email],
         queryFn: async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/restaurants/${user?.email}`);
+                const response = await axios.get(`https://food-masters-server-production.up.railway.app/restaurants/${user?.email}`);
 
                 const tags = response.data.tags;
 
                 if (tags) {
-                    const response = await axiosSecureBusiness.get(`http://localhost:4000/orders/restaurant/${user?.email}`);
+                    const response = await axiosSecureBusiness.get(`https://food-masters-server-production.up.railway.app/orders/restaurant/${user?.email}`);
 
                     const orders = response.data;
 

@@ -20,7 +20,7 @@ const HomeBanner = () => {
 
   const handleRestaurantSearch = (searchText) => {
 
-    axios.get(`http://localhost:4000/restaurants?search=${searchText}`)
+    axios.get(`https://food-masters-server-production.up.railway.app/restaurants?search=${searchText}`)
       .then((response) => {
         if (response?.status === 200) {
           console.log(response?.data);
