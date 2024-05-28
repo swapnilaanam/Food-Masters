@@ -17,7 +17,7 @@ const Menus = () => {
     const [currentMenu, setCurrentMenu] = useState(null);
 
     const { user } = useAuth();
-    const {setIsBusinessMenuOpen} = useBusinessMenu();
+    const { setIsBusinessMenuOpen } = useBusinessMenu();
 
     const [axiosSecureBusiness] = useAxiosSecureBusiness();
 
@@ -31,8 +31,6 @@ const Menus = () => {
                 response.data?.filter(menu => categorySet.add(menu?.foodCategory));
 
                 setAvailableCategory(Array.from(categorySet));
-
-                // console.log(currentCategory);
 
                 if (currentCategory === 'All Food') {
                     return response.data;
@@ -75,7 +73,7 @@ const Menus = () => {
                             title: "Food Item Removed!",
                             showConfirmButton: false,
                             timer: 1500
-                          });
+                        });
                     }
                 }
             });
@@ -111,6 +109,13 @@ const Menus = () => {
                     </div>
                 </div>
                 <div className="flex justify-center items-center flex-wrap gap-12 py-20">
+                    {
+                        menus?.length === 0 && (
+                            <h4 className="text-xl font-medium text-center">
+                                No Food Is Available Now To Show...
+                            </h4>
+                        )
+                    }
                     {
                         menus.map(menu => {
                             return (

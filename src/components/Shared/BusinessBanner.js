@@ -7,7 +7,7 @@ import Image from "next/image";
 
 
 const BusinessBanner = ({ title }) => {
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
 
   const { data: restaurantInfo = {} } = useQuery({
     queryKey: ['restaurantInfo', user?.email],

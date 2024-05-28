@@ -80,7 +80,7 @@ const CheckOut = () => {
         <div className="mx-auto max-w-7xl bg-orange-100 px-4 py-10 sm:px-6 sm:py-10 lg:px-7 rounded-sm shadow-lg">
           <div className="xl:px-24">
             <header className="text-center">
-              <h1 className="text-xl font-bold text-gray-900 sm:text-3xl mb-10">CheckOut</h1>
+              <h1 className="text-xl font-bold text-gray-900 sm:text-3xl mb-10">Checkout</h1>
             </header>
 
             <div className="mt-8 flex flex-col lg:flex-row justify-normal lg:justify-center items-center lg:items-stretch">

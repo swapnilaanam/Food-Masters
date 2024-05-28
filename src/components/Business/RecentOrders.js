@@ -40,7 +40,7 @@ const RecentOrders = () => {
         <div>
           {
             recentOrders?.length === 0 ? (
-              <h4 className="text-lg font-medium mt-12">No Orders Received Yet...</h4>
+              <h4 className="text-center text-lg font-medium mt-12 pb-6">No Orders Received Yet...</h4>
             )
               : (
                 <div className="overflow-auto">

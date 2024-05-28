@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const kanit = Kanit({ subsets: ['latin'], weight: ["400", "500", "600", "700"], variable: '--font-kanit' });
 
 export const metadata = {
-  title: 'Food Masters || Home',
+  title: 'Food Masters | Home',
   description: 'Food Masters - Best Food Delivery App In The Town',
 }
 

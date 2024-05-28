@@ -8,7 +8,6 @@ import axios from "axios";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { GrMapLocation } from "react-icons/gr";
-import { IoIosStar, IoMdStar } from "react-icons/io";
 import Rating from "react-rating";
 
 import './page.css';
@@ -24,7 +23,7 @@ const Restaurant = () => {
 
   const { id } = useParams();
 
-  const {setIsMenuOpen} = useMenu();
+  const { setIsMenuOpen } = useMenu();
 
   const { data: restaurant = {} } = useQuery({
     queryKey: ["restaurant", id],
@@ -96,19 +95,19 @@ const Restaurant = () => {
             <h3 className="text-xl font-medium mb-7">Restaurant Navigator</h3>
             <div className="px-20 xl:px-0 flex flex-col items-stretch justify-center gap-5">
               <button
-                className="bg-green-600 text-white font-medium px-4 py-2"
+                className={`${currentRestaurantPageView === 'Menu' ? 'bg-orange-600' : 'bg-green-600'} text-white font-medium px-4 py-2`}
                 onClick={() => setCurrentRestaurantPageView("Menu")}
               >
                 Menu
               </button>
               <button
-                className="bg-green-600 text-white font-medium px-7 py-2"
+                className={`${currentRestaurantPageView === 'Restaurant Vouchers' ? 'bg-orange-600' : 'bg-green-600'} text-white font-medium px-4 py-2`}
                 onClick={() => setCurrentRestaurantPageView("Restaurant Vouchers")}
               >
                 Vouchers
               </button>
               <button
-                className="bg-green-600 text-white font-medium px-7 py-2"
+                className={`${currentRestaurantPageView === 'Restaurant Info' ? 'bg-orange-600' : 'bg-green-600'} text-white font-medium px-4 py-2`}
                 onClick={() => setCurrentRestaurantPageView("Restaurant Info")}
               >
                 Restaurant Info

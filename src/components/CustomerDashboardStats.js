@@ -1,7 +1,7 @@
 import { FcMoneyTransfer, FcPaid } from "react-icons/fc"
 import { Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts"
 
-const CustomerDashboardStats = ({orders, totalSpent, totalPendingOrders, totalDeliveredOrders, totalCancelledOrders}) => {
+const CustomerDashboardStats = ({ orders, totalSpent, totalPendingOrders, totalDeliveredOrders, totalCancelledOrders }) => {
     const ordersData = [
         { name: 'Pending Orders', value: totalPendingOrders?.length },
         { name: 'Delivered Orders', value: totalDeliveredOrders?.length, fill: 'rgb(22, 163, 74)' },
@@ -26,22 +26,30 @@ const CustomerDashboardStats = ({orders, totalSpent, totalPendingOrders, totalDe
                 <h6 className="text-3xl font-medium text-center mt-5">BTD. {totalSpent}</h6>
             </div>
             <div className="bg-orange-200 p-2 w-96 h-56 rounded drop-shadow-lg flex flex-col justify-center items-center">
-                <ResponsiveContainer width="100%" height="100%">
-                    <PieChart width={100} height={100}>
-                        <Pie
-                            dataKey="value"
-                            isAnimationActive={true}
-                            data={ordersData}
-                            cx="50%"
-                            cy="50%"
-                            outerRadius={60}
-                            fill="#8884d8"
-                            label
-                        />
-                        <Tooltip />
-                        <Legend />
-                    </PieChart>
-                </ResponsiveContainer>
+                {
+                    orders?.length === 0 ? (
+                        <h4 className="text-xl text-center">
+                            Not Enough Data Available To Visualize
+                        </h4>
+                    ) : (
+                        <ResponsiveContainer width="100%" height="100%">
+                            <PieChart width={100} height={100}>
+                                <Pie
+                                    dataKey="value"
+                                    isAnimationActive={true}
+                                    data={ordersData}
+                                    cx="50%"
+                                    cy="50%"
+                                    outerRadius={60}
+                                    fill="#8884d8"
+                                    label
+                                />
+                                <Tooltip />
+                                <Legend />
+                            </PieChart>
+                        </ResponsiveContainer>
+                    )
+                }
             </div>
 
         </div>

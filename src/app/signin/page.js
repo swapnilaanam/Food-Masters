@@ -13,11 +13,14 @@ import useAuth from '@/hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
 import useAxiosSecure from '@/hooks/useAxiosSecure';
+import { useEffect } from 'react';
 
 const SignIn = () => {
-  const { signInUser, signInGoogle, signOutUser } = useAuth();
+  const { user, loading, signInUser, signInGoogle, signOutUser } = useAuth();
 
   const [axiosSecure] = useAxiosSecure();
+
+  const router = useRouter();
  
   const { data: restaurants } = useQuery({
     queryKey: ['restaurants'],
@@ -34,14 +37,18 @@ const SignIn = () => {
     }
   });
 
+  useEffect(() => {
+    if(!loading && user) {
+      return router.push('/');
+    }
+  }, [loading, router, user]);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset
   } = useForm();
-
-  const router = useRouter();
 
   const onSubmit = (data) => {
     signInUser(data.email, data.password)

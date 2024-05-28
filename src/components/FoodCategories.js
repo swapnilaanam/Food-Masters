@@ -25,7 +25,7 @@ const FoodCategories = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-5 md:gap-0">
           <h4 className="text-3xl font-medium">Food Categories</h4>
-          <Link href="/allcategories" className="text-xl text-green-600 font-medium">{'All Categories >>'}</Link>
+          <Link href="/restaurants" className="text-xl text-green-600 font-medium">{'All Categories >>'}</Link>
         </div>
         <div className="mt-20 flex flex-col md:flex-row md:flex-wrap justify-center lg:justify-around items-center gap-16">
           {

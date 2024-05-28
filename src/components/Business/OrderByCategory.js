@@ -11,7 +11,6 @@ import { FcBullish, FcCandleSticks } from "react-icons/fc"
 import {
     ComposedChart,
     Line,
-    Area,
     Bar,
     XAxis,
     YAxis,
@@ -133,9 +132,9 @@ const OrderByCategory = () => {
                     <FcCandleSticks className="text-2xl" />
                     <h4 className="text-xl font-medium">Orders By Category</h4>
                 </div>
-                <div className="w-full h-[300px]">
+                <div className={`w-full ${ordersByCategory?.length !== 0 && 'h-[300px]'}`}>
                     {
-                        !ordersByCategory ? <h4 className="text-xl font-medium text-center mt-12">
+                        ordersByCategory?.length === 0 ? <h4 className="text-xl font-medium text-center mt-12">
                             Not Enough Data To Show Visualization...
                         </h4>
                             :

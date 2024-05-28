@@ -36,14 +36,14 @@ const Menus = ({ restaurantId, restaurant }) => {
             <ul className="mb-10 ps-2 flex flex-wrap justify-start items-center gap-5">
                 <li
                     onClick={(e) => setCurrentCategory(e.target.innerText)}
-                    className="px-5 py-2 text-sm bg-orange-200 rounded-sm cursor-pointer hover:bg-green-200"
+                    className={`${currentCategory === 'All' ? 'bg-green-600 text-white' : 'bg-orange-200 text-black'} px-5 py-2 text-sm rounded-sm cursor-pointer hover:bg-green-500 hover:text-white`}
                 >
                     All
                 </li>
                 {restaurant?.tags?.map((tag, index) => <li
                     key={index}
                     onClick={(e) => setCurrentCategory(e.target.innerText)}
-                    className="px-5 py-2 text-sm bg-orange-200 rounded-sm cursor-pointer hover:bg-green-200"
+                    className={`${currentCategory === tag ? 'bg-green-600 text-white' : 'bg-orange-200 text-black'} px-5 py-2 text-sm rounded-sm cursor-pointer hover:bg-green-500 hover:text-white`}
                 >
                     {tag}
                 </li>)}

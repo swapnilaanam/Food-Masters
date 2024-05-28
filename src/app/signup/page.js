@@ -214,11 +214,9 @@ const SignUp = () => {
                             <div className="col-span-12">
                                 <p className="text-base text-gray-500">
                                     By creating an account, you agree to our
-                                    <Link href="#" className="text-gray-700 underline">
-                                        terms and conditions
+                                    <Link target="_blank" href="/termsandconditions" className="text-gray-700 underline ps-1">
+                                        terms and conditions.
                                     </Link>
-                                    and
-                                    <Link href="#" className="text-gray-700 underline">privacy policy</Link>.
                                 </p>
                             </div>
 

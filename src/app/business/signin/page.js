@@ -11,9 +11,12 @@ import useAuth from '@/hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 const SignIn = () => {
-    const { signInUser } = useAuth();
+    const { user, loading, signInUser } = useAuth();
+
+    const router = useRouter();
 
     const { data: customers } = useQuery({
         queryKey: ['customers'],
@@ -30,14 +33,18 @@ const SignIn = () => {
         }
     });
 
+    useEffect(() => {
+        if(!loading && user) {
+          return router.push('/business/dashboard');
+        }
+      }, [loading, router, user]);
+
     const {
         register,
         handleSubmit,
         formState: { errors },
         reset
     } = useForm();
-
-    const router = useRouter();
 
     const onSubmit = (data) => {
         const isExist = customers.find((customer) => customer?.email === data?.restaurantemail);
