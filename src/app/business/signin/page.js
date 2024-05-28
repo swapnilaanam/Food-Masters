@@ -134,7 +134,7 @@ const SignIn = () => {
                         </form>
                         <div className="w-full mt-8">
                             <p className="mt-4 text-base text-gray-500 sm:mt-0">
-                                Doesn't have an account?
+                                {`Doesn't`} have an account?
                                 <Link href="/business/signup" className="text-green-600 font-medium"> Sign Up</Link>.
                             </p>
                         </div>

@@ -35,7 +35,7 @@ const useAxiosSecureBusiness = () => {
             return Promise.reject(error);
         }
         )
-    }, [axiosSecureBusiness, router, signOutUser]);
+    }, [router, signOutUser]);
 
     return [axiosSecureBusiness];
 };

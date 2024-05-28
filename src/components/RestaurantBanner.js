@@ -14,7 +14,7 @@ const RestaurantBanner = () => {
                 <div className="bg-black bg-opacity-70 leading-relaxed w-full h-full absolute top-0 flex flex-col xl:flex-row justify-center items-center px-4 lg:px-20">
                     <div className="flex-1 mx-5 mt-20 xl:mt-0">
                         <h4 className="text-3xl md:text-5xl text-white text-center xl:text-left font-semibold leading-relaxed md:leading-relaxed">
-                            Want To Deliver Your Restaurant's Foods To Foodies Home?
+                            Want To Deliver Your {`Restaurant's`} Foods To Foodies Home?
                         </h4>
                     </div>
                     <div className="md:mt-12 lg:mt-0 flex-1 flex flex-col gap-12 items-center">

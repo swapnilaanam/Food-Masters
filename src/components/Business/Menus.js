@@ -56,7 +56,7 @@ const Menus = () => {
 
     useEffect(() => {
         refetch();
-    }, [currentCategory]);
+    }, [currentCategory, refetch]);
 
     const handleDeleteMenu = async (id) => {
         try {
