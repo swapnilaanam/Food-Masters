@@ -9,6 +9,8 @@ import Swal from "sweetalert2";
 import useAxiosSecureBusiness from "@/hooks/useAxiosSecureBusiness";
 import Image from "next/image";
 import useBusinessMenu from "@/hooks/useBusinessMenu";
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 const Menus = () => {
     const [availableCategory, setAvailableCategory] = useState([]);
@@ -43,6 +45,10 @@ const Menus = () => {
             }
         }
     });
+
+    useEffect(() => {
+        Aos.init();
+    }, []);
 
     useEffect(() => {
         setIsBusinessMenuOpen(false);
@@ -119,7 +125,11 @@ const Menus = () => {
                     {
                         menus.map(menu => {
                             return (
-                                <div key={menu?._id} className="w-[400px] flex justify-start items-start bg-orange-200 rounded relative shadow">
+                                <div 
+                                key={menu?._id} 
+                                className="w-[400px] flex justify-start items-start bg-orange-200 rounded relative shadow"
+                                data-aos="fade-in"
+                                data-aos-duration="1500">
                                     <div className="w-[40%] h-[220px] relative">
                                         <Image fill={true} src={menu?.foodImage} alt="Food Image" className="w-full h-full object-cover rounded-tl rounded-bl" />
                                     </div>

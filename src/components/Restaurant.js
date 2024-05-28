@@ -6,6 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { GrMapLocation } from "react-icons/gr";
 import { RiTimerLine } from "react-icons/ri";
+import Aos from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from "react";
 
 const Restaurant = ({ restaurant }) => {
     const { data: tags = [] } = useQuery({
@@ -18,9 +21,17 @@ const Restaurant = ({ restaurant }) => {
                 console.log(error?.message);
             }
         }
-    })
+    });
+
+    useEffect(() => {
+        Aos.init();
+    }, []);
+
     return (
-        <Link href={`/restaurants/${restaurant?._id}`}>
+        <Link href={`/restaurants/${restaurant?._id}`} 
+        data-aos="zoom-in-left"
+        data-aos-offset="100" 
+        data-aos-duration="1500">
             <div className="w-[340px] h-full bg-orange-100 shadow-lg shadow-gray-200">
                 <div className="w-full h-[220px] relative">
                     <Image fill={true} src={restaurant?.restaurantThumbnail} alt="Restaurant" className="w-full h-full object-cover rounded-t" />

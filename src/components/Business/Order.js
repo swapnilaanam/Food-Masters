@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import OrderDeliveryTimeline from "../Shared/OrderDeliveryTimeline";
 import { toast } from "react-toastify";
 import useAxiosSecureBusiness from "@/hooks/useAxiosSecureBusiness";
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 const Order = ({ order, ordersRefetch }) => {
     const [totalOrderNumber, setTotalOrderNumber] = useState(0);
@@ -10,6 +12,10 @@ const Order = ({ order, ordersRefetch }) => {
     const [deliveryStatusDialog, setDeliveryStatusDialog] = useState(false);
 
     const [axiosSecureBusiness] = useAxiosSecureBusiness();
+
+    useEffect(() => {
+        Aos.init();
+    }, []);
 
     useEffect(() => {
         setTotalOrderNumber(order?.orderedItems?.reduce((total, prev) => total + prev.quantity, 0));
@@ -41,7 +47,11 @@ const Order = ({ order, ordersRefetch }) => {
 
     return (
         <>
-            <div className="w-full md:w-[515px] bg-orange-100 rounded px-7 drop-shadow-lg">
+            <div
+                className="w-full md:w-[515px] bg-orange-100 rounded px-7 drop-shadow-lg"
+                data-aos="zoom"
+                data-aos-offset="200"
+                data-aos-duration="1500">
                 <OrderDeliveryTimeline orderInfo={order} />
                 <div className="flex justify-center items-center gap-2">
                     <div className="flex flex-col items-end">

@@ -27,16 +27,16 @@ const HomeBanner = () => {
 
           const searchList = document.getElementById('searchResult');
           searchList.innerHTML = '';
-          
+
           response?.data?.map((restaurant, index) => {
 
             const linkItem = document.createElement('a');
             linkItem.href = `/restaurants/${restaurant?._id}`;
 
             const liItem = document.createElement('li');
-            liItem.innerText =  `${restaurant?.restaurantName}, ${restaurant?.city}`;
-            
-            if(index === response?.data?.length - 1) {
+            liItem.innerText = `${restaurant?.restaurantName}, ${restaurant?.city}`;
+
+            if (index === response?.data?.length - 1) {
               liItem.className = 'px-4 py-4';
             }
             else {
@@ -54,7 +54,7 @@ const HomeBanner = () => {
   };
 
   const debounce = (searchText, timeout = 700) => {
-    if(searchTimeout) {
+    if (searchTimeout) {
       clearTimeout(searchTimeout);
     }
 
@@ -86,10 +86,17 @@ const HomeBanner = () => {
             type="search"
             name="searchbarhome"
             className="bg-white w-full h-14 rounded-l-full font-medium ps-4 focus:outline-none peer"
+            data-aos="zoom-out"
+            data-aos-duration="700"
             placeholder="Search Restaurant By Name..."
             onChange={handleSearchField}
           />
-          <input type="submit" value="Search" className="bg-green-600 text-white text-lg font-medium px-10 h-14 rounded-r-full cursor-pointer" />
+          <input
+            type="submit"
+            value="Search"
+            className="bg-green-600 text-white text-lg font-medium px-10 h-14 rounded-r-full cursor-pointer"
+            data-aos="zoom-out"
+            data-aos-duration="700" />
           <ul id="searchResult" className="opacity-0 peer-focus:opacity-100 w-full absolute left-0 top-16 bg-green-100 rounded-xl px-4"></ul>
         </form>
       </div>

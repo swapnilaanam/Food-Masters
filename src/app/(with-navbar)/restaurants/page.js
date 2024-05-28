@@ -76,7 +76,7 @@ const Restaurants = () => {
                             </button>)
                         }
                     </div>
-                    <div className="flex justify-center items-stretch gap-20 flex-wrap">
+                    <div className="flex justify-center items-stretch gap-20 flex-wrap overflow-hidden">
                         {
                             restaurants.length === 0 ? <h4 className="mt-7 text-xl font-medium">No Restaurants Available...</h4> :
                                 restaurants?.map((restaurant) => <Restaurant key={restaurant?._id} restaurant={restaurant} />)

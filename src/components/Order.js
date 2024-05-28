@@ -8,6 +8,8 @@ import Rating from 'react-rating';
 import { IoIosStar, IoMdStar } from 'react-icons/io';
 import { CiFaceFrown, CiFaceMeh } from "react-icons/ci";
 import useAxiosSecure from '@/hooks/useAxiosSecure';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 const Order = ({ order, ordersRefetch }) => {
     const [totalOrderNumber, setTotalOrderNumber] = useState(0);
@@ -16,6 +18,10 @@ const Order = ({ order, ordersRefetch }) => {
     const feedbackTextRef = useRef(null);
 
     const [axiosSecure] = useAxiosSecure();
+
+    useEffect(() => {
+        Aos.init();
+    }, []);
 
     useEffect(() => {
         setTotalOrderNumber(order?.orderedItems?.reduce((total, prev) => total + prev.quantity, 0));
@@ -81,7 +87,11 @@ const Order = ({ order, ordersRefetch }) => {
 
     return (
         <>
-            <div className="bg-orange-100 rounded md:px-7 drop-shadow-lg">
+            <div
+                className="bg-orange-100 rounded md:px-7 drop-shadow-lg"
+                data-aos="zoom"
+                data-aos-offset="200"
+                data-aos-duration="1500">
                 <OrderDeliveryTimeline orderInfo={order} />
                 <div className="flex justify-center items-center">
                     <div className='w-full space-y-1'>

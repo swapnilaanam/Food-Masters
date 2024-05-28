@@ -7,9 +7,11 @@ import { CartContext } from "@/providers/CartProvider";
 import axios from "axios";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 const Menu = ({ menu }) => {
     const { refetch } = useContext(CartContext);
@@ -21,6 +23,10 @@ const Menu = ({ menu }) => {
     const [isCustomer, isCustomerLoading] = useIsCustomer();
 
     const [axiosSecure] = useAxiosSecure();
+
+    useEffect(() => {
+        Aos.init();
+    }, [])
 
     const handleAddToCart = async (menu) => {
         if (!isCustomerLoading && !isCustomer) {
@@ -149,7 +155,9 @@ const Menu = ({ menu }) => {
     };
 
     return (
-        <div className="w-[400px] flex justify-start items-start bg-orange-200 rounded relative shadow">
+        <div className="w-[400px] flex justify-start items-start bg-orange-200 rounded relative shadow"
+        data-aos="fade-in"
+        data-aos-duration="1500">
             <div className="w-[40%] h-[220px] relative">
                 <Image fill={true} src={menu?.foodImage} alt={menu?.foodName} className="w-full h-full object-cover rounded-tl rounded-bl" />
             </div>

@@ -15,10 +15,16 @@ import PaymentPartners from "@/components/PaymentPartners";
 import FAQS from "@/components/FAQS";
 import useMenu from "@/hooks/useMenu";
 import { useEffect } from "react";
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 
 export default function Home() {
   const {setIsMenuOpen} = useMenu();
+
+  useEffect(() => {
+    Aos.init();
+  }, []);
 
   useEffect(() => {
     setIsMenuOpen(false);
