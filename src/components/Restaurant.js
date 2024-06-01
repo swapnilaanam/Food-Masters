@@ -15,7 +15,7 @@ const Restaurant = ({ restaurant }) => {
         queryKey: ["restaurant", restaurant?.restaurantEmail],
         queryFn: async () => {
             try {
-                const response = await axios.get(`https://food-masters-server-production.up.railway.app/restaurants/${restaurant?.restaurantEmail}`);
+                const response = await axios.get(`https://food-masters-server.vercel.app/restaurants/${restaurant?.restaurantEmail}`);
                 return response.data?.tags.slice(0, 3);
             } catch (error) {
                 console.log(error?.message);

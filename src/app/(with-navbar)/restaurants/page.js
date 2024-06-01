@@ -22,7 +22,7 @@ const Restaurants = () => {
         queryKey: ["categories"],
         queryFn: async () => {
             try {
-                const response = await axios.get('https://food-masters-server-production.up.railway.app/categories');
+                const response = await axios.get('https://food-masters-server.vercel.app/categories');
                 return response.data;
             } catch (error) {
                 console.log(error?.message);
@@ -34,7 +34,7 @@ const Restaurants = () => {
         queryKey: ["restaurants"],
         queryFn: async () => {
             try {
-                const response = await axios.get('https://food-masters-server-production.up.railway.app/restaurants');
+                const response = await axios.get('https://food-masters-server.vercel.app/restaurants');
                 if (currentCategory === 'All') {
                     return response.data.filter((restaurant) => restaurant?.tags.length > 0);
                 }

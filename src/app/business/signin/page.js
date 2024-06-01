@@ -22,7 +22,7 @@ const SignIn = () => {
         queryKey: ['customers'],
         queryFn: async () => {
             try {
-                const response = await axios.get('https://food-masters-server-production.up.railway.app/users');
+                const response = await axios.get('https://food-masters-server.vercel.app/users');
 
                 if (response?.status === 200) {
                     return response?.data;

@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 const axiosSecureBusiness = axios.create({
-    baseURL: 'https://food-masters-server-production.up.railway.app'
+    baseURL: 'https://food-masters-server.vercel.app'
 });
 
 const useAxiosSecureBusiness = () => {

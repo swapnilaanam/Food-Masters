@@ -46,7 +46,7 @@ const AuthProvider = ({ children }) => {
             // console.log('Current User:', currentUser);
 
             if (currentUser) {
-                axios.post('https://food-masters-server-production.up.railway.app/jwt', currentUser)
+                axios.post('https://food-masters-server.vercel.app/jwt', currentUser)
                     .then((res) => {
                         setLoading(false);
                         localStorage.setItem('access-token', res?.data?.token);

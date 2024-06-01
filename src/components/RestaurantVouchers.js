@@ -14,7 +14,7 @@ const RestaurantVouchers = ({ restaurantEmail }) => {
     queryKey: ['vouchers'],
     queryFn: async () => {
       try {
-        const response = await axios.get(`https://food-masters-server-production.up.railway.app/vouchers/${restaurantEmail}`);
+        const response = await axios.get(`https://food-masters-server.vercel.app/vouchers/${restaurantEmail}`);
 
         if (response?.status === 200) {
           return response?.data;

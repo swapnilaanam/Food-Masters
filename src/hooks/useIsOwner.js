@@ -11,7 +11,7 @@ const useIsOwner = () => {
         queryKey: ['isOwner', user?.email],
         queryFn: async () => {
             try {
-                const response = await axios.get(`https://food-masters-server-production.up.railway.app/restaurants/${user?.email}`);
+                const response = await axios.get(`https://food-masters-server.vercel.app/restaurants/${user?.email}`);
 
                 if (response?.data) {
                     return true;

@@ -10,7 +10,7 @@ const useIsCustomer = () => {
         queryKey: ['isCustomer', user?.email],
         queryFn: async () => {
             try {
-                const response = await axios.get(`https://food-masters-server-production.up.railway.app/users/${user?.email}`);
+                const response = await axios.get(`https://food-masters-server.vercel.app/users/${user?.email}`);
                 // console.log(loading, user?.email, response?.data);
 
                 if (response?.data) {

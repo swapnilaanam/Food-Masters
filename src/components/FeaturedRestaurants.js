@@ -10,7 +10,7 @@ const FeaturedRestaurants = () => {
     queryKey: ["featuredRestaurants"],
     queryFn: async () => {
       try {
-        const response = await axios.get('https://food-masters-server-production.up.railway.app/restaurants');
+        const response = await axios.get('https://food-masters-server.vercel.app/restaurants');
         const featured = response.data.slice(0, 3);
         return featured;
       } catch (error) {
