@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import homeBanner from '@/assets/image/homebanner3.jpg';
+import homeBanner from '@/assets/image/homeBanner3.jpg';
 import axios from 'axios';
 import { useState } from 'react';
 

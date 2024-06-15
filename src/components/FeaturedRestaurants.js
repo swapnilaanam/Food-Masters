@@ -31,7 +31,7 @@ const FeaturedRestaurants = () => {
             <h4 className="text-center text-4xl text-white font-medium">
               Featured Restaurants
             </h4>
-            <Link href="/restaurants" className="text-xl bg-white font-medium px-12 py-3 rounded">{'All Restaurants >>'}</Link>
+            <Link href="/restaurants" className="text-xl bg-white font-medium px-12 py-3 rounded whitespace-nowrap">{'All Restaurants >>'}</Link>
           </div>
           <div
             className="w-full xl:w-[60%] h-full flex flex-col md:flex-row justify-center items-center gap-5"

@@ -35,8 +35,7 @@ const FoodCategories = () => {
                   href={`/restaurants?category=${category?.name}`}
                   key={category?._id}
                   className="w-[180px] h-[180px] relative border-orange-300 border-4 rounded-full"
-                  data-aos="zoom-out"
-                  data-aos-offset="100"
+                  data-aos="zoom-in"
                   data-aos-duration="1200"
                 >
                   <Image src={category?.img} alt={category?.name} width={200} height={200} className="w-full h-full object-cover rounded-full" />
