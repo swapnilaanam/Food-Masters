@@ -14,3 +14,12 @@ Food Masters is a food delivery app/website, where foodies can find their favori
 **Technologies Used:** Next JS, React JS, JavaScript, Node JS, Express JS, REST APIs, Mongoose, MongoDB, Firebase, JWT, Tailwind CSS, Hyper UI, SSLCOMMERZ Payment(like Stripe), AOS, Vercel.
 
 ### [Live Website Link (Click To Visit)](https://food-masters-next.vercel.app/)
+
+
+## License
+
+This project is licensed under a [Custom License](LICENSE.md). 
+
+© 2024 MD. Ashraf-Ul-Aanam Swapnil. All rights reserved.
+
+Please see the [LICENSE](LICENSE.md) file for full details.
